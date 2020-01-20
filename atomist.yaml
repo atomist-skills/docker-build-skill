@@ -25,8 +25,8 @@ skill:
   technology:
     - docker
   license: Apache-2.0
-  homepage: https://github.com/atomisthq/docker-item
-  repository: https://github.com/atomisthq/docker-item.git
+  homepage: https://github.com/atomist-skills/docker-build-skill
+  repository: https://github.com/atomist-skills/docker-build-skill.git
   icon: https://www.docker.com/sites/default/files/social/docker_facebook_share.png
 
   package:
