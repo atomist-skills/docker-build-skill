@@ -15,7 +15,7 @@
 #
  
 skill:
-  name: '@atomist/docker-skill'
+  name: '@atomist/docker-build-skill'
   title: Docker Build and Push Skill
   version: 0.1.0
   author: Atomist
