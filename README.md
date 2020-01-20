@@ -1,6 +1,6 @@
-# `@atomist/maven-skill`
+# `@atomist/docker-build-skill`
 
-Atomist Skill to run mvn tasks on Maven projects.
+Atomist Skill to build and push Docker images.
 
 ---
 
