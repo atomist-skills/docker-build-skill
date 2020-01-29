@@ -1,4 +1,4 @@
-# `@atomist/docker-build-skill`
+# `atomist/docker-build-skill`
 
 Atomist Skill to build and push Docker images.
 
