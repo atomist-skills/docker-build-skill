@@ -62,7 +62,7 @@ rules:
       - name: docker build
         containers:
           - name: kaniko
-            image: gcr.io/kaniko-project/executor
+            image: gcr.io/kaniko-project/executor:v0.16.0
             args:
               - --context=dir:///atm/home
               - --destination=${skill.configuration.parameters.registry:${repo.owner}}/${repo.name}:${skill.configuration.parameters.tag:${push.after.version:${push.after.sha}}}
