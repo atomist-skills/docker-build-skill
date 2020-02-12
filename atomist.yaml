@@ -19,7 +19,10 @@ skill:
   title: Docker Build and Push Skill
   version: 0.2.0
   author: Atomist
-  description: Atomist Skill to build and push Docker images
+  description: |-
+    Atomist Skill to build and push Docker images
+  documentation: |-
+    Requires the Atomist workspace to have a configured Docker Registry provider
   category:
     - ci
   technology:
