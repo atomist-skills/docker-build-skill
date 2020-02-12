@@ -51,7 +51,10 @@ rules:
       - is_output:
           type: build
           test:
-            has_file: Dockerfile
+            and:
+              - has_file: Dockerfile
+              - has_resource_provider:
+                  type: docker
     goals:
       - name: docker build
         containers:
