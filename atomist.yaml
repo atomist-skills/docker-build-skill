@@ -15,11 +15,11 @@
 #
  
 skill:
-  name: '@atomist/docker-build-skill'
-  title: Docker Build and Push
+  name: 'atomist/docker-build-skill'
+  title: Docker Build and Push Skill
   version: 0.1.0
   author: Atomist
-  description: Build and push Docker images as a goal
+  description: Atomist Skill to build and push Docker images
   category:
     - ci
   technology:
@@ -30,7 +30,7 @@ skill:
   icon: https://www.docker.com/sites/default/files/social/docker_facebook_share.png
 
   package:
-    - use: '@atomist/package-sdm-skill/package'
+    - use: 'atomist/package-sdm-skill/package'
 
 goals:
   - name: build
