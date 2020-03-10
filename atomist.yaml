@@ -17,7 +17,7 @@
 skill:
   name: atomist/docker-build-skill
   title: Docker Build and Push Skill
-  version: 0.2.0
+  version: 0.3.0
   author: Atomist
   description: |-
     Atomist Skill to build and push Docker images
@@ -32,9 +32,6 @@ skill:
   repository: https://github.com/atomist-skills/docker-build-skill.git
   icon: https://www.docker.com/sites/default/files/social/docker_facebook_share.png
 
-  package:
-    - use: atomist/package-sdm-skill/package
-
 parameters:
   - string:
       name: registry
@@ -44,47 +41,53 @@ parameters:
   - string:
       name: tag
       display_name: Docker Image Tag
-      description: Tag to use when pushing the Docker image (defaults to snapshot version or sha)
+      description: Tag to use when pushing the Docker image (defaults to sha)
+      required: false
+  - string:
+      name: dockerfile
+      display_name: Dockerfile Path
+      description: Path to the Dockerfile within the project (defaults to Dockerfile)
+      required: false
+  - string:
+      name: docker_provider_secrets
+      display_name: Provider Secrets
+      description: Provider Secrets spec
+      required: true
+      line_style: multiple
+  - repo_filter:
+      name: repos
+      display_name: Which repositories
+      description: ''
       required: false
 
-rules:
+artifacts:
+  docker:
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:v0.18.0
+      args:
+        - --context=dir:///atm/home
+        - --destination=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
+        - --dockerfile=${configuration[0].parameters.dockerfile:Dockerfile}
+        - --cache=true
+        - --cache-repo=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}-cache
+        - --force
 
-  - name: docker build
-    tests:
-      - is_output:
-          type: build
-          test:
-            and:
-              - has_file: Dockerfile
-              - has_resource_provider:
-                  type: docker
-    goals:
-      - name: docker build
-        containers:
-          - name: kaniko
-            image: gcr.io/kaniko-project/executor:v0.16.0
-            args:
-              - --context=dir:///atm/home
-              - --destination=${skill.configuration.parameters.registry:${repo.owner}}/${repo.name}:${skill.configuration.parameters.tag:${push.after.version:${push.after.sha}}}
-              - --dockerfile=Dockerfile
-              - --cache=true
-              - --cache-repo=${skill.configuration.parameters.registry:${repo.owner}}/${repo.name}-cache
-              - --force
-            secrets:
-              file_mounts:
-                - mount_path: /kaniko/.docker/config.json
-                  value:
-                    provider:
-                      type: docker
-            resources:
-              limits:
-                cpu: 1000m
-                memory: 2048Mi
-              requests:
-                cpu: 100m
-                memory: 1024Mi
-            security_context:
-              run_as_group: 0
-              run_as_non_root: false
-              run_as_user: 0
-        retry: true
+subscriptions:
+  - >-
+    subscription deployOnPush {
+        Push {
+            repo {
+                owner
+                name
+                org {
+                    provider {
+                        apiUrl
+                    }
+                }
+            }
+            branch
+            after {
+                sha
+            }
+        }
+    }
