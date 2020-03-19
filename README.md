@@ -3,7 +3,7 @@
 Atomist Skill to build and push Docker images.  
 
 ---
-
+ 
 Created by [Atomist][atomist].
 Need Help?  [Join our Slack workspace][slack].
 
