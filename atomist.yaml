@@ -72,7 +72,7 @@ artifacts:
         - >-
           echo 'Building Docker image ${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}' &&
           /kaniko/executor --context=dir:///atm/home --destination=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}:${configuration[0].parameters.tag:${data.Push[0].after.sha}} --dockerfile=${configuration[0].parameters.dockerfile:Dockerfile} --cache=true --cache-repo=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}-cache --force &&
-          echo 'Successfully built and pushed Docker image ${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}'
+          echo 'atm:reason=Successfully built and pushed Docker image ${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}'
 
 subscriptions:
   - >-
