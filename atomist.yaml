@@ -68,7 +68,7 @@ artifacts:
     - name: kaniko
       image: gcr.io/kaniko-project/executor:debug
       command:
-        - busybox
+        - /busybox/sh
       args:
         - >-
           echo 'Building Docker image ${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}' &&
