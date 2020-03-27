@@ -16,7 +16,7 @@
  
 skill:
   name: atomist/docker-build-skill
-  title: Docker Build and Push Skill
+  title: Docker Build and Push
   version: 0.4.0
   author: Atomist
   description: |-
