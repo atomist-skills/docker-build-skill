@@ -39,7 +39,12 @@ parameters:
   - string:
       name: registry
       display_name: Docker Image Registry
-      description: Name/Url of the Docker Image Registry (defaults to repository owner)
+      description: Name/Url of the Docker Image registry (defaults to repository owner)
+      required: false
+  - string:
+      name: name
+      display_name: Docker Image Name
+      description: Name of the Docker Image after the registry (defaults to repostiory name)
       required: false
   - string:
       name: tag
@@ -74,7 +79,7 @@ artifacts:
       image: gcr.io/kaniko-project/executor:v0.19.0
       args:
         - --context=dir:///atm/home
-        - --destination=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
+        - --destination=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
         - --dockerfile=${configuration[0].parameters.dockerfile:Dockerfile}
         - --cache=true
         - --cache-repo=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}-cache
