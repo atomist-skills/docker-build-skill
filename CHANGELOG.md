@@ -10,3 +10,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 -   Add support for common labels. [#1](https://github.com/atomist-skills/docker-build-skill/issues/1)
+-   Single Repos with multiple Dockerfiles. [#2](https://github.com/atomist-skills/docker-build-skill/issues/2)
