@@ -91,7 +91,7 @@ artifacts:
         - --label=org.label-schema.vcs-ref="${data.Push[0].after.sha}"
         - --label=org.label-schema.build-date="${data.Push[0].after.timestamp}"
     - name: atm-image-link
-      image: gcr.io/atomist-customer-skill-product/skill-runner@b83bbaeb3dfe9218ead9c86ab7ec1cdfb45b4adc
+      image: gcr.io/atomist-customer-skill-product/skill-runner:b83bbaeb3dfe9218ead9c86ab7ec1cdfb45b4adc
       args:
         - /sdm/bin/start.js
         - image-link
