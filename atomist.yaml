@@ -60,7 +60,7 @@ parameters:
       name: docker_args
       display_name: Kaniko Arguments
       description: Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image
-      required: true
+      required: false
   - string:
       name: docker_provider_secrets
       display_name: Provider Secrets
