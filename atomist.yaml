@@ -13,7 +13,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
- 
+
 skill:
   name: atomist/docker-build-skill
   title: Docker Build and Push
@@ -34,6 +34,15 @@ skill:
 
   package:
     use: atomist/package-docker-skill
+
+integrations:
+  - name: docker_push_registry
+    description: Docker Registry to push to
+    type_name: DockerHubRegistryProvider
+    max_allowed: 1
+  - name: docker_pull_registries
+    description: Docker Registry to pull from
+    type_name: DockerHubRegistryProvider
 
 parameters:
   - string:
@@ -56,17 +65,17 @@ parameters:
       display_name: Dockerfile Path
       description: Path to the Dockerfile within the project (defaults to Dockerfile)
       required: false
+  - boolean:
+      name: cache
+      display_name: Enabled Kaniko Cache
+      description: Enable Kaniko's support for Docker image layer caching
+      default_value: false
+      required: false
   - string_array:
       name: docker_args
       display_name: Kaniko Arguments
       description: Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image
       required: false
-  - string:
-      name: docker_provider_secrets
-      display_name: Provider Secrets
-      description: Provider Secrets spec
-      required: true
-      line_style: multiple
   - repo_filter:
       name: repos
       display_name: Which repositories
@@ -81,7 +90,7 @@ artifacts:
         - --context=dir:///atm/home
         - --destination=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
         - --dockerfile=${configuration[0].parameters.dockerfile:Dockerfile}
-        - --cache=true
+        - --cache=${configuration[0].parameters.cache:false}
         - --cache-repo=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${data.Push[0].repo.name}-cache
         - --force
         - --label=org.label-schema.schema-version="1.0"
@@ -90,35 +99,16 @@ artifacts:
         - --label=org.label-schema.vcs-url="${data.Push[0].repo.org.provider.gitUrl}:${data.Push[0].repo.owner}/${data.Push[0].repo.name}.git"
         - --label=org.label-schema.vcs-ref="${data.Push[0].after.sha}"
         - --label=org.label-schema.build-date="${data.Push[0].after.timestamp}"
+      env:
+        - name: DOCKER_CONFIG
+          value: /atm/input/.docker/
     - name: atm-image-link
-      image: gcr.io/atomist-customer-skill-product/skill-runner:342b3aa68f67d3c643a16f5ecef6795752956aa2
+      image: gcr.io/atomist-container-skills/docker-build-skill:de11feacbc11cca965de2da682b74dd6dbe49d83
       args:
         - /sdm/bin/start.js
         - image-link
       env:
         - name: DOCKER_BUILD_IMAGE_NAME
           value: ${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
-
-subscriptions:
-  - >-
-    subscription buildOnPush {
-      Push {
-        repo {
-          owner
-          name
-          org {
-            provider {
-              apiUrl
-              gitUrl
-            }
-          }
-        }
-        branch
-        after {
-          timestamp
-          sha
-        }
-      }
-    }
-
-
+        - name: DOCKER_PROVIDER_ID
+          value: ${configuration[0].integrations.docker_push_registry.integrations[0].id}
