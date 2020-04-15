@@ -71,7 +71,7 @@ export async function imageLink(): Promise<number> {
 ${ticks}
 Building image ${imageName}
 ${ticks}`,
-            thumb_url: `https://badge.atomist.com/v2/progress/in_progress/0/1   `,
+            thumb_url: `https://badge.atomist.com/v2/progress/in_process/0/1`,
             color: "#2A7D7D",
             footer: url(repo.url, `${repo.owner}/${repo.name}`),
             footer_icon: "https://images.atomist.com/rug/github_grey.png",
@@ -97,7 +97,7 @@ ${ticks}`,
                 providerId,
             });
         slackMsg.attachments[0].color = "#37A745";
-        slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/success/1/1`;
+        slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/success/1/1`;
         slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.after.url, `\`${push.after.sha.slice(0, 7)}\``)}\n
 ${ticks}
 Successfully built and pushed image ${imageName}
@@ -105,7 +105,7 @@ ${ticks}`;
         await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
     } else if (status !== 0) {
         slackMsg.attachments[0].color = "#BC3D33";
-        slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/failure/0/1`;
+        slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/failure/0/1`;
         slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.after.url, `\`${push.after.sha.slice(0, 7)}\``)}\n
 ${ticks}
 Failed to built image ${imageName}
