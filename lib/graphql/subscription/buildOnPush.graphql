@@ -1,6 +1,7 @@
 subscription buildOnPush {
     Push {
         repo {
+            url
             owner
             name
             org {
@@ -20,6 +21,7 @@ subscription buildOnPush {
         after {
             timestamp
             sha
+            url
         }
     }
 }
