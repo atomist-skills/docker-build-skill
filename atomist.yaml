@@ -111,4 +111,4 @@ artifacts:
         - name: DOCKER_BUILD_IMAGE_NAME
           value: ${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
         - name: DOCKER_PROVIDER_ID
-          value: ${configuration[0].integrations.docker_push_registry.integrations[0].id}
+          value: ${configuration[0].resourceProviders.docker_push_registry.selectedResourceProviders[0].id}
