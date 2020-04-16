@@ -35,7 +35,7 @@ skill:
   package:
     use: atomist/package-docker-skill
 
-integrations:
+resource_providers:
   - name: docker_push_registry
     description: Docker Registry to push to
     type_name: DockerHubRegistryProvider
@@ -53,7 +53,7 @@ parameters:
   - string:
       name: name
       display_name: Docker Image Name
-      description: Name of the Docker Image after the registry (defaults to repostiory name)
+      description: Name of the Docker Image after the registry (defaults to repository name)
       required: false
   - string:
       name: tag
@@ -67,7 +67,7 @@ parameters:
       required: false
   - boolean:
       name: cache
-      display_name: Enabled Kaniko Cache
+      display_name: Kaniko Cache
       description: Enable Kaniko's support for Docker image layer caching
       default_value: false
       required: false
