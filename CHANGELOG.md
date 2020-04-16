@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 -   Add image-link. [7e3c4e9](https://github.com/atomist-skills/docker-build-skill/commit/7e3c4e90a11a7464f7b0d64d536d8da6b1346048)
+-   Render chat progress update during docker build. [#5](https://github.com/atomist-skills/docker-build-skill/issues/5)
 
 ## [0.4.0](https://github.com/atomist-skills/docker-build-skill/tree/0.4.0) - 2020-04-01
 
