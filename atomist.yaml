@@ -65,6 +65,11 @@ parameters:
       display_name: Dockerfile Path
       description: Path to the Dockerfile within the project (defaults to Dockerfile)
       required: false
+  - string:
+      name: version
+      display_name: Kaniko Version
+      description: Version of Kaniko to use
+      required: false
   - boolean:
       name: cache
       display_name: Kaniko Cache
@@ -85,7 +90,7 @@ parameters:
 artifacts:
   docker:
     - name: kaniko
-      image: gcr.io/kaniko-project/executor:v0.19.0
+      image: gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.19.0}
       args:
         - --context=dir:///atm/home
         - --destination=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
