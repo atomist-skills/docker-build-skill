@@ -85,7 +85,7 @@ parameters:
       name: docker_provider_secrets
       display_name: Provider Secrets
       description: Provider Secrets spec
-      required: true
+      required: false
       line_style: multiple
   - repo_filter:
       name: repos
