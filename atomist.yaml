@@ -81,6 +81,12 @@ parameters:
       display_name: Kaniko Arguments
       description: Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image
       required: false
+  - string:
+      name: docker_provider_secrets
+      display_name: Provider Secrets
+      description: Provider Secrets spec
+      required: true
+      line_style: multiple
   - repo_filter:
       name: repos
       display_name: Which repositories
