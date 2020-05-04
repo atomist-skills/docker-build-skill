@@ -100,7 +100,8 @@ artifacts:
       command:
         - /bin/sh
       args:
-        - -c "sleep 3600"
+        - -c
+        - sleep 3600
     - name: kaniko
       image: gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.20.0}
       args:
