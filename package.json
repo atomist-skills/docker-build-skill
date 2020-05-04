@@ -2,7 +2,7 @@
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
     "@atomist/sdm": "^2.0.0-master.20200330164246",
-    "@atomist/skill": "0.1.0-master.20200325205350",
+    "@atomist/skill": "0.1.0-master.20200501091905",
     "@atomist/slack-messages": "^1.1.2-master.20200108150633",
     "@types/fs-extra": "^8.0.1",
     "fs-extra": "^8.1.0",
