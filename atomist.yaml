@@ -95,8 +95,14 @@ parameters:
 
 artifacts:
   docker:
+    - name: ubuntu
+      image: ubuntu:latest
+      command:
+        - /bin/sh
+      args:
+        - -c "sleep 3600"
     - name: kaniko
-      image: gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.19.0}
+      image: gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.20.0}
       args:
         - --context=dir:///atm/home
         - --destination=${configuration[0].parameters.registry:${data.Push[0].repo.owner}}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
