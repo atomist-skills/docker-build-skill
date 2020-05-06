@@ -39,10 +39,12 @@ resource_providers:
   - name: docker_push_registry
     description: Docker Registry to push to
     type_name: DockerRegistry
+    min_required: 1
     max_allowed: 1
   - name: docker_pull_registries
     description: Docker Registry to pull from
     type_name: DockerRegistry
+    min_required: 0
 
 parameters:
   - string:
