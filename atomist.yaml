@@ -72,7 +72,7 @@ parameters:
       name: cache
       display_name: Kaniko Cache
       description: Enable Kaniko's support for Docker image layer caching
-      default_value: false
+      default_value: true
       required: false
       visibility: hidden
   - string_array:
