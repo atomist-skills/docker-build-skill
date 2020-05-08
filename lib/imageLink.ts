@@ -162,14 +162,14 @@ export const K8sNamespaceFile = "/var/run/secrets/kubernetes.io/serviceaccount/n
 
 export async function readNamespace(): Promise<string> {
     let podNs = process.env.ATOMIST_POD_NAMESPACE || process.env.ATOMIST_DEPLOYMENT_NAMESPACE;
-    if (!!podNs) {
+    if (podNs) {
         return podNs;
     }
 
     if (await fs.pathExists(K8sNamespaceFile)) {
         podNs = (await fs.readFile(K8sNamespaceFile)).toString().trim();
     }
-    if (!!podNs) {
+    if (podNs) {
         return podNs;
     }
 
