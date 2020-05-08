@@ -1,7 +1,7 @@
 {
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
-    "@atomist/skill": "0.1.0-master.20200505115848",
+    "@atomist/skill": "0.1.0-master.20200501091905",
     "@atomist/slack-messages": "^1.1.2-master.20200108150633",
     "@kubernetes/client-node": "^0.11.2",
     "@types/fs-extra": "^8.0.1",
