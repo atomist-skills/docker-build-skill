@@ -33,7 +33,7 @@ We recommend connecting the **Slack** integration.
 
     ![Docker Registry](docs/images/docker-push-registry.png)
     
-    Please create at least one Docker registry integration from _Manage -> Integrations_. Once created you can now 
+    Please create at least one Docker registry integration from **Manage -> Integrations**. Once created you can now 
     select the integration.
          
     
@@ -41,8 +41,8 @@ We recommend connecting the **Slack** integration.
 
     ![Docker Pull Registry](docs/images/docker-pull-registries.png)
     
-    Occasionally you may want to pull private base images from a different registry. Use the _Docker registries to pull 
-    from_ parameter to configure those additional registries.
+    Occasionally you may want to pull private base images from a different registry. Use the **Docker registries to pull 
+    from** parameter to configure those additional registries.
 
 3. **Specify the name of the image**
 
