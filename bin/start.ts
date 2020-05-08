@@ -26,7 +26,9 @@ yargs
     .command(
         "image-link",
         "Link a Docker image",
-        () => {},
+        () => {
+            // Intentionally left empty
+        },
         async () => {
             try {
                 const exitCode = await (await import("../lib/imageLink")).imageLink();
