@@ -32,8 +32,8 @@ be configured to push your images to. We recommend connecting the **Slack** inte
 
     ![Docker Registry](docs/images/docker-push-registry.png)
     
-    Please create at least one Docker registry integration from **Manage -> Integrations**. Once created you can now 
-    select the integration.
+    First connect at least one Docker registry from **Manage -> Integrations**. Once connected you can then 
+    select a registry to push to.
          
     
 2. **Select Docker registries to pull from**
