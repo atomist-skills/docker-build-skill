@@ -16,7 +16,7 @@
 
 skill:
   name: atomist/docker-build-skill
-  title: Docker Build and Push
+  title: Docker Build
   version: 1.0.1
   author: Atomist
   description: |-
@@ -67,27 +67,27 @@ parameters:
       display_name: Kaniko Version
       description: Version of Kaniko to use
       required: false
-      visibility: advanced
+      visibility: hidden
   - boolean:
       name: cache
       display_name: Kaniko Cache
       description: Enable Kaniko's support for Docker image layer caching
       default_value: false
       required: false
-      visibility: advanced
+      visibility: hidden
   - string_array:
       name: docker_args
       display_name: Kaniko Arguments
       description: Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image
       required: false
-      visibility: advanced
+      visibility: hidden
   - string:
       name: docker_provider_secrets
       display_name: Provider Secrets
       description: Provider Secrets spec
       required: false
       line_style: multiple
-      visibility: advanced
+      visibility: hidden
   - repo_filter:
       name: repos
       display_name: Which repositories
