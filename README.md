@@ -1,4 +1,4 @@
-# `@atomist/docker-build-skill`
+# `atomist/docker-build-skill`
 
 Automatically build and push Docker images
 
