@@ -49,44 +49,44 @@ resource_providers:
 parameters:
   - string:
       name: name
-      display_name: Image Name
+      display_name: Image name
       description: Name of the Docker Image after the registry (defaults to repository name)
       required: false
   - string:
       name: tag
-      display_name: Image Tag
+      display_name: Image tag
       description: Tag to use when pushing the Docker image (defaults to sha)
       required: false
   - string:
       name: dockerfile
-      display_name: Dockerfile Path
+      display_name: Dockerfile path
       description: Path to the Dockerfile within the project (defaults to Dockerfile)
       place_holder: Dockerfile
       required: false
   - string:
       name: version
-      display_name: Kaniko Version
+      display_name: Kaniko version
       description: Version of Kaniko to use
       place_holder: v0.22.0
       required: false
       visibility: hidden
   - boolean:
       name: cache
-      display_name: Kaniko Cache
+      display_name: Kaniko cache
       description: Enable Kaniko's support for Docker image layer caching
       default_value: true
       required: false
       visibility: hidden
   - string_array:
       name: docker_args
-      display_name: Kaniko Arguments
+      display_name: Kaniko arguments
       description: Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image
       required: false
       visibility: hidden
   - string:
       name: docker_provider_secrets
-      display_name: Provider Secrets
-      description: Provider Secrets spec
+      display_name: Provider secrets
+      description: Provider secrets spec
       required: false
       line_style: multiple
       visibility: hidden
