@@ -28,7 +28,8 @@ skill:
     process away. Simply add this skill to your workspace and configure a Docker registry
     to push and you are ready to buiild your images.
   category:
-    - ci
+    - build
+    - deploy
   technology:
     - docker
   license: Apache-2.0
