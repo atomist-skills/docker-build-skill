@@ -6,9 +6,9 @@ Automatically build and push Docker images
 
 # What it's useful for
 
-With this skill you can automatically build and push Docker images on pushes to Git repositories.
+With this skill you can automatically build Docker images and push them to a Docker registry. The Docker build is triggered by a push to a Git repository.
 
-This skill takes the hard and cumbersome task of setting up a working `docker build` process away: simply add this skill
+This skill addresses the cumbersome task of setting up a working `docker build` process. Simply add this skill
 to your workspace and configure a Docker registry to push to and you are ready to build your images. Super simple!
 
 # Before you get started
@@ -20,12 +20,11 @@ Connect and configure these integrations:
 3. **Slack**
 
 The **GitHub** integration must be configured in order to use this skill. At least one repository must be selected.
-The **Docker Registry** integration must be configured to use this skill. At least one registry must be configured to 
-push your images to.  
-We recommend connecting the **Slack** integration.
+The **Docker Registry** integration must also be configured in order to use this skill. At least one registry must 
+be configured to push your images to. We recommend connecting the **Slack** integration.
 
-    Note: We are working on adding support for other Docker registries. Currently on the roadmap is support for Google
-    Container Registry and JFrog Artifactory registries.
+    Note: Docker Hub is the first supported Docker registry. Support for Google Container Registry and 
+    JFrog Artifactory is coming soon.
 
 # How to configure
 
@@ -54,7 +53,7 @@ We recommend connecting the **Slack** integration.
     
     ![Docker Image Tag](docs/images/docker-image-tag.png)
     
-    Specify the Docker image tag to create. If not provided this defaults to Git sha of the commit that was pushed.
+    Specify the Docker image tag to create. If not provided this defaults to Git SHA of the commit that was pushed.
 
 5. **Specify the path to the Dockerfile**
 
@@ -62,7 +61,7 @@ We recommend connecting the **Slack** integration.
     
     Path to the Dockerfile to use for building the image. This defaults to `./Dockerfile`. 
     
-    The path needs be relative to the root of repository.
+    The path is relative to the root of the repository.
 
 6. **Determine repository scope**
    
@@ -79,8 +78,8 @@ We recommend connecting the **Slack** integration.
 
 2. **For every new Git push, a new Docker image will be built**
     
-    When the optional **Slack** integration is configured, you'll see the following progress message in repositories'
-    linked chat channels.
+    When the optional **Slack** integration is configured, you'll see a progress message in the Slack
+    channel that is linked to the repository.
     
     ![Slack Progress](docs/images/slack-progress.png)
 
