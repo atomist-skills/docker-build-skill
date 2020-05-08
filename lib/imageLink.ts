@@ -14,8 +14,6 @@
 * limitations under the License.
 */
 
-import { loadKubeConfig } from "@atomist/sdm/lib/core/pack/k8s/kubernetes/config";
-import { readNamespace } from "@atomist/sdm/lib/core/pack/k8s/scheduler/KubernetesGoalScheduler";
 import { createContext } from "@atomist/skill/lib/context";
 import { EventContext } from "@atomist/skill/lib/handler";
 import {
@@ -148,4 +146,32 @@ function containerWatch(name: string,
             reject(err);
         });
     });
+}
+
+function loadKubeConfig(): k8s.KubeConfig {
+    const kc = new k8s.KubeConfig();
+    try {
+        kc.loadFromDefault();
+    } catch (e) {
+        kc.loadFromCluster();
+    }
+    return kc;
+}
+
+export const K8sNamespaceFile = "/var/run/secrets/kubernetes.io/serviceaccount/namespace";
+
+export async function readNamespace(): Promise<string> {
+    let podNs = process.env.ATOMIST_POD_NAMESPACE || process.env.ATOMIST_DEPLOYMENT_NAMESPACE;
+    if (!!podNs) {
+        return podNs;
+    }
+
+    if (await fs.pathExists(K8sNamespaceFile)) {
+        podNs = (await fs.readFile(K8sNamespaceFile)).toString().trim();
+    }
+    if (!!podNs) {
+        return podNs;
+    }
+
+    return "default";
 }
