@@ -17,12 +17,16 @@
 skill:
   name: atomist/docker-build-skill
   title: Docker Build
-  version: 1.0.1
+  version: 1.1.0
   author: Atomist
   description: |-
-    Atomist Skill to build and push Docker images
+    Automatically build and push Docker images
   documentation: |-
-    Requires the Atomist workspace to have a configured Docker Registry provider
+    Automatically build and push Docker images on pushes to Git repositories.
+
+    This skill takes the hard and cumbersome task setting up a working `docker build`
+    process away. Simply add this skill to your workspace and configure a Docker registry
+    to push and you are ready to buiild your images.
   category:
     - ci
   technology:
