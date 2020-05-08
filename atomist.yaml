@@ -61,11 +61,13 @@ parameters:
       name: dockerfile
       display_name: Dockerfile Path
       description: Path to the Dockerfile within the project (defaults to Dockerfile)
+      place_holder: Dockerfile
       required: false
   - string:
       name: version
       display_name: Kaniko Version
       description: Version of Kaniko to use
+      place_holder: v0.22.0
       required: false
       visibility: hidden
   - boolean:
