@@ -58,7 +58,7 @@ export async function imageLink(): Promise<number> {
     const namespace = await readNamespace();
     const name = os.hostname();
 
-    const title = "Docker Build and Push";
+    const title = "Docker Build";
     const id = `${payload.skill.namespace}/${payload.skill.name}/${push.after.sha}`;
     const ticks = "```";
     const slackMsg: SlackMessage = {
