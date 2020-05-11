@@ -21,6 +21,9 @@ import {
     info,
 } from "@atomist/skill/lib/log";
 import { EventIncoming } from "@atomist/skill/lib/payload";
+import { gitHubComRepository } from "@atomist/skill/lib/project";
+import { gitHub } from "@atomist/skill/lib/project/github";
+import { gitHubAppToken } from "@atomist/skill/lib/secrets";
 import {
     bold,
     SlackMessage,
@@ -50,14 +53,45 @@ export async function imageLink(): Promise<number> {
     const providerId = process.env.DOCKER_PROVIDER_ID;
 
     const ctx: EventContext<BuildOnPushSubscription> = createContext(payload, {} as any) as any;
-    const push = ctx.data.Push[0];
-    const repo = push?.repo;
     const container = payload.skill.artifacts[0].name;
     const namespace = await readNamespace();
     const name = os.hostname();
 
+    const slackMessageCb = await slackMessage(ctx);
+    const checkCb = await gitHubCheck(ctx);
+
+    debug("Watching container '%s'", container);
+    const status = await containerWatch(name, namespace, container);
+    debug("Container exited with '%s'", status);
+
+    if (!!imageName && status === 0) {
+        const push = ctx.data.Push[0];
+        await ctx.graphql.mutate<CreateDockerImageMutation, CreateDockerImageMutationVariables>({
+                root: __dirname,
+                path: "graphql/mutation/createDockerImage.graphql",
+            },
+            {
+                sha: push.after.sha,
+                branch: push.branch,
+                image: imageName,
+                providerId,
+            });
+    }
+
+    await slackMessageCb.close(status);
+    await checkCb.close(status);
+
+    info("Completed processing. Exiting...");
+    return 0;
+}
+
+async function slackMessage(ctx: EventContext<BuildOnPushSubscription>): Promise<{ close: (status: number) => Promise<void> }> {
+    const push = ctx.data.Push[0];
+    const repo = push?.repo;
+    const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
+
     const title = "Docker Build";
-    const id = `${payload.skill.namespace}/${payload.skill.name}/${push.after.sha}`;
+    const id = `${ctx.skill.namespace}/${ctx.skill.name}/${push.after.sha}`;
     const ticks = "```";
     const slackMsg: SlackMessage = {
         attachments: [{
@@ -78,41 +112,96 @@ ${ticks}`,
     };
     await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
 
-    debug("Watching container '%s'", container);
-    const status = await containerWatch(name, namespace, container);
-    debug("Container exited with '%s'", status);
-
-    if (!!imageName && status === 0) {
-        const push = ctx.data.Push[0];
-        await ctx.graphql.mutate<CreateDockerImageMutation, CreateDockerImageMutationVariables>({
-                root: __dirname,
-                path: "graphql/mutation/createDockerImage.graphql",
-            },
-            {
-                sha: push.after.sha,
-                branch: push.branch,
-                image: imageName,
-                providerId,
-            });
-        slackMsg.attachments[0].color = "#37A745";
-        slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/success/1/1`; // eslint-disable-line @typescript-eslint/camelcase
-        slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.after.url, `\`${push.after.sha.slice(0, 7)}\``)}\n
+    return {
+        close: async status => {
+            if (status === 0) {
+                slackMsg.attachments[0].color = "#37A745";
+                slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/success/1/1`; // eslint-disable-line @typescript-eslint/camelcase
+                slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.after.url, `\`${push.after.sha.slice(0, 7)}\``)}\n
 ${ticks}
 Successfully built and pushed image ${imageName}
 ${ticks}`;
-        await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
-    } else if (status !== 0) {
-        slackMsg.attachments[0].color = "#BC3D33";
-        slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/failure/0/1`; // eslint-disable-line @typescript-eslint/camelcase
-        slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.after.url, `\`${push.after.sha.slice(0, 7)}\``)}\n
+                await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
+            } else {
+                slackMsg.attachments[0].color = "#BC3D33";
+                slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/failure/0/1`; // eslint-disable-line @typescript-eslint/camelcase
+                slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.after.url, `\`${push.after.sha.slice(0, 7)}\``)}\n
 ${ticks}
 Failed to built image ${imageName}
 ${ticks}`;
-        await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
-    }
+                await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
+            }
+        },
+    };
+}
 
-    info("Completed processing. Exiting...");
-    return 0;
+async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<{ close: (status: number) => Promise<void> }> {
+    const push = ctx.data.Push[0];
+    const repo = push?.repo;
+    const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
+
+    if (!!ctx.configuration[0]?.parameters?.githubCheck) {
+        const credential = await ctx.credential.resolve(gitHubAppToken({
+            owner: repo.owner,
+            repo: repo.name,
+            apiUrl: repo.org.provider.apiUrl,
+        }));
+        const api = gitHub(gitHubComRepository({
+            owner: repo.owner,
+            repo: repo.name,
+            credential,
+            sha: push.after.sha,
+            branch: push.branch,
+        }));
+
+        const check = (await api.checks.create({
+            name: ctx.skill.name,
+            owner: repo.owner,
+            repo: repo.name,
+            head_sha: push.after.sha,
+            started_at: new Date().toISOString(),
+            external_id: ctx.correlationId,
+            status: "in_progress",
+            details_url: `https://preview.atomist.com/log/${ctx.workspaceId}/${ctx.correlationId}`,
+        })).data;
+
+        return {
+            close: async status => {
+                if (status === 0) {
+                    await api.checks.update({
+                        check_run_id: check.id,
+                        owner: repo.owner,
+                        repo: repo.name,
+                        status: "completed",
+                        conclusion: "success",
+                        completed_at: new Date().toISOString(),
+                        output: {
+                            title: "Docker Build",
+                            summary: `Successfully built and pushed image \`${imageName}\``,
+                        },
+                    });
+                } else {
+                    await api.checks.update({
+                        check_run_id: check.id,
+                        owner: repo.owner,
+                        repo: repo.name,
+                        status: "completed",
+                        conclusion: "failure",
+                        completed_at: new Date().toISOString(),
+                        output: {
+                            title: "Docker Build",
+                            summary: `Failed to built image \`${imageName}\``,
+                        },
+                    });
+                }
+            },
+        };
+    } else {
+        return {
+            close: async () => {
+            },
+        };
+    }
 }
 
 /**
@@ -160,7 +249,7 @@ function loadKubeConfig(): k8s.KubeConfig {
 
 export const K8sNamespaceFile = "/var/run/secrets/kubernetes.io/serviceaccount/namespace";
 
-export async function readNamespace(): Promise<string> {
+async function readNamespace(): Promise<string> {
     let podNs = process.env.ATOMIST_POD_NAMESPACE || process.env.ATOMIST_DEPLOYMENT_NAMESPACE;
     if (podNs) {
         return podNs;
