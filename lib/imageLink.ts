@@ -113,7 +113,7 @@ ${ticks}`,
     await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
 
     return {
-        close: async status => {
+        close: async (status): Promise<void> => {
             if (status === 0) {
                 slackMsg.attachments[0].color = "#37A745";
                 slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/success/1/1`; // eslint-disable-line @typescript-eslint/camelcase
@@ -158,23 +158,23 @@ async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<
             name: ctx.skill.name,
             owner: repo.owner,
             repo: repo.name,
-            head_sha: push.after.sha,
-            started_at: new Date().toISOString(),
-            external_id: ctx.correlationId,
+            head_sha: push.after.sha, // eslint-disable-line @typescript-eslint/camelcase
+            started_at: new Date().toISOString(), // eslint-disable-line @typescript-eslint/camelcase
+            external_id: ctx.correlationId, // eslint-disable-line @typescript-eslint/camelcase
             status: "in_progress",
-            details_url: `https://preview.atomist.com/log/${ctx.workspaceId}/${ctx.correlationId}`,
+            details_url: `https://preview.atomist.com/log/${ctx.workspaceId}/${ctx.correlationId}`, // eslint-disable-line @typescript-eslint/camelcase
         })).data;
 
         return {
-            close: async status => {
+            close: async (status): Promise<void> => {
                 if (status === 0) {
                     await api.checks.update({
-                        check_run_id: check.id,
+                        check_run_id: check.id, // eslint-disable-line @typescript-eslint/camelcase
                         owner: repo.owner,
                         repo: repo.name,
                         status: "completed",
                         conclusion: "success",
-                        completed_at: new Date().toISOString(),
+                        completed_at: new Date().toISOString(), // eslint-disable-line @typescript-eslint/camelcase
                         output: {
                             title: "Docker Build",
                             summary: `Successfully built and pushed image \`${imageName}\``,
@@ -182,12 +182,12 @@ async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<
                     });
                 } else {
                     await api.checks.update({
-                        check_run_id: check.id,
+                        check_run_id: check.id, // eslint-disable-line @typescript-eslint/camelcase
                         owner: repo.owner,
                         repo: repo.name,
                         status: "completed",
                         conclusion: "failure",
-                        completed_at: new Date().toISOString(),
+                        completed_at: new Date().toISOString(), // eslint-disable-line @typescript-eslint/camelcase
                         output: {
                             title: "Docker Build",
                             summary: `Failed to built image \`${imageName}\``,
@@ -198,7 +198,8 @@ async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<
         };
     } else {
         return {
-            close: async () => {
+            close: async (): Promise<void> => {
+                // Intentionally left empty
             },
         };
     }
