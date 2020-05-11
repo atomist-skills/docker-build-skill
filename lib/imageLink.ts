@@ -140,7 +140,7 @@ async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<
     const repo = push?.repo;
     const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
-    if (!!ctx.configuration[0]?.parameters?.githubCheck) {
+    if (ctx.configuration[0]?.parameters?.githubCheck) {
         const credential = await ctx.credential.resolve(gitHubAppToken({
             owner: repo.owner,
             repo: repo.name,
