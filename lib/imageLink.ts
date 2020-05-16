@@ -32,6 +32,7 @@ import {
 import * as k8s from "@kubernetes/client-node";
 import * as fs from "fs-extra";
 import * as os from "os";
+import * as path from "path";
 import {
     BuildOnPushSubscription,
     CreateDockerImageMutation,
@@ -49,8 +50,15 @@ export async function imageLink(): Promise<number> {
     const payload = await fs.readJson(process.env.ATOMIST_PAYLOAD || "/atm/payload.json") as EventIncoming;
     info("Starting %s/%s:%s image-link", payload.skill.namespace, payload.skill.name, payload.skill.version);
 
+    const home = process.env.ATOMIST_HOME || "/atm/home";
     const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
     const providerId = process.env.DOCKER_PROVIDER_ID;
+    const dockerfile = process.env.DOCKER_FILE;
+
+    if (!await fs.pathExists(path.join(home, dockerfile))) {
+        info(`Dockerfile '${dockerfile}' not found. Exiting...`);
+        return 0;
+    }
 
     const ctx: EventContext<BuildOnPushSubscription> = createContext(payload, {} as any) as any;
     const container = payload.skill.artifacts[0].name;
@@ -65,7 +73,7 @@ export async function imageLink(): Promise<number> {
     debug("Container exited with '%s'", status);
 
     if (!!imageName && status === 0) {
-        const push = ctx.data.Push[0];
+        const push = ctx.event.Push[0];
         await ctx.graphql.mutate<CreateDockerImageMutation, CreateDockerImageMutationVariables>({
                 root: __dirname,
                 path: "graphql/mutation/createDockerImage.graphql",
@@ -86,7 +94,7 @@ export async function imageLink(): Promise<number> {
 }
 
 async function slackMessage(ctx: EventContext<BuildOnPushSubscription>): Promise<{ close: (status: number) => Promise<void> }> {
-    const push = ctx.data.Push[0];
+    const push = ctx.event.Push[0];
     const repo = push?.repo;
     const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
@@ -98,7 +106,7 @@ async function slackMessage(ctx: EventContext<BuildOnPushSubscription>): Promise
             mrkdwn_in: ["text"], // eslint-disable-line @typescript-eslint/camelcase
             fallback: title,
             title,
-            title_link: `https://preview.atomist.${process.env.ATOMIST_GRAPHQL_ENDPOINT.includes("staging") ? "services" : "com"}/log/${ctx.workspaceId}/${ctx.correlationId}`, // eslint-disable-line @typescript-eslint/camelcase
+            title_link: ctx.audit.url, // eslint-disable-line @typescript-eslint/camelcase
             text: `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.after.url, `\`${push.after.sha.slice(0, 7)}\``)}\n
 ${ticks}
 Building image ${imageName}
@@ -136,7 +144,7 @@ ${ticks}`;
 }
 
 async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<{ close: (status: number) => Promise<void> }> {
-    const push = ctx.data.Push[0];
+    const push = ctx.event.Push[0];
     const repo = push?.repo;
     const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
@@ -162,7 +170,7 @@ async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<
             started_at: new Date().toISOString(), // eslint-disable-line @typescript-eslint/camelcase
             external_id: ctx.correlationId, // eslint-disable-line @typescript-eslint/camelcase
             status: "in_progress",
-            details_url: `https://preview.atomist.com/log/${ctx.workspaceId}/${ctx.correlationId}`, // eslint-disable-line @typescript-eslint/camelcase
+            details_url: ctx.audit.url, // eslint-disable-line @typescript-eslint/camelcase
         })).data;
 
         return {

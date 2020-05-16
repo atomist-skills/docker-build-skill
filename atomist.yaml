@@ -110,29 +110,20 @@ parameters:
 artifacts:
   docker:
     - name: kaniko
-      image: gcr.io/kaniko-project/executor:debug-${configuration[0].parameters.version:v0.22.0}
-      command:
-        - /busybox/sh
+      image: gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.22.0}
       args:
-        - -c
-        - >
-          "if [ -f ${configuration[0].parameters.dockerfile:Dockerfile} ]; then
-          /kaniko/executor
-          --context=dir:///atm/home
-          --destination=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
-          --dockerfile=${configuration[0].parameters.dockerfile:Dockerfile}
-          --cache=${configuration[0].parameters.cache:false}
-          --cache-repo=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}-cache
-          --label=org.label-schema.schema-version="1.0"
-          --label=org.label-schema.name="${data.Push[0].repo.name}"
-          --label=org.label-schema.vendor="${data.Push[0].repo.owner}"
-          --label=org.label-schema.vcs-url="${data.Push[0].repo.org.provider.gitUrl}:${data.Push[0].repo.owner}/${data.Push[0].repo.name}.git"
-          --label=org.label-schema.vcs-ref="${data.Push[0].after.sha}"
-          --label=org.label-schema.build-date="${data.Push[0].after.timestamp}"
-          --force;
-          else
-          exit 0;
-          fi"
+        - --context=dir:///atm/home
+        - --destination=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
+        - --dockerfile=${configuration[0].parameters.dockerfile:Dockerfile}
+        - --cache=${configuration[0].parameters.cache:false}
+        - --cache-repo=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}-cache
+        - --label=org.label-schema.schema-version="1.0"
+        - --label=org.label-schema.name='${data.Push[0].repo.name}'
+        - --label=org.label-schema.vendor='${data.Push[0].repo.owner}'
+        - --label=org.label-schema.vcs-url='${data.Push[0].repo.org.provider.gitUrl}:${data.Push[0].repo.owner}/${data.Push[0].repo.name}.git'
+        - --label=org.label-schema.vcs-ref='${data.Push[0].after.sha}'
+        - --label=org.label-schema.build-date='${data.Push[0].after.timestamp}'
+        - --force
       env:
         - name: DOCKER_CONFIG
           value: /atm/input/.docker/
@@ -146,3 +137,5 @@ artifacts:
           value: "#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}"
         - name: DOCKER_PROVIDER_ID
           value: ${configuration[0].resourceProviders.docker_push_registry.selectedResourceProviders[0].id}
+        - name: DOCKER_FILE
+          value: ${configuration[0].parameters.dockerfile:Dockerfile}
