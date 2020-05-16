@@ -55,6 +55,7 @@ export async function imageLink(): Promise<number> {
     const providerId = process.env.DOCKER_PROVIDER_ID;
     const dockerfile = process.env.DOCKER_FILE;
 
+    // Check if Dockerfile exists
     if (!await fs.pathExists(path.join(home, dockerfile))) {
         info(`Dockerfile '${dockerfile}' not found. Exiting...`);
         return 0;
