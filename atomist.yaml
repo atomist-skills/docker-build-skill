@@ -117,6 +117,7 @@ artifacts:
         - -c
         - >
           "if [ -f ${configuration[0].parameters.dockerfile:Dockerfile} ]; then
+          /kaniko/executor
           --context=dir:///atm/home
           --destination=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}
           --dockerfile=${configuration[0].parameters.dockerfile:Dockerfile}
