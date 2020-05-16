@@ -137,7 +137,7 @@ artifacts:
         - name: DOCKER_CONFIG
           value: /atm/input/.docker/
     - name: image-link
-      image: gcr.io/atomist-container-skills/docker-build-skill:4162c138d5320b513135a655691e8dadaf82dd98
+      image: gcr.io/atomist-container-skills/docker-build-skill:df949f0d25541854c78a77c1194c4525827e3df5
       args:
         - /sdm/bin/start.js
         - image-link
