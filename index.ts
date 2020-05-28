@@ -111,16 +111,16 @@ export const Skill = skill({
             image: "gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.22.0}",
             args: [
                 "--context=dir:///atm/home",
-                "--destination=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${event.Push[0].repo.name}}:${configuration[0].parameters.tag:${event.Push[0].after.sha}}",
+                "--destination=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}",
                 "--dockerfile=${configuration[0].parameters.dockerfile:Dockerfile}",
                 "--cache=${configuration[0].parameters.cache:false}",
-                "--cache-repo=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${event.Push[0].repo.name}}-cache",
+                "--cache-repo=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}-cache",
                 "--label=org.label-schema.schema-version='1.0'",
-                "--label=org.label-schema.name='${event.Push[0].repo.name}'",
-                "--label=org.label-schema.vendor='${event.Push[0].repo.owner}'",
-                "--label=org.label-schema.vcs-url='${event.Push[0].repo.org.provider.gitUrl}:${event.Push[0].repo.owner}/${event.Push[0].repo.name}.git'",
-                "--label=org.label-schema.vcs-ref='${event.Push[0].after.sha}'",
-                "--label=org.label-schema.build-date='${event.Push[0].after.timestamp}'",
+                "--label=org.label-schema.name='${data.Push[0].repo.name}'",
+                "--label=org.label-schema.vendor='${data.Push[0].repo.owner}'",
+                "--label=org.label-schema.vcs-url='${data.Push[0].repo.org.provider.gitUrl}:${data.Push[0].repo.owner}/${data.Push[0].repo.name}.git'",
+                "--label=org.label-schema.vcs-ref='${data.Push[0].after.sha}'",
+                "--label=org.label-schema.build-date='${data.Push[0].after.timestamp}'",
                 "--force",
             ],
             env: [{
@@ -136,7 +136,7 @@ export const Skill = skill({
             ],
             env: [{
                 name: "DOCKER_BUILD_IMAGE_NAME",
-                value: "#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${event.Push[0].repo.name}}:${configuration[0].parameters.tag:${event.Push[0].after.sha}}",
+                value: "#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}",
             }, {
                 name: "DOCKER_PROVIDER_ID",
                 value: "${configuration[0].resourceProviders.docker_push_registry.selectedResourceProviders[0].id}",
