@@ -15,15 +15,19 @@
 */
 
 import {
+    gitHubResourceProvider,
     LineStyle,
     ParameterType,
     ParameterVisibility,
     skill,
+    slackResourceProvider,
 } from "@atomist/skill/lib/skill";
 
 export const Skill = skill({
 
     resourceProviders: {
+        github: gitHubResourceProvider(),
+        slack: slackResourceProvider(),
         "docker_push_registry": {
             typeName: "DockerRegistry",
             description: "Docker registry to push to",
