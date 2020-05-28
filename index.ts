@@ -129,5 +129,5 @@ export const Skill = skill({
 
     subscriptions: [
         "file://lib/graphql/subscription/*.graphql",
-    ]
+    ],
 });
