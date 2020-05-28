@@ -74,7 +74,7 @@ export async function imageLink(): Promise<number> {
     debug("Container exited with '%s'", status);
 
     if (!!imageName && status === 0) {
-        const push = ctx.event.Push[0];
+        const push = ctx.data.Push[0];
         await ctx.graphql.mutate<CreateDockerImageMutation, CreateDockerImageMutationVariables>({
                 root: __dirname,
                 path: "graphql/mutation/createDockerImage.graphql",
@@ -95,7 +95,7 @@ export async function imageLink(): Promise<number> {
 }
 
 async function slackMessage(ctx: EventContext<BuildOnPushSubscription>): Promise<{ close: (status: number) => Promise<void> }> {
-    const push = ctx.event.Push[0];
+    const push = ctx.data.Push[0];
     const repo = push?.repo;
     const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
@@ -145,7 +145,7 @@ ${ticks}`;
 }
 
 async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<{ close: (status: number) => Promise<void> }> {
-    const push = ctx.event.Push[0];
+    const push = ctx.data.Push[0];
     const repo = push?.repo;
     const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 

@@ -1,7 +1,23 @@
 {
+  "name": "@atomist/docker-build-skill",
+  "description": "Docker Build",
+  "author": {
+    "name": "Atomist",
+    "email": "oss@atomist.com"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "BUILD",
+    "DEPLOY"
+  ],
+  "homepage": "https://github.com/atomist-skills/docker-build-skill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atomist-skills/docker-build-skill.git"
+  },
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
-    "@atomist/skill": "0.1.0-master.20200514124836",
+    "@atomist/skill": "0.1.0-issue-6.20200528091740",
     "@atomist/slack-messages": "^1.1.2-master.20200108150633",
     "@kubernetes/client-node": "^0.11.2",
     "@types/fs-extra": "^8.0.1",
@@ -53,7 +69,9 @@
     "start": "functions-framework --target=entryPoint --signature-type=event",
     "test": "echo no tests",
     "test:one": "mocha --require espower-typescript/guess \"test/**/${TEST:-*.test.ts}\"",
-    "typedoc": "npm run doc"
+    "typedoc": "npm run doc",
+    "skill": "run-s compile test skill:generate",
+    "skill:generate": "atm-skill generate"
   },
   "engines": {
     "node": ">=8.2.0",

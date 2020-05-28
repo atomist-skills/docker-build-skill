@@ -1,6 +1,10 @@
 # `atomist/docker-build-skill`
 
+<!---atomist-skill-description:start--->
+
 Automatically build and push Docker images
+
+<!---atomist-skill-description:end--->
 
 <!---atomist-skill-readme:start--->
 
