@@ -11,7 +11,7 @@ This page details all runtime OSS dependencies of `@atomist/docker-build-skill`.
 | License | Count |
 |---------|-------|
 |[AFLv2.1](#aflv21)|1|
-|[Apache-2.0](#apache-20)|39|
+|[Apache-2.0](#apache-20)|37|
 |[BSD-2-Clause](#bsd-2-clause)|8|
 |[BSD-3-Clause](#bsd-3-clause)|23|
 |[BSD](#bsd)|1|
@@ -20,7 +20,7 @@ This page details all runtime OSS dependencies of `@atomist/docker-build-skill`.
 |[GPL-3.0](#gpl-30)|1|
 |[ISC](#isc)|32|
 |[MIT AND Zlib](#mit-and-zlib)|1|
-|[MIT](#mit)|306|
+|[MIT](#mit)|304|
 |[Unlicense](#unlicense)|1|
 
 #### AFLv2.1
@@ -35,7 +35,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | Name | Version | Publisher | Repository |
 |------|---------|-----------|------------|
 |`@atomist/skill-logging`|`0.1.0-master.20200316180914`|Atomist|[https://github.com/atomist/skill-logging](https://github.com/atomist/skill-logging)|
-|`@atomist/skill`|`0.1.0-issue-6.20200528091740`|Atomist|[https://github.com/atomist/skill](https://github.com/atomist/skill)|
+|`@atomist/skill`|`0.1.0-master.20200605104148`|Atomist|[https://github.com/atomist/skill](https://github.com/atomist/skill)|
 |`@atomist/slack-messages`|`1.1.1`|Atomist|[https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)|
 |`@atomist/slack-messages`|`1.1.2-master.20200430150635`|Atomist|[https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)|
 |`@google-cloud/common`|`2.4.0`|Google Inc.|[https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)|
@@ -46,7 +46,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 |`@google-cloud/promisify`|`1.0.4`|Google Inc.|[https://github.com/googleapis/nodejs-promisify](https://github.com/googleapis/nodejs-promisify)|
 |`@google-cloud/pubsub`|`1.1.5`|Google Inc.|[https://github.com/googleapis/nodejs-pubsub](https://github.com/googleapis/nodejs-pubsub)|
 |`@google-cloud/storage`|`4.7.0`|Google Inc.|[https://github.com/googleapis/nodejs-storage](https://github.com/googleapis/nodejs-storage)|
-|`@grpc/grpc-js`|`1.0.4`|Google Inc.|[https://github.com/grpc/grpc-node/tree/master/packages/grpc-js](https://github.com/grpc/grpc-node/tree/master/packages/grpc-js)|
+|`@grpc/grpc-js`|`1.0.5`|Google Inc.|[https://github.com/grpc/grpc-node/tree/master/packages/grpc-js](https://github.com/grpc/grpc-node/tree/master/packages/grpc-js)|
 |`@grpc/proto-loader`|`0.5.4`|Google Inc.|[https://github.com/grpc/grpc-node](https://github.com/grpc/grpc-node)|
 |`@kubernetes/client-node`|`0.11.2`|Kubernetes Authors|[https://github.com/kubernetes-client/javascript](https://github.com/kubernetes-client/javascript)|
 |`@opencensus/core`|`0.0.20`|Google Inc.|[https://github.com/census-instrumentation/opencensus-node](https://github.com/census-instrumentation/opencensus-node)|
@@ -61,9 +61,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 |`gaxios`|`2.3.4`|Google, LLC|[https://github.com/googleapis/gaxios](https://github.com/googleapis/gaxios)|
 |`gaxios`|`3.0.3`|Google, LLC|[https://github.com/googleapis/gaxios](https://github.com/googleapis/gaxios)|
 |`gcp-metadata`|`3.5.0`|Stephen Sawchuk|[https://github.com/googleapis/gcp-metadata](https://github.com/googleapis/gcp-metadata)|
-|`gcp-metadata`|`4.1.0`|Stephen Sawchuk|[https://github.com/googleapis/gcp-metadata](https://github.com/googleapis/gcp-metadata)|
 |`google-auth-library`|`5.10.1`|Google Inc.|[https://github.com/googleapis/google-auth-library-nodejs](https://github.com/googleapis/google-auth-library-nodejs)|
-|`google-auth-library`|`6.0.0`|Google Inc.|[https://github.com/googleapis/google-auth-library-nodejs](https://github.com/googleapis/google-auth-library-nodejs)|
 |`google-gax`|`1.15.3`|Google API Authors|[https://github.com/googleapis/gax-nodejs](https://github.com/googleapis/gax-nodejs)|
 |`hex2dec`|`1.1.2`||[https://github.com/donmccurdy/hex2dec](https://github.com/donmccurdy/hex2dec)|
 |`long`|`4.0.0`|Daniel Wirtz|[https://github.com/dcodeIO/long.js](https://github.com/dcodeIO/long.js)|
@@ -197,13 +195,13 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 |`@octokit/graphql`|`4.5.0`||[https://github.com/octokit/graphql.js](https://github.com/octokit/graphql.js)|
 |`@octokit/plugin-paginate-rest`|`2.2.1`||[https://github.com/octokit/plugin-paginate-rest.js](https://github.com/octokit/plugin-paginate-rest.js)|
 |`@octokit/plugin-request-log`|`1.0.0`||[https://github.com/octokit/plugin-request-log.js](https://github.com/octokit/plugin-request-log.js)|
-|`@octokit/plugin-rest-endpoint-methods`|`3.12.3`||[https://github.com/octokit/plugin-rest-endpoint-methods.js](https://github.com/octokit/plugin-rest-endpoint-methods.js)|
+|`@octokit/plugin-rest-endpoint-methods`|`3.15.0`||[https://github.com/octokit/plugin-rest-endpoint-methods.js](https://github.com/octokit/plugin-rest-endpoint-methods.js)|
 |`@octokit/plugin-retry`|`3.0.2`||[https://github.com/octokit/plugin-retry.js](https://github.com/octokit/plugin-retry.js)|
 |`@octokit/plugin-throttling`|`3.2.1`||[https://github.com/octokit/plugin-throttling.js](https://github.com/octokit/plugin-throttling.js)|
 |`@octokit/request-error`|`2.0.1`||[https://github.com/octokit/request-error.js](https://github.com/octokit/request-error.js)|
 |`@octokit/request`|`5.4.4`||[https://github.com/octokit/request.js](https://github.com/octokit/request.js)|
-|`@octokit/rest`|`17.9.2`||[https://github.com/octokit/rest.js](https://github.com/octokit/rest.js)|
-|`@octokit/types`|`4.0.2`||[https://github.com/octokit/types.ts](https://github.com/octokit/types.ts)|
+|`@octokit/rest`|`17.10.0`||[https://github.com/octokit/rest.js](https://github.com/octokit/rest.js)|
+|`@octokit/types`|`4.1.7`||[https://github.com/octokit/types.ts](https://github.com/octokit/types.ts)|
 |`@sindresorhus/is`|`0.7.0`|Sindre Sorhus|[https://github.com/sindresorhus/is](https://github.com/sindresorhus/is)|
 |`@sindresorhus/is`|`1.2.0`|Sindre Sorhus|[https://github.com/sindresorhus/is](https://github.com/sindresorhus/is)|
 |`@tootallnate/once`|`1.1.2`|Nathan Rajlich|[https://github.com/TooTallNate/once](https://github.com/TooTallNate/once)|
@@ -313,10 +311,8 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 |`git-url-parse`|`11.1.2`|Ionică Bizău|[https://github.com/IonicaBizau/git-url-parse](https://github.com/IonicaBizau/git-url-parse)|
 |`glob-gitignore`|`1.0.14`|kaelzhang|[https://github.com/kaelzhang/node-glob-gitignore](https://github.com/kaelzhang/node-glob-gitignore)|
 |`google-p12-pem`|`2.0.4`|Ryan Seys|[https://github.com/google/google-p12-pem](https://github.com/google/google-p12-pem)|
-|`google-p12-pem`|`3.0.1`|Ryan Seys|[https://github.com/google/google-p12-pem](https://github.com/google/google-p12-pem)|
 |`got`|`8.3.2`||[https://github.com/sindresorhus/got](https://github.com/sindresorhus/got)|
 |`gtoken`|`4.1.4`|Google, LLC|[https://github.com/google/node-gtoken](https://github.com/google/node-gtoken)|
-|`gtoken`|`5.0.1`|Google, LLC|[https://github.com/google/node-gtoken](https://github.com/google/node-gtoken)|
 |`har-validator`|`5.1.3`|Ahmad Nassri|[https://github.com/ahmadnassri/node-har-validator](https://github.com/ahmadnassri/node-har-validator)|
 |`has-symbol-support-x`|`1.4.2`|Graham Fairweather|[https://github.com/Xotic750/has-symbol-support-x](https://github.com/Xotic750/has-symbol-support-x)|
 |`has-to-string-tag-x`|`1.4.1`|Graham Fairweather|[https://github.com/Xotic750/has-to-string-tag-x](https://github.com/Xotic750/has-to-string-tag-x)|
