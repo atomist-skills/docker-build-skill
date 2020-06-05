@@ -16,11 +16,13 @@
 
 import {
     gitHubResourceProvider,
+    slackResourceProvider,
+} from "@atomist/skill/lib/resource_providers";
+import {
     LineStyle,
     ParameterType,
     ParameterVisibility,
     skill,
-    slackResourceProvider,
 } from "@atomist/skill/lib/skill";
 
 export const Skill = skill({
@@ -108,7 +110,7 @@ export const Skill = skill({
 
     containers: {
         kaniko: {
-            image: "gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.22.0}",
+            image: "gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.23.0}",
             args: [
                 "--context=dir:///atm/home",
                 "--destination=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}",
