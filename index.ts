@@ -74,7 +74,7 @@ export const Skill = skill({
             type: ParameterType.String,
             displayName: "Kaniko version",
             description: "Version of Kaniko to use",
-            placeHolder: "v0.22.0",
+            placeHolder: "v0.23.0",
             required: false,
             visibility: ParameterVisibility.Hidden,
         },
