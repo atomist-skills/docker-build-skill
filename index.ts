@@ -124,7 +124,6 @@ export const Skill = skill({
                 "--label=org.label-schema.vcs-ref='${data.Push[0].after.sha}'",
                 "--label=org.label-schema.build-date='${data.Push[0].after.timestamp}'",
                 "--force",
-                "--use-new-run=true",
             ],
             env: [{
                 name: "DOCKER_CONFIG",
