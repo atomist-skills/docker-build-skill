@@ -107,7 +107,7 @@ export const Skill = skill({
             required: false,
         },
     },
-
+                        
     containers: {
         kaniko: {
             image: "gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.23.0}",
