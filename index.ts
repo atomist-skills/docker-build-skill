@@ -29,7 +29,7 @@ import {
 export const Skill = skill({
 
     resourceProviders: {
-        github: gitHubResourceProvider(),
+        github: gitHubResourceProvider({ minRequired: 1 }),
         slack: slackResourceProvider(),
         "docker_push_registry": dockerRegistryProvider({
             description: "Docker registry to push to",
