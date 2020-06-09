@@ -106,7 +106,7 @@ export const Skill = skill({
             description: "",
             required: false,
         },
-    },         
+    },
 
     containers: {
         kaniko: {
