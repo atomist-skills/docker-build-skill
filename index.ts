@@ -110,7 +110,7 @@ export const Skill = skill({
 
     containers: {
         kaniko: {
-            image: "gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.23.0}",
+            image: "gcr.io/kaniko-project/executor:${configuration[0].parameters.version:perf}",
             args: [
                 "--context=dir:///atm/home",
                 "--destination=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}",
@@ -124,6 +124,7 @@ export const Skill = skill({
                 "--label=org.label-schema.vcs-ref='${data.Push[0].after.sha}'",
                 "--label=org.label-schema.build-date='${data.Push[0].after.timestamp}'",
                 "--force",
+                "--use-new-run=true",
             ],
             env: [{
                 name: "DOCKER_CONFIG",
