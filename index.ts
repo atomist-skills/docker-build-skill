@@ -15,6 +15,7 @@
 */
 
 import {
+    dockerRegistryProvider,
     gitHubResourceProvider,
     slackResourceProvider,
 } from "@atomist/skill/lib/resource_providers";
@@ -30,17 +31,17 @@ export const Skill = skill({
     resourceProviders: {
         github: gitHubResourceProvider(),
         slack: slackResourceProvider(),
-        "docker_push_registry": {
-            typeName: "DockerRegistry",
+        "docker_push_registry": dockerRegistryProvider({
             description: "Docker registry to push to",
+            displayName: "Push Registry",
             minRequired: 1,
             maxAllowed: 1,
-        },
-        "docker_pull_registries": {
-            typeName: "DockerRegistry",
+        }),
+        "docker_pull_registries": dockerRegistryProvider({
             description: "Additional Docker registries to pull from",
+            displayName: "Pull Registries",
             minRequired: 0,
-        },
+        }),
     },
 
     parameters: {
@@ -107,7 +108,7 @@ export const Skill = skill({
             required: false,
         },
     },
-                        
+
     containers: {
         kaniko: {
             image: "gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.23.0}",
