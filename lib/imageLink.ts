@@ -112,7 +112,7 @@ async function slackMessage(ctx: EventContext<BuildOnPushSubscription>): Promise
 ${ticks}
 Building image ${imageName}
 ${ticks}`,
-            thumb_url: `https://badge.atomist.com/v2/progress/in_process/0/1`, // eslint-disable-line @typescript-eslint/camelcase
+            thumb_url: `https://badge.atomist.com/v2/progress/in_process/0/1?counter=no`, // eslint-disable-line @typescript-eslint/camelcase
             color: "#2A7D7D",
             footer: url(repo.url, `${repo.owner}/${repo.name}`),
             footer_icon: "https://images.atomist.com/rug/github_grey.png", // eslint-disable-line @typescript-eslint/camelcase
@@ -125,7 +125,7 @@ ${ticks}`,
         close: async (status): Promise<void> => {
             if (status === 0) {
                 slackMsg.attachments[0].color = "#37A745";
-                slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/success/1/1`; // eslint-disable-line @typescript-eslint/camelcase
+                slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/success/1/1?counter=no`; // eslint-disable-line @typescript-eslint/camelcase
                 slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.after.url, `\`${push.after.sha.slice(0, 7)}\``)}\n
 ${ticks}
 Successfully built and pushed image ${imageName}
@@ -133,7 +133,7 @@ ${ticks}`;
                 await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
             } else {
                 slackMsg.attachments[0].color = "#BC3D33";
-                slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/failure/0/1`; // eslint-disable-line @typescript-eslint/camelcase
+                slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/failure/0/1?counter=no`; // eslint-disable-line @typescript-eslint/camelcase
                 slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.after.url, `\`${push.after.sha.slice(0, 7)}\``)}\n
 ${ticks}
 Failed to built image ${imageName}
