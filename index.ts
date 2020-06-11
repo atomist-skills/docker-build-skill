@@ -21,7 +21,6 @@ import {
     slackResourceProvider,
 } from "@atomist/skill/lib/resource_providers";
 import {
-    LineStyle,
     ParameterType,
     ParameterVisibility,
     skill,
@@ -93,15 +92,6 @@ export const Skill = skill({
             displayName: "Kaniko arguments",
             description: "Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image",
             required: false,
-            visibility: ParameterVisibility.Hidden,
-        },
-        "docker_provider_secrets": {
-            type: ParameterType.String,
-            displayName: "Provider secrets",
-            description: "Provider secrets spec",
-            required: false,
-            lineStyle: LineStyle.Multiple,
-            visibility: ParameterVisibility.Hidden,
         },
         repos: {
             type: ParameterType.RepoFilter,
