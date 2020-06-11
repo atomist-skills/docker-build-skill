@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.1.4...HEAD)
 
+### Changed
+
+-   Show docker_args in configuration. [14d31d6](https://github.com/atomist-skills/docker-build-skill/commit/14d31d692201744e79d4dc47c4fe51cb09ac37db)
+
 ## [1.1.4](https://github.com/atomist-skills/docker-build-skill/compare/1.1.3...1.1.4) - 2020-06-11
 
 ### Fixed
