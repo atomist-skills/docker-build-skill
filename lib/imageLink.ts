@@ -174,7 +174,7 @@ async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<
             details_url: ctx.audit.url, // eslint-disable-line @typescript-eslint/camelcase
             output: {
                 title: "Docker Build",
-                summary: `Building image \`${imageName}\``
+                summary: `Building image \`${imageName}\``,
             },
         })).data;
 
