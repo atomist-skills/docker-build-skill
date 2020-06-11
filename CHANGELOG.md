@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 -   Set output on GitHub check. [16a3129](https://github.com/atomist-skills/docker-build-skill/commit/16a31292afa6bf19c4f698c5667be6a45fa43f71)
 
+### Changed
+
+-   Remove counter from progress image. [6b31d8a](https://github.com/atomist-skills/docker-build-skill/commit/6b31d8a6f82818d6efe2e0d07f8d96542d2722fa)
+
 ## [1.1.5](https://github.com/atomist-skills/docker-build-skill/compare/1.1.4...1.1.5) - 2020-06-11
 
 ### Changed
