@@ -172,6 +172,10 @@ async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<
             external_id: ctx.correlationId, // eslint-disable-line @typescript-eslint/camelcase
             status: "in_progress",
             details_url: ctx.audit.url, // eslint-disable-line @typescript-eslint/camelcase
+            output: {
+                title: "Docker Build",
+                summary: `Building image \`${imageName}\``
+            },
         })).data;
 
         return {
