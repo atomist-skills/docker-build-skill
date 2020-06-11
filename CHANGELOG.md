@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.1.2...HEAD)
 
+### Added
+
+-   Add MavenRepositoryProvider to list of optional integrations. [41c1854](https://github.com/atomist-skills/docker-build-skill/commit/41c1854e35faf845ea8c69c789c0170853f46c56)
+
 ### Changed
 
 -   Update kaniko to 0.23.0. [5292844](https://github.com/atomist-skills/docker-build-skill/commit/5292844a28c235549d825b6a0e6a7b0497846313)
