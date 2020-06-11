@@ -17,6 +17,7 @@
 import {
     dockerRegistryProvider,
     gitHubResourceProvider,
+    mavenRepositoryProvider,
     slackResourceProvider,
 } from "@atomist/skill/lib/resource_providers";
 import {
@@ -42,6 +43,7 @@ export const Skill = skill({
             displayName: "Pull Registries",
             minRequired: 0,
         }),
+        maven: mavenRepositoryProvider({ minRequired: 0 }),
     },
 
     parameters: {
