@@ -19,7 +19,7 @@ and configure a Docker registry to push and you are ready to build
 your images.
 
 <!---atomist-skill-long_description:end--->
-
+ 
 ---
 
 <!---atomist-skill-readme:start--->
