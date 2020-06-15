@@ -136,7 +136,7 @@ ${ticks}`;
                 slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/failure/0/1?counter=no`; // eslint-disable-line @typescript-eslint/camelcase
                 slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.after.url, `\`${push.after.sha.slice(0, 7)}\``)}\n
 ${ticks}
-Failed to built image ${imageName}
+Failed to build image ${imageName}
 ${ticks}`;
                 await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
             }
@@ -203,7 +203,7 @@ async function gitHubCheck(ctx: EventContext<BuildOnPushSubscription>): Promise<
                         completed_at: new Date().toISOString(), // eslint-disable-line @typescript-eslint/camelcase
                         output: {
                             title: "Docker Build",
-                            summary: `Failed to built image \`${imageName}\``,
+                            summary: `Failed to build image \`${imageName}\``,
                         },
                     });
                 }
