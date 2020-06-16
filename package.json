@@ -15,6 +15,7 @@
     "type": "git",
     "url": "https://github.com/atomist-skills/docker-build-skill.git"
   },
+  "icon": "file://docs/images/icon.svg",
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
     "@atomist/skill": "0.1.0-master.20200611144357",
