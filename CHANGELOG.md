@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.1.6...HEAD)
 
+### Fixed
+
+-   Fix some typos in chat messages. [82684d1](https://github.com/atomist-skills/docker-build-skill/commit/82684d15f36dbfa752a2b337272b3d208da5ebe6)
+
 ## [1.1.6](https://github.com/atomist-skills/docker-build-skill/compare/1.1.5...1.1.6) - 2020-06-11
 
 ### Added
