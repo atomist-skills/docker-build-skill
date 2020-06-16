@@ -39,5 +39,4 @@ yargs
             }
         },
     )
-    .help()
-    .argv;
+    .help().argv;

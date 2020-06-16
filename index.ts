@@ -1,18 +1,18 @@
 /*
-* Copyright © 2020 Atomist, Inc.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright © 2020 Atomist, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import {
     dockerRegistryProvider,
@@ -20,24 +20,19 @@ import {
     mavenRepositoryProvider,
     slackResourceProvider,
 } from "@atomist/skill/lib/resource_providers";
-import {
-    ParameterType,
-    ParameterVisibility,
-    skill,
-} from "@atomist/skill/lib/skill";
+import { ParameterType, ParameterVisibility, skill } from "@atomist/skill/lib/skill";
 
 export const Skill = skill({
-
     resourceProviders: {
         github: gitHubResourceProvider({ minRequired: 1 }),
         slack: slackResourceProvider(),
-        "docker_push_registry": dockerRegistryProvider({
+        docker_push_registry: dockerRegistryProvider({
             description: "Docker registry to push to",
             displayName: "Push Registry",
             minRequired: 1,
             maxAllowed: 1,
         }),
-        "docker_pull_registries": dockerRegistryProvider({
+        docker_pull_registries: dockerRegistryProvider({
             description: "Additional Docker registries to pull from",
             displayName: "Pull Registries",
             minRequired: 0,
@@ -87,10 +82,11 @@ export const Skill = skill({
             required: false,
             visibility: ParameterVisibility.Hidden,
         },
-        "docker_args": {
+        docker_args: {
             type: ParameterType.StringArray,
             displayName: "Kaniko arguments",
-            description: "Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image",
+            description:
+                "Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image",
             required: false,
         },
         repos: {
@@ -118,32 +114,33 @@ export const Skill = skill({
                 "--label=org.label-schema.build-date='${data.Push[0].after.timestamp}'",
                 "--force",
             ],
-            env: [{
-                name: "DOCKER_CONFIG",
-                value: "/atm/input/.docker/",
-            }],
+            env: [
+                {
+                    name: "DOCKER_CONFIG",
+                    value: "/atm/input/.docker/",
+                },
+            ],
         },
         "image-link": {
             image: "gcr.io/atomist-container-skills/docker-build-skill",
-            args: [
-                "/sdm/bin/start.js",
-                "image-link",
+            args: ["/sdm/bin/start.js", "image-link"],
+            env: [
+                {
+                    name: "DOCKER_BUILD_IMAGE_NAME",
+                    value:
+                        "#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}",
+                },
+                {
+                    name: "DOCKER_PROVIDER_ID",
+                    value: "${configuration[0].resourceProviders.docker_push_registry.selectedResourceProviders[0].id}",
+                },
+                {
+                    name: "DOCKER_FILE",
+                    value: "${configuration[0].parameters.dockerfile:Dockerfile}",
+                },
             ],
-            env: [{
-                name: "DOCKER_BUILD_IMAGE_NAME",
-                value: "#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}",
-            }, {
-                name: "DOCKER_PROVIDER_ID",
-                value: "${configuration[0].resourceProviders.docker_push_registry.selectedResourceProviders[0].id}",
-            }, {
-                name: "DOCKER_FILE",
-                value: "${configuration[0].parameters.dockerfile:Dockerfile}",
-            }],
         },
     },
 
-    subscriptions: [
-        "file://lib/graphql/subscription/*.graphql",
-    ],
+    subscriptions: ["file://lib/graphql/subscription/*.graphql"],
 });
-           

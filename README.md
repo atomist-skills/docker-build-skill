@@ -56,26 +56,26 @@ be configured to push your images to. We recommend connecting the **Slack** inte
     select a registry to push to.
          
     
-2. **Select Docker registries to pull from**
+1. **Select Docker registries to pull from**
 
     ![Docker Pull Registry](docs/images/docker-pull-registries.png)
     
     Occasionally you may want to pull private base images from a different registry. Use the **Docker registries to pull 
     from** parameter to configure those additional registries.
 
-3. **Specify the name of the image**
+1. **Specify the name of the image**
 
     ![Docker Image Name](docs/images/docker-image-name.png)
     
     Provide the name of the Docker image to create. If not provided this defaults to the name of repository.
 
-4. **Specify the tag to create**
+1. **Specify the tag to create**
     
     ![Docker Image Tag](docs/images/docker-image-tag.png)
     
     Specify the Docker image tag to create. If not provided this defaults to Git SHA of the commit that was pushed.
 
-5. **Specify the path to the Dockerfile**
+1. **Specify the path to the Dockerfile**
 
     ![Dockerfile Path](docs/images/dockerfile-path.png)
     
@@ -83,7 +83,7 @@ be configured to push your images to. We recommend connecting the **Slack** inte
     
     The path is relative to the root of the repository.
 
-6. **Determine repository scope**
+1. **Determine repository scope**
    
    ![Repository filter](docs/images/repo-filter.png)
    
