@@ -62,6 +62,10 @@ be configured to push your images to. We recommend connecting the **Slack** inte
     
     Occasionally you may want to pull private base images from a different registry. Use the **Docker registries to pull 
     from** parameter to configure those additional registries.
+    
+1. **Select the trigger for running this skill**
+
+    This skill can build Docker images on Git push or tag events. Use this parameter to configure the trigger.     
 
 1. **Specify the name of the image**
 
@@ -73,7 +77,8 @@ be configured to push your images to. We recommend connecting the **Slack** inte
     
     ![Docker Image Tag](docs/images/docker-image-tag.png)
     
-    Specify the Docker image tag to create. If not provided this defaults to Git SHA of the commit that was pushed.
+    Specify the Docker image tag to create. If not provided this defaults to Git SHA of the commit that was pushed or
+    the name of the Git tag.
 
 1. **Specify the path to the Dockerfile**
 

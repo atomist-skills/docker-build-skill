@@ -41,16 +41,30 @@ export const Skill = skill({
     },
 
     parameters: {
+        subscription_filter: {
+            type: ParameterType.SingleChoice,
+            displayName: "Build trigger",
+            description: "Determine when to run the Docker build; on Git pushes or tags",
+            defaultValue: "buildOnPush",
+            options: [{
+                text: "Pushes",
+                value: "buildOnPush",
+            }, {
+                text: "Tags",
+                value: "buildOnTag",
+            }],
+            required: false,
+        },
         name: {
             type: ParameterType.String,
             displayName: "Image name",
-            description: "Name of the Docker Image after the registry (defaults to repository name)",
+            description: "Name of the Docker image after the registry (defaults to repository name)",
             required: false,
         },
         tag: {
             type: ParameterType.String,
             displayName: "Image tag",
-            description: "Tag to use when pushing the Docker image (defaults to Git SHA)",
+            description: "Tag to use when pushing the Docker image (defaults to Git SHA for pushes and Git tag name for tags)",
             required: false,
         },
         dockerfile: {
@@ -102,16 +116,16 @@ export const Skill = skill({
             image: "gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.23.0}",
             args: [
                 "--context=dir:///atm/home",
-                "--destination=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}",
+                "--destination=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name:${data.Tag[0].commit.repo.name}}}:${configuration[0].parameters.tag:${data.Push[0].after.sha:${data.Tag[0].name}}}",
                 "--dockerfile=${configuration[0].parameters.dockerfile:Dockerfile}",
                 "--cache=${configuration[0].parameters.cache:false}",
-                "--cache-repo=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}-cache",
+                "--cache-repo=#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name:${data.Tag[0].commit.repo.name}}}-cache",
                 "--label=org.label-schema.schema-version='1.0'",
-                "--label=org.label-schema.name='${data.Push[0].repo.name}'",
-                "--label=org.label-schema.vendor='${data.Push[0].repo.owner}'",
-                "--label=org.label-schema.vcs-url='${data.Push[0].repo.org.provider.gitUrl}:${data.Push[0].repo.owner}/${data.Push[0].repo.name}.git'",
-                "--label=org.label-schema.vcs-ref='${data.Push[0].after.sha}'",
-                "--label=org.label-schema.build-date='${data.Push[0].after.timestamp}'",
+                "--label=org.label-schema.name='${data.Push[0].repo.name:${data.Tag[0].commit.repo.name}}'",
+                "--label=org.label-schema.vendor='${data.Push[0].repo.owner:${data.Tag[0].commit.repo.owner}}'",
+                "--label=org.label-schema.vcs-url='${data.Push[0].repo.org.provider.gitUrl::${data.Tag[0].commit.repo.org.provider.gitUrl}}:${data.Push[0].repo.owner:${data.Tag[0].commit.repo.owner}}/${data.Push[0].repo.name:${data.Tag[0].commit.repo.name}}.git'",
+                "--label=org.label-schema.vcs-ref='${data.Push[0].after.sha:${data.Tag[0].name}}'",
+                "--label=org.label-schema.build-date='${data.Push[0].after.timestamp:${data.Tag[0].commit.timestamp}}'",
                 "--force",
             ],
             env: [
@@ -128,7 +142,7 @@ export const Skill = skill({
                 {
                     name: "DOCKER_BUILD_IMAGE_NAME",
                     value:
-                        "#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name}}:${configuration[0].parameters.tag:${data.Push[0].after.sha}}",
+                        "#{configuration[0].resourceProviders.docker_push_registry | loadProvider('registryName') | replace('https://','')}/${configuration[0].parameters.name:${data.Push[0].repo.name:${data.Tag[0].commit.repo.name}}}:${configuration[0].parameters.tag:${data.Push[0].after.sha:${data.Tag[0].commit.name}}}",
                 },
                 {
                     name: "DOCKER_PROVIDER_ID",

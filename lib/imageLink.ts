@@ -16,18 +16,26 @@
 
 import { createContext } from "@atomist/skill/lib/context";
 import { EventContext } from "@atomist/skill/lib/handler";
-import { debug, info } from "@atomist/skill/lib/log";
+import {
+    debug,
+    info,
+} from "@atomist/skill/lib/log";
 import { EventIncoming } from "@atomist/skill/lib/payload";
 import { gitHubComRepository } from "@atomist/skill/lib/project";
 import { gitHub } from "@atomist/skill/lib/project/github";
 import { gitHubAppToken } from "@atomist/skill/lib/secrets";
-import { bold, SlackMessage, url } from "@atomist/slack-messages";
+import {
+    bold,
+    SlackMessage,
+    url,
+} from "@atomist/slack-messages";
 import * as k8s from "@kubernetes/client-node";
 import * as fs from "fs-extra";
 import * as os from "os";
 import * as path from "path";
 import {
     BuildOnPushSubscription,
+    BuildOnTagSubscription,
     CreateDockerImageMutation,
     CreateDockerImageMutationVariables,
 } from "./typings/types";
@@ -54,27 +62,33 @@ export async function imageLink(): Promise<number> {
         return 0;
     }
 
-    const ctx: EventContext<BuildOnPushSubscription> = createContext(payload, {} as any) as any;
+    const ctx: EventContext<BuildOnPushSubscription | BuildOnTagSubscription> = createContext(payload, {} as any) as any;
     const container = payload.skill.artifacts[0].name;
     const namespace = await readNamespace();
     const name = os.hostname();
 
-    const slackMessageCb = await slackMessage(ctx);
-    const checkCb = await gitHubCheck(ctx);
+    const repo = (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.repo || (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit?.repo;
+    const push = {
+        sha: (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.after.sha || (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit?.sha,
+        url: (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.after.url || (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit?.url,
+        branch: (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.branch || (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.name,
+    };
+
+    const slackMessageCb = await slackMessage(repo, push, ctx);
+    const checkCb = await gitHubCheck(repo, push, ctx);
 
     debug("Watching container '%s'", container);
     const status = await containerWatch(name, namespace, container);
     debug("Container exited with '%s'", status);
 
     if (!!imageName && status === 0) {
-        const push = ctx.data.Push[0];
         await ctx.graphql.mutate<CreateDockerImageMutation, CreateDockerImageMutationVariables>(
             {
                 root: __dirname,
                 path: "graphql/mutation/createDockerImage.graphql",
             },
             {
-                sha: push.after.sha,
+                sha: push.sha,
                 branch: push.branch,
                 image: imageName,
                 providerId,
@@ -90,14 +104,14 @@ export async function imageLink(): Promise<number> {
 }
 
 async function slackMessage(
-    ctx: EventContext<BuildOnPushSubscription>,
+    repo: BuildOnPushSubscription["Push"][0]["repo"],
+    push: { sha: string; branch: string; url: string },
+    ctx: EventContext,
 ): Promise<{ close: (status: number) => Promise<void> }> {
-    const push = ctx.data.Push[0];
-    const repo = push?.repo;
     const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
     const title = "Docker Build";
-    const id = `${ctx.skill.namespace}/${ctx.skill.name}/${push.after.sha}`;
+    const id = `${ctx.skill.namespace}/${ctx.skill.name}/${push.sha}`;
     const ticks = "```";
     const slackMsg: SlackMessage = {
         attachments: [
@@ -107,8 +121,8 @@ async function slackMessage(
                 title,
                 title_link: ctx.audit.url,
                 text: `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(
-                    push.after.url,
-                    `\`${push.after.sha.slice(0, 7)}\``,
+                    push.url,
+                    `\`${push.sha.slice(0, 7)}\``,
                 )}\n
 ${ticks}
 Building image ${imageName}
@@ -129,8 +143,8 @@ ${ticks}`,
                 slackMsg.attachments[0].color = "#37A745";
                 slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/success/1/1?counter=no`;
                 slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(
-                    push.after.url,
-                    `\`${push.after.sha.slice(0, 7)}\``,
+                    push.url,
+                    `\`${push.sha.slice(0, 7)}\``,
                 )}\n
 ${ticks}
 Successfully built and pushed image ${imageName}
@@ -140,8 +154,8 @@ ${ticks}`;
                 slackMsg.attachments[0].color = "#BC3D33";
                 slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/failure/0/1?counter=no`;
                 slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(
-                    push.after.url,
-                    `\`${push.after.sha.slice(0, 7)}\``,
+                    push.url,
+                    `\`${push.sha.slice(0, 7)}\``,
                 )}\n
 ${ticks}
 Failed to build image ${imageName}
@@ -153,10 +167,10 @@ ${ticks}`;
 }
 
 async function gitHubCheck(
-    ctx: EventContext<BuildOnPushSubscription>,
+    repo: BuildOnPushSubscription["Push"][0]["repo"],
+    push: { sha: string; branch: string; url: string },
+    ctx: EventContext,
 ): Promise<{ close: (status: number) => Promise<void> }> {
-    const push = ctx.data.Push[0];
-    const repo = push?.repo;
     const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
     if (ctx.configuration[0]?.parameters?.githubCheck) {
@@ -172,7 +186,7 @@ async function gitHubCheck(
                 owner: repo.owner,
                 repo: repo.name,
                 credential,
-                sha: push.after.sha,
+                sha: push.sha,
                 branch: push.branch,
             }),
         );
@@ -182,7 +196,7 @@ async function gitHubCheck(
                 name: ctx.skill.name,
                 owner: repo.owner,
                 repo: repo.name,
-                head_sha: push.after.sha,
+                head_sha: push.sha,
                 started_at: new Date().toISOString(),
                 external_id: ctx.correlationId,
                 status: "in_progress",
