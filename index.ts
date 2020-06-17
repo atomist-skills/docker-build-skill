@@ -44,7 +44,7 @@ export const Skill = skill({
         subscription_filter: {
             type: ParameterType.SingleChoice,
             displayName: "Build trigger",
-            description: "Determine when to run the Docker build; on Git pushes or tags",
+            description: "Determine when to run the Docker build; on Git pushes or tags or both",
             defaultValue: "buildOnPush",
             options: [{
                 text: "Pushes",
