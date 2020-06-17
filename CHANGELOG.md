@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.1.7...HEAD)
 
+### Added
+
+-   Add support for Git tag building. [05f42d7](https://github.com/atomist-skills/docker-build-skill/commit/05f42d77081841918233e12c302295d1be53013e)
+
 ## [1.1.7](https://github.com/atomist-skills/docker-build-skill/compare/1.1.6...1.1.7) - 2020-06-16
 
 ### Fixed
