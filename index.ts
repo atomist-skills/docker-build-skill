@@ -46,13 +46,16 @@ export const Skill = skill({
             displayName: "Build trigger",
             description: "Determine when to run the Docker build; on Git pushes or tags or both",
             defaultValue: "buildOnPush",
-            options: [{
-                text: "Pushes",
-                value: "buildOnPush",
-            }, {
-                text: "Tags",
-                value: "buildOnTag",
-            }],
+            options: [
+                {
+                    text: "Pushes",
+                    value: "buildOnPush",
+                },
+                {
+                    text: "Tags",
+                    value: "buildOnTag",
+                },
+            ],
             required: false,
         },
         name: {
@@ -64,7 +67,8 @@ export const Skill = skill({
         tag: {
             type: ParameterType.String,
             displayName: "Image tag",
-            description: "Tag to use when pushing the Docker image (defaults to Git SHA for pushes and Git tag name for tags)",
+            description:
+                "Tag to use when pushing the Docker image (defaults to Git SHA for pushes and Git tag name for tags)",
             required: false,
         },
         dockerfile: {

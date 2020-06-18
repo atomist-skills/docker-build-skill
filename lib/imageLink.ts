@@ -16,19 +16,12 @@
 
 import { createContext } from "@atomist/skill/lib/context";
 import { EventContext } from "@atomist/skill/lib/handler";
-import {
-    debug,
-    info,
-} from "@atomist/skill/lib/log";
+import { debug, info } from "@atomist/skill/lib/log";
 import { EventIncoming } from "@atomist/skill/lib/payload";
 import { gitHubComRepository } from "@atomist/skill/lib/project";
 import { gitHub } from "@atomist/skill/lib/project/github";
 import { gitHubAppToken } from "@atomist/skill/lib/secrets";
-import {
-    bold,
-    SlackMessage,
-    url,
-} from "@atomist/slack-messages";
+import { bold, SlackMessage, url } from "@atomist/slack-messages";
 import * as k8s from "@kubernetes/client-node";
 import * as fs from "fs-extra";
 import * as os from "os";
@@ -62,16 +55,27 @@ export async function imageLink(): Promise<number> {
         return 0;
     }
 
-    const ctx: EventContext<BuildOnPushSubscription | BuildOnTagSubscription> = createContext(payload, {} as any) as any;
+    const ctx: EventContext<BuildOnPushSubscription | BuildOnTagSubscription> = createContext(
+        payload,
+        {} as any,
+    ) as any;
     const container = payload.skill.artifacts[0].name;
     const namespace = await readNamespace();
     const name = os.hostname();
 
-    const repo = (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.repo || (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit?.repo;
+    const repo =
+        (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.repo ||
+        (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit?.repo;
     const push = {
-        sha: (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.after.sha || (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit?.sha,
-        url: (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.after.url || (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit?.url,
-        branch: (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.branch || (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.name,
+        sha:
+            (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.after.sha ||
+            (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit?.sha,
+        url:
+            (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.after.url ||
+            (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit?.url,
+        branch:
+            (ctx.data as BuildOnPushSubscription)?.Push?.[0]?.branch ||
+            (ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.name,
     };
 
     const slackMessageCb = await slackMessage(repo, push, ctx);
