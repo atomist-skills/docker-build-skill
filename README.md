@@ -2,7 +2,7 @@
 
 <!---atomist-skill-description:start---> 
 
-Automatically build and push Docker images
+Build Docker images and push them to a Docker registry
 
 <!---atomist-skill-description:end--->
 
