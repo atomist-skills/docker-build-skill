@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
+import { github, log, repository, secret } from "@atomist/skill";
 import { createContext } from "@atomist/skill/lib/context";
 import { EventContext } from "@atomist/skill/lib/handler";
-import { debug, info } from "@atomist/skill/lib/log";
 import { EventIncoming } from "@atomist/skill/lib/payload";
-import { gitHubComRepository } from "@atomist/skill/lib/project";
-import { gitHub } from "@atomist/skill/lib/project/github";
-import { gitHubAppToken } from "@atomist/skill/lib/secrets";
 import { bold, SlackMessage, url } from "@atomist/slack-messages";
 import * as k8s from "@kubernetes/client-node";
 import * as fs from "fs-extra";
@@ -42,7 +39,7 @@ import {
  */
 export async function imageLink(): Promise<number> {
     const payload = (await fs.readJson(process.env.ATOMIST_PAYLOAD || "/atm/payload.json")) as EventIncoming;
-    info("Starting %s/%s:%s image-link", payload.skill.namespace, payload.skill.name, payload.skill.version);
+    log.info("Starting %s/%s:%s image-link", payload.skill.namespace, payload.skill.name, payload.skill.version);
 
     const home = process.env.ATOMIST_HOME || "/atm/home";
     const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
@@ -51,7 +48,7 @@ export async function imageLink(): Promise<number> {
 
     // Check if Dockerfile exists
     if (!(await fs.pathExists(path.join(home, dockerfile)))) {
-        info(`Dockerfile '${dockerfile}' not found. Exiting...`);
+        log.info(`Dockerfile '${dockerfile}' not found. Exiting...`);
         return 0;
     }
 
@@ -81,9 +78,9 @@ export async function imageLink(): Promise<number> {
     const slackMessageCb = await slackMessage(repo, push, ctx);
     const checkCb = await gitHubCheck(repo, push, ctx);
 
-    debug("Watching container '%s'", container);
+    log.debug("Watching container '%s'", container);
     const status = await containerWatch(name, namespace, container);
-    debug("Container exited with '%s'", status);
+    log.debug("Container exited with '%s'", status);
 
     if (!!imageName && status === 0) {
         await ctx.graphql.mutate<CreateDockerImageMutation, CreateDockerImageMutationVariables>(
@@ -103,7 +100,7 @@ export async function imageLink(): Promise<number> {
     await slackMessageCb.close(status);
     await checkCb.close(status);
 
-    info("Completed processing. Exiting...");
+    log.info("Completed processing. Exiting...");
     return 0;
 }
 
@@ -179,14 +176,14 @@ async function gitHubCheck(
 
     if (ctx.configuration[0]?.parameters?.githubCheck) {
         const credential = await ctx.credential.resolve(
-            gitHubAppToken({
+            secret.gitHubAppToken({
                 owner: repo.owner,
                 repo: repo.name,
                 apiUrl: repo.org.provider.apiUrl,
             }),
         );
-        const api = gitHub(
-            gitHubComRepository({
+        const api = github.api(
+            repository.gitHub({
                 owner: repo.owner,
                 repo: repo.name,
                 credential,
@@ -275,14 +272,18 @@ function containerWatch(name: string, namespace: string, container: string): Pro
                 if (pod?.status?.containerStatuses) {
                     const containerStatus = pod.status.containerStatuses.find(c => c.name === container);
                     if (containerStatus?.state?.terminated) {
-                        debug("Container exited");
+                        log.debug("Container exited");
                         resolve(containerStatus.state.terminated.exitCode);
                     }
                 }
             },
             err => {
-                err.message = `Error watching container: ${err.message}`;
-                reject(err);
+                if (err) {
+                    err.message = `Error watching container: ${err.message}`;
+                    reject(err);
+                } else {
+                    resolve(0);
+                }
             },
         );
     });

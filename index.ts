@@ -14,30 +14,24 @@
  * limitations under the License.
  */
 
-import {
-    dockerRegistryProvider,
-    gitHubResourceProvider,
-    mavenRepositoryProvider,
-    slackResourceProvider,
-} from "@atomist/skill/lib/resource_providers";
-import { ParameterType, ParameterVisibility, skill } from "@atomist/skill/lib/skill";
+import { parameter, ParameterType, ParameterVisibility, resourceProvider, skill } from "@atomist/skill";
 
 export const Skill = skill({
     resourceProviders: {
-        github: gitHubResourceProvider({ minRequired: 1 }),
-        slack: slackResourceProvider(),
-        docker_push_registry: dockerRegistryProvider({
+        github: resourceProvider.gitHub({ minRequired: 1 }),
+        slack: resourceProvider.chat(),
+        docker_push_registry: resourceProvider.dockerRegistry({
             description: "Docker registry to push to",
             displayName: "Push Registry",
             minRequired: 1,
             maxAllowed: 1,
         }),
-        docker_pull_registries: dockerRegistryProvider({
+        docker_pull_registries: resourceProvider.dockerRegistry({
             description: "Additional Docker registries to pull from",
             displayName: "Pull Registries",
             minRequired: 0,
         }),
-        maven: mavenRepositoryProvider({ minRequired: 0 }),
+        maven: resourceProvider.mavenRepository({ minRequired: 0 }),
     },
 
     parameters: {
@@ -107,12 +101,7 @@ export const Skill = skill({
                 "Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image",
             required: false,
         },
-        repos: {
-            type: ParameterType.RepoFilter,
-            displayName: "Which repositories",
-            description: "",
-            required: false,
-        },
+        repos: parameter.repoFilter({ required: false }),
     },
 
     containers: {
