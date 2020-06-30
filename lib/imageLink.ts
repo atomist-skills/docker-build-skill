@@ -112,7 +112,7 @@ async function slackMessage(
     const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
     const title = "Docker Build";
-    const id = `${ctx.skill.namespace}/${ctx.skill.name}/${push.sha}`;
+    const id = `${ctx.skill.namespace}/${ctx.skill.name}/${imageName}`;
     const ticks = "```";
 
     let slackMsg = await slack.progressMessage(
