@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 -   Update to new skill package. [154f782](https://github.com/atomist-skills/docker-build-skill/commit/154f782823bbe9de396c44d53a28bf6c5ddcc262)
 -   Update to use check and progressMessage from skill. [92d3904](https://github.com/atomist-skills/docker-build-skill/commit/92d39045d88a3daab2c0e942ca7403edbcf805ab)
+-   Use image name in message id. [1da59cc](https://github.com/atomist-skills/docker-build-skill/commit/1da59cc107a02b9c0b4bbed6a1ac8c1b3a2ed68c)
 
 ### Fixed
 
