@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { github, log, repository, secret } from "@atomist/skill";
+import { github, log, repository, secret, slack } from "@atomist/skill";
 import { createContext } from "@atomist/skill/lib/context";
 import { EventContext } from "@atomist/skill/lib/handler";
 import { EventIncoming } from "@atomist/skill/lib/payload";
-import { bold, SlackMessage, url } from "@atomist/slack-messages";
+import { bold, url } from "@atomist/slack-messages";
 import * as k8s from "@kubernetes/client-node";
 import * as fs from "fs-extra";
 import * as os from "os";
@@ -114,53 +114,65 @@ async function slackMessage(
     const title = "Docker Build";
     const id = `${ctx.skill.namespace}/${ctx.skill.name}/${push.sha}`;
     const ticks = "```";
-    const slackMsg: SlackMessage = {
-        attachments: [
-            {
-                mrkdwn_in: ["text"],
-                fallback: title,
-                title,
-                title_link: ctx.audit.url,
-                text: `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(
-                    push.url,
-                    `\`${push.sha.slice(0, 7)}\``,
-                )}\n
+
+    let slackMsg = await slack.progressMessage(
+        title,
+        `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.url, `\`${push.sha.slice(0, 7)}\``)}\n
 ${ticks}
 Building image ${imageName}
 ${ticks}`,
-                thumb_url: `https://badge.atomist.com/v2/progress/in_process/0/1?counter=no`,
-                color: "#2A7D7D",
-                footer: url(repo.url, `${repo.owner}/${repo.name}`),
-                footer_icon: "https://images.atomist.com/rug/github_grey.png",
-                ts: Math.floor(Date.now() / 1000),
-            },
-        ],
-    };
+        {
+            state: "in_process",
+            total: 1,
+            count: 0,
+            counter: false,
+        },
+        ctx,
+    );
+
     await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
 
     return {
         close: async (status): Promise<void> => {
             if (status === 0) {
-                slackMsg.attachments[0].color = "#37A745";
-                slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/success/1/1?counter=no`;
-                slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(
-                    push.url,
-                    `\`${push.sha.slice(0, 7)}\``,
-                )}\n
+                slackMsg = await slack.progressMessage(
+                    title,
+                    `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(
+                        push.url,
+                        `\`${push.sha.slice(0, 7)}\``,
+                    )}\n
 ${ticks}
 Successfully built and pushed image ${imageName}
-${ticks}`;
+${ticks}`,
+                    {
+                        state: "success",
+                        total: 1,
+                        count: 1,
+                        counter: false,
+                    },
+                    ctx,
+                );
+
                 await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
             } else {
-                slackMsg.attachments[0].color = "#BC3D33";
-                slackMsg.attachments[0].thumb_url = `https://badge.atomist.com/v2/progress/failure/0/1?counter=no`;
-                slackMsg.attachments[0].text = `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(
-                    push.url,
-                    `\`${push.sha.slice(0, 7)}\``,
-                )}\n
+                slackMsg = await slack.progressMessage(
+                    title,
+                    `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(
+                        push.url,
+                        `\`${push.sha.slice(0, 7)}\``,
+                    )}\n
 ${ticks}
 Failed to build image ${imageName}
-${ticks}`;
+${ticks}`,
+                    {
+                        state: "failure",
+                        total: 1,
+                        count: 0,
+                        counter: false,
+                    },
+                    ctx,
+                );
+
                 await ctx.message.send(slackMsg, { channels: repo.channels.map(c => c.name), users: [] }, { id });
             }
         },
@@ -182,7 +194,8 @@ async function gitHubCheck(
                 apiUrl: repo.org.provider.apiUrl,
             }),
         );
-        const api = github.api(
+        const check = await github.openCheck(
+            ctx,
             repository.gitHub({
                 owner: repo.owner,
                 repo: repo.name,
@@ -190,52 +203,26 @@ async function gitHubCheck(
                 sha: push.sha,
                 branch: push.branch,
             }),
-        );
-
-        const check = (
-            await api.checks.create({
+            {
                 name: ctx.skill.name,
-                owner: repo.owner,
-                repo: repo.name,
-                head_sha: push.sha,
-                started_at: new Date().toISOString(),
-                external_id: ctx.correlationId,
-                status: "in_progress",
-                details_url: ctx.audit.url,
-                output: {
-                    title: "Docker Build",
-                    summary: `Building image \`${imageName}\``,
-                },
-            })
-        ).data;
+                sha: push.sha,
+                startedAt: new Date().toISOString(),
+                title: "Docker Build",
+                body: `Building image \`${imageName}\``,
+            },
+        );
 
         return {
             close: async (status): Promise<void> => {
                 if (status === 0) {
-                    await api.checks.update({
-                        check_run_id: check.id,
-                        owner: repo.owner,
-                        repo: repo.name,
-                        status: "completed",
+                    await check.update({
                         conclusion: "success",
-                        completed_at: new Date().toISOString(),
-                        output: {
-                            title: "Docker Build",
-                            summary: `Successfully built and pushed image \`${imageName}\``,
-                        },
+                        body: `Successfully built and pushed image \`${imageName}\``,
                     });
                 } else {
-                    await api.checks.update({
-                        check_run_id: check.id,
-                        owner: repo.owner,
-                        repo: repo.name,
-                        status: "completed",
+                    await check.update({
                         conclusion: "failure",
-                        completed_at: new Date().toISOString(),
-                        output: {
-                            title: "Docker Build",
-                            summary: `Failed to build image \`${imageName}\``,
-                        },
+                        body: `Failed to build image \`${imageName}\``,
                     });
                 }
             },
