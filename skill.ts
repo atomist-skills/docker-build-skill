@@ -135,7 +135,7 @@ export const Skill = skill({
                 {
                     name: "DOCKER_BUILD_IMAGE_NAME",
                     value:
-                        "#{configuration[0].resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{data | get('Push[0].repo.name') | orValue(data | get('Tag[0].commit.repo.name'))}:#{configuration[0].parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}",
+                        "#{configuration[0].resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration[0].parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration[0].parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}",
                 },
                 {
                     name: "DOCKER_PROVIDER_ID",
