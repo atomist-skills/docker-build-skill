@@ -1,27 +1,27 @@
 subscription buildOnTag {
-    Tag {
+  Tag {
+    name
+    commit {
+      timestamp
+      sha
+      url
+      repo {
+        url
+        owner
         name
-        commit {
-            timestamp
-            sha
-            url
-            repo {
-                url
-                owner
-                name
-                org {
-                    provider {
-                        apiUrl
-                        gitUrl
-                    }
-                }
-                channels {
-                    name
-                    team {
-                        id
-                    }
-                }
-            }
+        org {
+          provider {
+            apiUrl
+            gitUrl
+          }
         }
+        channels {
+          name
+          team {
+            id
+          }
+        }
+      }
     }
+  }
 }

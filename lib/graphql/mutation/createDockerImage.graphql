@@ -1,5 +1,19 @@
-mutation createDockerImage($providerId: ID!, $image: String!, $sha: String!, $branch: String!) {
-    createDockerContainerImage(resourceProviderId: $providerId, input: {image: $image, imageName: $image}, links: [{pushLink: {afterSha: $sha, branchName: $branch}, commitLink: {sha: $sha}}]) {
-        id
-    }
+mutation createDockerImage(
+  $providerId: ID!
+  $image: String!
+  $sha: String!
+  $branch: String!
+) {
+  createDockerContainerImage(
+    resourceProviderId: $providerId
+    input: { image: $image, imageName: $image }
+    links: [
+      {
+        pushLink: { afterSha: $sha, branchName: $branch }
+        commitLink: { sha: $sha }
+      }
+    ]
+  ) {
+    id
+  }
 }

@@ -22,7 +22,13 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["index.ts", "skill.ts","bin/*.ts", "lib/**/*.ts", "test/**/*.ts"],
+  "include": [
+    "index.ts",
+    "skill.ts",
+    "bin/*.ts",
+    "lib/**/*.ts",
+    "test/**/*.ts"
+  ],
   "exclude": [".#*"],
   "compileOnSave": true,
   "buildOnSave": false,
