@@ -82,7 +82,7 @@ export const Skill = skill({
             type: ParameterType.String,
             displayName: "Kaniko version",
             description: "Version of Kaniko to use",
-            placeHolder: "v0.23.0",
+            placeHolder: "v0.24.0",
             required: false,
             visibility: ParameterVisibility.Hidden,
         },
@@ -106,7 +106,7 @@ export const Skill = skill({
 
     containers: {
         kaniko: {
-            image: "gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.23.0}",
+            image: "gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.24.0}",
             args: [
                 "--context=dir:///atm/home",
                 "--destination=#{configuration[0].resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration[0].parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration[0].parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}",
