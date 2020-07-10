@@ -18,7 +18,6 @@ import { github, log, repository, secret, slack } from "@atomist/skill";
 import { createContext } from "@atomist/skill/lib/context";
 import { EventContext } from "@atomist/skill/lib/handler";
 import { EventIncoming } from "@atomist/skill/lib/payload";
-import { bold, url } from "@atomist/slack-messages";
 import * as k8s from "@kubernetes/client-node";
 import * as fs from "fs-extra";
 import * as os from "os";
@@ -117,7 +116,7 @@ async function slackMessage(
 
     let slackMsg = await slack.progressMessage(
         title,
-        `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(push.url, `\`${push.sha.slice(0, 7)}\``)}\n
+        `${slack.bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${slack.url(push.url, `\`${push.sha.slice(0, 7)}\``)}\n
 ${ticks}
 Building image ${imageName}
 ${ticks}`,
@@ -137,7 +136,7 @@ ${ticks}`,
             if (status === 0) {
                 slackMsg = await slack.progressMessage(
                     title,
-                    `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(
+                    `${slack.bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${slack.url(
                         push.url,
                         `\`${push.sha.slice(0, 7)}\``,
                     )}\n
@@ -157,7 +156,7 @@ ${ticks}`,
             } else {
                 slackMsg = await slack.progressMessage(
                     title,
-                    `${bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${url(
+                    `${slack.bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${slack.url(
                         push.url,
                         `\`${push.sha.slice(0, 7)}\``,
                     )}\n
@@ -194,7 +193,7 @@ async function gitHubCheck(
                 apiUrl: repo.org.provider.apiUrl,
             }),
         );
-        const check = await github.openCheck(
+        const check = await github.createCheck(
             ctx,
             repository.gitHub({
                 owner: repo.owner,
