@@ -116,7 +116,10 @@ async function slackMessage(
 
     let slackMsg = await slack.progressMessage(
         title,
-        `${slack.bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${slack.url(push.url, `\`${push.sha.slice(0, 7)}\``)}\n
+        `${slack.bold(`${repo.owner}/${repo.name}/${push.branch}`)} at ${slack.url(
+            push.url,
+            `\`${push.sha.slice(0, 7)}\``,
+        )}\n
 ${ticks}
 Building image ${imageName}
 ${ticks}`,
