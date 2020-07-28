@@ -18,5 +18,5 @@ import { EventHandler } from "@atomist/skill/lib/handler";
 import { BuildOnTagSubscription } from "../typings/types";
 
 export const handler: EventHandler<BuildOnTagSubscription> = async () => {
-    // intentionally empty
+	// intentionally empty
 };
