@@ -15,7 +15,7 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2020,
     "project": "tsconfig.json",
     "sourceType": "module"
   },
@@ -27,9 +27,10 @@
       "error",
       {
         "arrowParens": "avoid",
-        "trailingComma": "all",
+        "quoteProps": "consistent",
         "tabWidth": 4,
-        "printWidth": 120
+        "trailingComma": "all",
+        "useTabs": true
       }
     ]
   }
