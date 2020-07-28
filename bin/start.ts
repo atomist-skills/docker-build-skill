@@ -23,20 +23,22 @@ import * as yargs from "yargs";
 
 // tslint:disable-next-line:no-unused-expression
 yargs
-    .command(
-        "image-link",
-        "Link a Docker image",
-        () => {
-            // Intentionally left empty
-        },
-        async () => {
-            try {
-                const exitCode = await (await import("../lib/imageLink")).imageLink();
-                process.exit(exitCode);
-            } catch (e) {
-                error(e);
-                process.exit(1);
-            }
-        },
-    )
-    .help().argv;
+	.command(
+		"image-link",
+		"Link a Docker image",
+		() => {
+			// Intentionally left empty
+		},
+		async () => {
+			try {
+				const exitCode = await (
+					await import("../lib/imageLink")
+				).imageLink();
+				process.exit(exitCode);
+			} catch (e) {
+				error(e);
+				process.exit(1);
+			}
+		},
+	)
+	.help().argv;
