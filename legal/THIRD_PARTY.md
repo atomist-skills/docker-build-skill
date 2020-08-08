@@ -18,9 +18,9 @@ This page details all runtime dependencies of `@atomist/docker-build-skill`.
 | [CC0-1.0](#cc0-10)            | 1     |
 | [GPL-2.0](#gpl-20)            | 2     |
 | [GPL-3.0](#gpl-30)            | 1     |
-| [ISC](#isc)                   | 34    |
+| [ISC](#isc)                   | 35    |
 | [MIT AND Zlib](#mit-and-zlib) | 1     |
-| [MIT](#mit)                   | 307   |
+| [MIT](#mit)                   | 311   |
 | [Unlicense](#unlicense)       | 1     |
 
 #### AFLv2.1
@@ -36,7 +36,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | Name                                  | Version                       | Publisher           | Repository                                                                                                                       |
 | ------------------------------------- | ----------------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `@atomist/skill-logging`              | `0.1.1-9`                     | Atomist             | [https://github.com/atomist-skills/skill-logging](https://github.com/atomist-skills/skill-logging)                               |
-| `@atomist/skill`                      | `0.1.1-29`                    | Atomist             | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
+| `@atomist/skill`                      | `0.1.1-31`                    | Atomist             | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
 | `@atomist/slack-messages`             | `1.2.0-master.20200806132057` | Atomist             | [https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)                                           |
 | `@google-cloud/common`                | `2.4.0`                       | Google Inc.         | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
 | `@google-cloud/common`                | `3.3.2`                       | Google Inc.         | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
@@ -47,7 +47,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | `@google-cloud/projectify`            | `2.0.1`                       | Google Inc.         | [https://github.com/googleapis/nodejs-projectify](https://github.com/googleapis/nodejs-projectify)                               |
 | `@google-cloud/promisify`             | `1.0.4`                       | Google Inc.         | [https://github.com/googleapis/nodejs-promisify](https://github.com/googleapis/nodejs-promisify)                                 |
 | `@google-cloud/promisify`             | `2.0.2`                       | Google Inc.         | [https://github.com/googleapis/nodejs-promisify](https://github.com/googleapis/nodejs-promisify)                                 |
-| `@google-cloud/pubsub`                | `2.3.0`                       | Google Inc.         | [https://github.com/googleapis/nodejs-pubsub](https://github.com/googleapis/nodejs-pubsub)                                       |
+| `@google-cloud/pubsub`                | `2.4.0`                       | Google Inc.         | [https://github.com/googleapis/nodejs-pubsub](https://github.com/googleapis/nodejs-pubsub)                                       |
 | `@google-cloud/storage`               | `5.1.2`                       | Google Inc.         | [https://github.com/googleapis/nodejs-storage](https://github.com/googleapis/nodejs-storage)                                     |
 | `@grpc/grpc-js`                       | `1.1.3`                       | Google Inc.         | [https://github.com/grpc/grpc-node/tree/master/packages/grpc-js](https://github.com/grpc/grpc-node/tree/master/packages/grpc-js) |
 | `@grpc/proto-loader`                  | `0.5.5`                       | Google Inc.         | [https://github.com/grpc/grpc-node](https://github.com/grpc/grpc-node)                                                           |
@@ -160,6 +160,7 @@ ISC License - [https://www.isc.org/downloads/software-support-policy/isc-license
 
 | Name                    | Version  | Publisher          | Repository                                                                                         |
 | ----------------------- | -------- | ------------------ | -------------------------------------------------------------------------------------------------- |
+| `at-least-node`         | `1.0.0`  | Ryan Zimmerman     | [https://github.com/RyanZim/at-least-node](https://github.com/RyanZim/at-least-node)               |
 | `cliui`                 | `6.0.0`  | Ben Coe            | [https://github.com/yargs/cliui](https://github.com/yargs/cliui)                                   |
 | `deprecation`           | `2.3.1`  |                    | [https://github.com/gr2m/deprecation](https://github.com/gr2m/deprecation)                         |
 | `fastq`                 | `1.7.0`  | Matteo Collina     | [https://github.com/mcollina/fastq](https://github.com/mcollina/fastq)                             |
@@ -216,7 +217,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `@octokit/request-error`                | `2.0.2`    |                                                       | [https://github.com/octokit/request-error.js](https://github.com/octokit/request-error.js)                                                     |
 | `@octokit/request`                      | `5.4.7`    |                                                       | [https://github.com/octokit/request.js](https://github.com/octokit/request.js)                                                                 |
 | `@octokit/rest`                         | `18.0.3`   |                                                       | [https://github.com/octokit/rest.js](https://github.com/octokit/rest.js)                                                                       |
-| `@octokit/types`                        | `5.2.1`    |                                                       | [https://github.com/octokit/types.ts](https://github.com/octokit/types.ts)                                                                     |
+| `@octokit/types`                        | `5.3.0`    |                                                       | [https://github.com/octokit/types.ts](https://github.com/octokit/types.ts)                                                                     |
 | `@sindresorhus/is`                      | `0.7.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/is](https://github.com/sindresorhus/is)                                                                       |
 | `@tootallnate/once`                     | `1.1.2`    | Nathan Rajlich                                        | [https://github.com/TooTallNate/once](https://github.com/TooTallNate/once)                                                                     |
 | `@types/caseless`                       | `0.12.2`   |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
@@ -244,6 +245,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `@types/stack-trace`                    | `0.0.29`   |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
 | `@types/tough-cookie`                   | `4.0.0`    |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
 | `@types/underscore`                     | `1.10.2`   |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
+| `@types/uuid`                           | `8.0.1`    |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
 | `@types/ws`                             | `6.0.4`    |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
 | `@types/yargs-parser`                   | `15.0.0`   |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
 | `@types/yargs`                          | `15.0.5`   |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
@@ -317,6 +319,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `form-data`                             | `3.0.0`    | Felix Geisendörfer                                    | [https://github.com/form-data/form-data](https://github.com/form-data/form-data)                                                               |
 | `from2`                                 | `2.3.0`    | Hugh Kennedy                                          | [https://github.com/hughsk/from2](https://github.com/hughsk/from2)                                                                             |
 | `fs-extra`                              | `8.1.0`    | JP Richardson                                         | [https://github.com/jprichardson/node-fs-extra](https://github.com/jprichardson/node-fs-extra)                                                 |
+| `fs-extra`                              | `9.0.1`    | JP Richardson                                         | [https://github.com/jprichardson/node-fs-extra](https://github.com/jprichardson/node-fs-extra)                                                 |
 | `gcs-resumable-upload`                  | `3.1.1`    | Stephen Sawchuk                                       | [https://github.com/googleapis/gcs-resumable-upload](https://github.com/googleapis/gcs-resumable-upload)                                       |
 | `get-stream`                            | `3.0.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/get-stream](https://github.com/sindresorhus/get-stream)                                                       |
 | `get-stream`                            | `4.1.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/get-stream](https://github.com/sindresorhus/get-stream)                                                       |
@@ -369,6 +372,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `json-buffer`                           | `3.0.0`    | Dominic Tarr                                          | [https://github.com/dominictarr/json-buffer](https://github.com/dominictarr/json-buffer)                                                       |
 | `json-schema-traverse`                  | `0.4.1`    | Evgeny Poberezkin                                     | [https://github.com/epoberezkin/json-schema-traverse](https://github.com/epoberezkin/json-schema-traverse)                                     |
 | `jsonfile`                              | `4.0.0`    | JP Richardson                                         | [https://github.com/jprichardson/node-jsonfile](https://github.com/jprichardson/node-jsonfile)                                                 |
+| `jsonfile`                              | `6.0.1`    | JP Richardson                                         | [https://github.com/jprichardson/node-jsonfile](https://github.com/jprichardson/node-jsonfile)                                                 |
 | `jsonpath-plus`                         | `0.19.0`   | Stefan Goessner                                       | [https://github.com/s3u/JSONPath](https://github.com/s3u/JSONPath)                                                                             |
 | `jsprim`                                | `1.4.1`    |                                                       | [https://github.com/joyent/node-jsprim](https://github.com/joyent/node-jsprim)                                                                 |
 | `jszip`                                 | `3.5.0`    | Stuart Knightley                                      | [https://github.com/Stuk/jszip](https://github.com/Stuk/jszip)                                                                                 |
@@ -494,6 +498,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `underscore`                            | `1.10.2`   | Jeremy Ashkenas                                       | [https://github.com/jashkenas/underscore](https://github.com/jashkenas/underscore)                                                             |
 | `unique-string`                         | `2.0.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/unique-string](https://github.com/sindresorhus/unique-string)                                                 |
 | `universalify`                          | `0.1.2`    | Ryan Zimmerman                                        | [https://github.com/RyanZim/universalify](https://github.com/RyanZim/universalify)                                                             |
+| `universalify`                          | `1.0.0`    | Ryan Zimmerman                                        | [https://github.com/RyanZim/universalify](https://github.com/RyanZim/universalify)                                                             |
 | `url-parse-lax`                         | `3.0.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/url-parse-lax](https://github.com/sindresorhus/url-parse-lax)                                                 |
 | `url-to-options`                        | `1.0.1`    | Steven Vachon                                         | [https://github.com/stevenvachon/url-to-options](https://github.com/stevenvachon/url-to-options)                                               |
 | `util-deprecate`                        | `1.0.2`    | Nathan Rajlich                                        | [https://github.com/TooTallNate/util-deprecate](https://github.com/TooTallNate/util-deprecate)                                                 |
