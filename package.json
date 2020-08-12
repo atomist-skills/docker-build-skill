@@ -27,9 +27,9 @@
   },
   "devDependencies": {
     "@google-cloud/functions-framework": "^1.7.1",
-    "@graphql-codegen/cli": "^1.17.7",
-    "@graphql-codegen/typescript": "^1.17.7",
-    "@graphql-codegen/typescript-operations": "^1.17.7",
+    "@graphql-codegen/cli": "^1.17.8",
+    "@graphql-codegen/typescript": "^1.17.8",
+    "@graphql-codegen/typescript-operations": "^1.17.8",
     "@types/lodash": "^4.14.159",
     "@types/mocha": "^7.0.2",
     "@types/power-assert": "^1.5.3",
