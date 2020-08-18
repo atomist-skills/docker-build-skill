@@ -43,9 +43,6 @@ The **GitHub** integration must be configured in order to use this skill. At lea
 The **Docker Registry** integration must also be configured in order to use this skill. At least one registry must
 be configured to push your images to. We recommend connecting the **Slack** integration.
 
-> Note: Docker Hub is the first supported Docker registry. Support for Google Container Registry and
-> JFrog Artifactory is coming soon.
-
 # How to configure
 
 1. **Select a Docker registry to push to**
