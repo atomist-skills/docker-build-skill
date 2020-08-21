@@ -20,7 +20,7 @@ your images.
 
 <!---atomist-skill-long_description:end--->
 
----
+--- 
 
 <!---atomist-skill-readme:start--->
 
