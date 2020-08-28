@@ -20,7 +20,7 @@ This page details all runtime dependencies of `@atomist/docker-build-skill`.
 | [GPL-3.0](#gpl-30)            | 1     |
 | [ISC](#isc)                   | 35    |
 | [MIT AND Zlib](#mit-and-zlib) | 1     |
-| [MIT](#mit)                   | 312   |
+| [MIT](#mit)                   | 311   |
 | [Unlicense](#unlicense)       | 1     |
 
 #### AFLv2.1
@@ -36,7 +36,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | Name                                  | Version                       | Publisher             | Repository                                                                                                                       |
 | ------------------------------------- | ----------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `@atomist/skill-logging`              | `0.1.1-9`                     | Atomist               | [https://github.com/atomist-skills/skill-logging](https://github.com/atomist-skills/skill-logging)                               |
-| `@atomist/skill`                      | `0.1.1-72`                    | Atomist               | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
+| `@atomist/skill`                      | `0.1.1-75`                    | Atomist               | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
 | `@atomist/slack-messages`             | `1.2.0-master.20200806132057` | Atomist               | [https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)                                           |
 | `@google-cloud/common`                | `2.4.0`                       | Google Inc.           | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
 | `@google-cloud/common`                | `3.3.2`                       | Google Inc.           | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
@@ -450,7 +450,6 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `picomatch`                             | `2.2.2`    | Jon Schlinkert                                        | [https://github.com/micromatch/picomatch](https://github.com/micromatch/picomatch)                                                             |
 | `pify`                                  | `3.0.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/pify](https://github.com/sindresorhus/pify)                                                                   |
 | `prepend-http`                          | `2.0.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/prepend-http](https://github.com/sindresorhus/prepend-http)                                                   |
-| `prettier`                              | `2.1.1`    | James Long                                            | [https://github.com/prettier/prettier](https://github.com/prettier/prettier)                                                                   |
 | `process-nextick-args`                  | `2.0.1`    |                                                       | [https://github.com/calvinmetcalf/process-nextick-args](https://github.com/calvinmetcalf/process-nextick-args)                                 |
 | `process`                               | `0.11.10`  | Roman Shtylman                                        | [https://github.com/shtylman/node-process](https://github.com/shtylman/node-process)                                                           |
 | `protocols`                             | `1.4.8`    | Ionică Bizău                                          | [https://github.com/IonicaBizau/protocols](https://github.com/IonicaBizau/protocols)                                                           |
