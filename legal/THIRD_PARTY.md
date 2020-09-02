@@ -13,10 +13,10 @@ This page details all runtime dependencies of `@atomist/docker-build-skill`.
 | [AFLv2.1](#aflv21)            | 1     |
 | [Apache-2.0](#apache-20)      | 48    |
 | [BSD-2-Clause](#bsd-2-clause) | 8     |
-| [BSD-3-Clause](#bsd-3-clause) | 23    |
+| [BSD-3-Clause](#bsd-3-clause) | 24    |
 | [BSD](#bsd)                   | 1     |
 | [CC0-1.0](#cc0-10)            | 1     |
-| [GPL-2.0](#gpl-20)            | 2     |
+| [GPL-2.0](#gpl-20)            | 3     |
 | [GPL-3.0](#gpl-30)            | 1     |
 | [ISC](#isc)                   | 35    |
 | [MIT AND Zlib](#mit-and-zlib) | 1     |
@@ -36,12 +36,12 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | Name                                  | Version                       | Publisher             | Repository                                                                                                                       |
 | ------------------------------------- | ----------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `@atomist/skill-logging`              | `0.1.1-9`                     | Atomist               | [https://github.com/atomist-skills/skill-logging](https://github.com/atomist-skills/skill-logging)                               |
-| `@atomist/skill`                      | `0.1.1-77`                    | Atomist               | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
+| `@atomist/skill`                      | `0.1.1-87`                    | Atomist               | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
 | `@atomist/slack-messages`             | `1.2.0-master.20200806132057` | Atomist               | [https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)                                           |
 | `@google-cloud/common`                | `2.4.0`                       | Google Inc.           | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
 | `@google-cloud/common`                | `3.3.3`                       | Google Inc.           | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
 | `@google-cloud/logging`               | `8.0.5`                       | Google Inc.           | [https://github.com/googleapis/nodejs-logging](https://github.com/googleapis/nodejs-logging)                                     |
-| `@google-cloud/paginator`             | `3.0.4`                       | Google Inc.           | [https://github.com/googleapis/nodejs-paginator](https://github.com/googleapis/nodejs-paginator)                                 |
+| `@google-cloud/paginator`             | `3.0.5`                       | Google Inc.           | [https://github.com/googleapis/nodejs-paginator](https://github.com/googleapis/nodejs-paginator)                                 |
 | `@google-cloud/precise-date`          | `2.0.3`                       | Google Inc.           | [https://github.com/googleapis/nodejs-precise-date](https://github.com/googleapis/nodejs-precise-date)                           |
 | `@google-cloud/projectify`            | `1.0.4`                       | Google Inc.           | [https://github.com/googleapis/nodejs-projectify](https://github.com/googleapis/nodejs-projectify)                               |
 | `@google-cloud/projectify`            | `2.0.1`                       | Google Inc.           | [https://github.com/googleapis/nodejs-projectify](https://github.com/googleapis/nodejs-projectify)                               |
@@ -126,8 +126,9 @@ BSD 3-Clause "New" or "Revised" License - [https://opensource.org/licenses/BSD-3
 | `duplexer3`                  | `0.1.4`  | Conrad Pankoff                           | [https://github.com/floatdrop/duplexer3](https://github.com/floatdrop/duplexer3)                                   |
 | `flat`                       | `5.0.2`  | Hugh Kennedy                             | [https://github.com/hughsk/flat](https://github.com/hughsk/flat)                                                   |
 | `ieee754`                    | `1.1.13` | Feross Aboukhadijeh                      | [https://github.com/feross/ieee754](https://github.com/feross/ieee754)                                             |
+| `node-forge`                 | `0.10.0` | Digital Bazaar, Inc.                     | [https://github.com/digitalbazaar/forge](https://github.com/digitalbazaar/forge)                                   |
 | `node-forge`                 | `0.8.5`  | Digital Bazaar, Inc.                     | [https://github.com/digitalbazaar/forge](https://github.com/digitalbazaar/forge)                                   |
-| `node-forge`                 | `0.9.1`  | Digital Bazaar, Inc.                     | [https://github.com/digitalbazaar/forge](https://github.com/digitalbazaar/forge)                                   |
+| `node-forge`                 | `0.9.2`  | Digital Bazaar, Inc.                     | [https://github.com/digitalbazaar/forge](https://github.com/digitalbazaar/forge)                                   |
 | `protobufjs`                 | `6.10.1` | Daniel Wirtz                             | [https://github.com/protobufjs/protobuf.js](https://github.com/protobufjs/protobuf.js)                             |
 | `qs`                         | `6.5.2`  |                                          | [https://github.com/ljharb/qs](https://github.com/ljharb/qs)                                                       |
 | `shelljs`                    | `0.8.4`  |                                          | [https://github.com/shelljs/shelljs](https://github.com/shelljs/shelljs)                                           |
@@ -147,10 +148,11 @@ Creative Commons Zero v1.0 Universal - [https://creativecommons.org/publicdomain
 
 GNU General Public License v2.0 only - [https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html](https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html)
 
-| Name         | Version | Publisher            | Repository                                                                       |
-| ------------ | ------- | -------------------- | -------------------------------------------------------------------------------- |
-| `node-forge` | `0.8.5` | Digital Bazaar, Inc. | [https://github.com/digitalbazaar/forge](https://github.com/digitalbazaar/forge) |
-| `node-forge` | `0.9.1` | Digital Bazaar, Inc. | [https://github.com/digitalbazaar/forge](https://github.com/digitalbazaar/forge) |
+| Name         | Version  | Publisher            | Repository                                                                       |
+| ------------ | -------- | -------------------- | -------------------------------------------------------------------------------- |
+| `node-forge` | `0.10.0` | Digital Bazaar, Inc. | [https://github.com/digitalbazaar/forge](https://github.com/digitalbazaar/forge) |
+| `node-forge` | `0.8.5`  | Digital Bazaar, Inc. | [https://github.com/digitalbazaar/forge](https://github.com/digitalbazaar/forge) |
+| `node-forge` | `0.9.2`  | Digital Bazaar, Inc. | [https://github.com/digitalbazaar/forge](https://github.com/digitalbazaar/forge) |
 
 #### GPL-3.0
 
@@ -244,7 +246,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `@types/long`                           | `4.0.1`    |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
 | `@types/node-fetch`                     | `2.5.7`    |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
 | `@types/node`                           | `10.17.26` |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
-| `@types/node`                           | `12.12.54` |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
+| `@types/node`                           | `12.12.55` |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
 | `@types/node`                           | `13.13.5`  |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
 | `@types/request`                        | `2.48.5`   |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
 | `@types/retry`                          | `0.12.0`   |                                                       | [https://github.com/DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)                                       |
@@ -335,7 +337,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `git-url-parse`                         | `11.1.3`   | Ionică Bizău                                          | [https://github.com/IonicaBizau/git-url-parse](https://github.com/IonicaBizau/git-url-parse)                                                   |
 | `glob-gitignore`                        | `1.0.14`   | kaelzhang                                             | [https://github.com/kaelzhang/node-glob-gitignore](https://github.com/kaelzhang/node-glob-gitignore)                                           |
 | `google-p12-pem`                        | `2.0.4`    | Ryan Seys                                             | [https://github.com/google/google-p12-pem](https://github.com/google/google-p12-pem)                                                           |
-| `google-p12-pem`                        | `3.0.2`    | Ryan Seys                                             | [https://github.com/google/google-p12-pem](https://github.com/google/google-p12-pem)                                                           |
+| `google-p12-pem`                        | `3.0.3`    | Ryan Seys                                             | [https://github.com/google/google-p12-pem](https://github.com/google/google-p12-pem)                                                           |
 | `got`                                   | `8.3.2`    |                                                       | [https://github.com/sindresorhus/got](https://github.com/sindresorhus/got)                                                                     |
 | `graphql-tag`                           | `2.11.0`   |                                                       | [https://github.com/apollographql/graphql-tag](https://github.com/apollographql/graphql-tag)                                                   |
 | `graphql`                               | `15.3.0`   |                                                       | [https://github.com/graphql/graphql-js](https://github.com/graphql/graphql-js)                                                                 |
