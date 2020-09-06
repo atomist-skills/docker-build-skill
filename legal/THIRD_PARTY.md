@@ -20,7 +20,7 @@ This page details all runtime dependencies of `@atomist/docker-build-skill`.
 | [GPL-3.0](#gpl-30)            | 1     |
 | [ISC](#isc)                   | 35    |
 | [MIT AND Zlib](#mit-and-zlib) | 1     |
-| [MIT](#mit)                   | 312   |
+| [MIT](#mit)                   | 313   |
 | [Unlicense](#unlicense)       | 1     |
 
 #### AFLv2.1
@@ -36,7 +36,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | Name                                  | Version                       | Publisher             | Repository                                                                                                                       |
 | ------------------------------------- | ----------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `@atomist/skill-logging`              | `0.1.1-9`                     | Atomist               | [https://github.com/atomist-skills/skill-logging](https://github.com/atomist-skills/skill-logging)                               |
-| `@atomist/skill`                      | `0.1.1-92`                    | Atomist               | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
+| `@atomist/skill`                      | `0.1.1-101`                   | Atomist               | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
 | `@atomist/slack-messages`             | `1.2.0-master.20200806132057` | Atomist               | [https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)                                           |
 | `@google-cloud/common`                | `2.4.0`                       | Google Inc.           | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
 | `@google-cloud/common`                | `3.3.3`                       | Google Inc.           | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
@@ -305,7 +305,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `decode-uri-component`                  | `0.2.0`    | Sam Verschueren                                       | [https://github.com/SamVerschueren/decode-uri-component](https://github.com/SamVerschueren/decode-uri-component)                               |
 | `decompress-response`                   | `3.3.0`    |                                                       | [https://github.com/sindresorhus/decompress-response](https://github.com/sindresorhus/decompress-response)                                     |
 | `delayed-stream`                        | `1.0.0`    | Felix Geisendörfer                                    | [https://github.com/felixge/node-delayed-stream](https://github.com/felixge/node-delayed-stream)                                               |
-| `dot-prop`                              | `5.2.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/dot-prop](https://github.com/sindresorhus/dot-prop)                                                           |
+| `dot-prop`                              | `5.3.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/dot-prop](https://github.com/sindresorhus/dot-prop)                                                           |
 | `duplexify`                             | `3.7.1`    | Mathias Buus                                          | [https://github.com/mafintosh/duplexify](https://github.com/mafintosh/duplexify)                                                               |
 | `duplexify`                             | `4.1.1`    | Mathias Buus                                          | [https://github.com/mafintosh/duplexify](https://github.com/mafintosh/duplexify)                                                               |
 | `ecc-jsbn`                              | `0.1.2`    | Jeremie Miller                                        | [https://github.com/quartzjer/ecc-jsbn](https://github.com/quartzjer/ecc-jsbn)                                                                 |
@@ -420,6 +420,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `ms`                                    | `2.1.2`    |                                                       | [https://github.com/zeit/ms](https://github.com/zeit/ms)                                                                                       |
 | `nice-try`                              | `1.0.5`    |                                                       | [https://github.com/electerious/nice-try](https://github.com/electerious/nice-try)                                                             |
 | `node-fetch`                            | `2.6.0`    | David Frank                                           | [https://github.com/bitinn/node-fetch](https://github.com/bitinn/node-fetch)                                                                   |
+| `node-fetch`                            | `2.6.1`    | David Frank                                           | [https://github.com/bitinn/node-fetch](https://github.com/bitinn/node-fetch)                                                                   |
 | `normalize-url`                         | `2.0.1`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/normalize-url](https://github.com/sindresorhus/normalize-url)                                                 |
 | `normalize-url`                         | `3.3.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/normalize-url](https://github.com/sindresorhus/normalize-url)                                                 |
 | `npm-run-path`                          | `2.0.2`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/npm-run-path](https://github.com/sindresorhus/npm-run-path)                                                   |
