@@ -145,7 +145,7 @@ export const Skill = skill({
 					memory: 5000,
 				},
 				request: {
-					cpu: 0.25,
+					cpu: 2,
 					memory: 5000,
 				},
 			},
@@ -172,11 +172,11 @@ export const Skill = skill({
 			],
 			resources: {
 				limit: {
-					cpu: 1,
+					cpu: 0.5,
 					memory: 1000,
 				},
 				request: {
-					cpu: 0.25,
+					cpu: 0.5,
 					memory: 1000,
 				},
 			},
