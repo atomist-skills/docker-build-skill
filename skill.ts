@@ -139,6 +139,16 @@ export const Skill = skill({
 					value: "/atm/input/.docker/",
 				},
 			],
+			resources: {
+				limit: {
+					cpu: 2,
+					memory: 5000,
+				},
+				request: {
+					cpu: 0.25,
+					memory: 5000,
+				},
+			},
 		},
 		"image-link": {
 			image: "gcr.io/atomist-container-skills/docker-build-skill",
@@ -160,6 +170,16 @@ export const Skill = skill({
 						"${configuration[0].parameters.dockerfile:Dockerfile}",
 				},
 			],
+			resources: {
+				limit: {
+					cpu: 1,
+					memory: 1000,
+				},
+				request: {
+					cpu: 0.25,
+					memory: 1000,
+				},
+			},
 		},
 	},
 
