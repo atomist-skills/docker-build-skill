@@ -20,7 +20,7 @@ This page details all runtime dependencies of `@atomist/docker-build-skill`.
 | [GPL-3.0](#gpl-30)            | 1     |
 | [ISC](#isc)                   | 35    |
 | [MIT AND Zlib](#mit-and-zlib) | 1     |
-| [MIT](#mit)                   | 313   |
+| [MIT](#mit)                   | 312   |
 | [Unlicense](#unlicense)       | 1     |
 
 #### AFLv2.1
@@ -419,7 +419,6 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `mimic-response`                        | `1.0.1`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/mimic-response](https://github.com/sindresorhus/mimic-response)                                               |
 | `ms`                                    | `2.1.2`    |                                                       | [https://github.com/zeit/ms](https://github.com/zeit/ms)                                                                                       |
 | `nice-try`                              | `1.0.5`    |                                                       | [https://github.com/electerious/nice-try](https://github.com/electerious/nice-try)                                                             |
-| `node-fetch`                            | `2.6.0`    | David Frank                                           | [https://github.com/bitinn/node-fetch](https://github.com/bitinn/node-fetch)                                                                   |
 | `node-fetch`                            | `2.6.1`    | David Frank                                           | [https://github.com/bitinn/node-fetch](https://github.com/bitinn/node-fetch)                                                                   |
 | `normalize-url`                         | `2.0.1`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/normalize-url](https://github.com/sindresorhus/normalize-url)                                                 |
 | `normalize-url`                         | `3.3.0`    | Sindre Sorhus                                         | [https://github.com/sindresorhus/normalize-url](https://github.com/sindresorhus/normalize-url)                                                 |
