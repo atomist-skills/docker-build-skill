@@ -9,7 +9,7 @@ RUN npm ci --no-optional && \
     npm run compile && \
     rm -rf node_modules .git
  
-# Set up running image    
+# Set up running image     
 FROM atomist/sdm-base:0.4.1
  
 COPY package.json package-lock.json ./
