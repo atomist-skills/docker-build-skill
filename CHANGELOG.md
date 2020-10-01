@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.2.2...HEAD)
 
+### Changed
+
+-   Improve the resource provider descriptions. [4866082](https://github.com/atomist-skills/docker-build-skill/commit/4866082dadd3fa17e862aa29cd6afdd1aab7f076)
+
 ## [1.2.2](https://github.com/atomist-skills/docker-build-skill/compare/1.2.1...1.2.2) - 2020-10-01
 
 ### Changed
