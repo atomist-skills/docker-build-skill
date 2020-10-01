@@ -166,8 +166,7 @@ export const Skill = skill({
 				},
 				{
 					name: "DOCKER_FILE",
-					value:
-						"${configuration.parameters.dockerfile:Dockerfile}",
+					value: "${configuration.parameters.dockerfile:Dockerfile}",
 				},
 			],
 			resources: {
