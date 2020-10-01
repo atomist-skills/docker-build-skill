@@ -118,13 +118,13 @@ export const Skill = skill({
 	containers: {
 		"kaniko": {
 			image:
-				"gcr.io/kaniko-project/executor:${configuration[0].parameters.version:v0.24.0}",
+				"gcr.io/kaniko-project/executor:${configuration.parameters.version:v0.24.0}",
 			args: [
 				"--context=dir:///atm/home",
-				"--destination=#{configuration[0].resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration[0].parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration[0].parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}",
-				"--dockerfile=${configuration[0].parameters.dockerfile:Dockerfile}",
-				"--cache=${configuration[0].parameters.cache:false}",
-				"--cache-repo=#{configuration[0].resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration[0].parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}-cache",
+				"--destination=#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration.parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}",
+				"--dockerfile=${configuration.parameters.dockerfile:Dockerfile}",
+				"--cache=${configuration.parameters.cache:false}",
+				"--cache-repo=#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}-cache",
 				"--label=org.label-schema.schema-version='1.0'",
 				"--label=org.label-schema.name='#{data | get('Push[0].repo.name') | orValue(data | get('Tag[0].commit.repo.name'))}'",
 				"--label=org.label-schema.vendor='#{data | get('Push[0].repo.owner') | orValue(data | get('Tag[0].commit.repo.owner'))}'",
@@ -157,17 +157,17 @@ export const Skill = skill({
 				{
 					name: "DOCKER_BUILD_IMAGE_NAME",
 					value:
-						"#{configuration[0].resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration[0].parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration[0].parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}",
+						"#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration.parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}",
 				},
 				{
 					name: "DOCKER_PROVIDER_ID",
 					value:
-						"${configuration[0].resourceProviders.docker_push_registry.selectedResourceProviders[0].id}",
+						"${configuration.resourceProviders.docker_push_registry.selectedResourceProviders[0].id}",
 				},
 				{
 					name: "DOCKER_FILE",
 					value:
-						"${configuration[0].parameters.dockerfile:Dockerfile}",
+						"${configuration.parameters.dockerfile:Dockerfile}",
 				},
 			],
 			resources: {
