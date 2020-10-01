@@ -52,6 +52,9 @@
     "typedoc": "^0.19.2",
     "typescript": "^4.0.3"
   },
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "autotest": "supervisor --watch index.ts,lib,test --extensions ts --no-restart-on exit --quiet --exec npm -- test",
     "build": "run-s compile test lint doc",
