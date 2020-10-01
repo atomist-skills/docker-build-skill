@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.2.1...HEAD)
+## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.2.2...HEAD)
+
+## [1.2.2](https://github.com/atomist-skills/docker-build-skill/compare/1.2.1...1.2.2) - 2020-10-01
 
 ### Changed
 
