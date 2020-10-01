@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.2.1...HEAD)
 
+### Changed
+
+-   Switch to single dispatch. [c70910b](https://github.com/atomist-skills/docker-build-skill/commit/c70910b2313e5ed304fe481f855aa04947e88561)
+
 ## [1.2.1](https://github.com/atomist-skills/docker-build-skill/compare/1.2.0...1.2.1) - 2020-07-28
 
 ### Changed
