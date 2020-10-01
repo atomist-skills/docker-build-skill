@@ -28,16 +28,20 @@ export const Skill = skill({
 		slack: resourceProvider.chat(),
 		docker_push_registry: resourceProvider.dockerRegistry({
 			description: "Docker registry to push to",
-			displayName: "Push Registry",
+			displayName: "Push registry",
 			minRequired: 1,
 			maxAllowed: 1,
 		}),
 		docker_pull_registries: resourceProvider.dockerRegistry({
 			description: "Additional Docker registries to pull from",
-			displayName: "Pull Registries",
+			displayName: "Pull registries",
 			minRequired: 0,
 		}),
-		maven: resourceProvider.mavenRepository({ minRequired: 0 }),
+		maven: resourceProvider.mavenRepository({
+			description: "Optional Maven repositories needed during build",
+			displayName: "Maven repositories",
+			minRequired: 0,
+		}),
 	},
 
 	parameters: {
