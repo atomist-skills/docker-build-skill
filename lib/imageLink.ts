@@ -335,6 +335,5 @@ async function readNamespace(): Promise<string> {
 	if (podNs) {
 		return podNs;
 	}
-
 	return "default";
 }
