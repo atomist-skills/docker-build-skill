@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.2.3...HEAD)
 
+### Changed
+
+-   Update to kaniko 1.2.0. [73237f9](https://github.com/atomist-skills/docker-build-skill/commit/73237f9eae9a827825801853de79cb763a16f7b7)
+
 ## [1.2.3](https://github.com/atomist-skills/docker-build-skill/compare/1.2.2...1.2.3) - 2020-10-01
 
 ### Changed
