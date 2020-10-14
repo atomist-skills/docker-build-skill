@@ -212,7 +212,7 @@ async function gitHubCheck(
 ): Promise<{ close: (status: number) => Promise<void> }> {
 	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
-	if (ctx.configuration[0]?.parameters?.githubCheck) {
+	if (ctx.configuration?.parameters?.githubCheck) {
 		const credential = await ctx.credential.resolve(
 			secret.gitHubAppToken({
 				owner: repo.owner,

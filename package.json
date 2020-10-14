@@ -18,7 +18,7 @@
   "icon": "file://docs/images/icon.svg",
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
-    "@atomist/skill": "^0.2.3",
+    "@atomist/skill": "^0.3.0-main.21",
     "@kubernetes/client-node": "^0.12.2",
     "@types/fs-extra": "^9.0.2",
     "fs-extra": "^9.0.1",
