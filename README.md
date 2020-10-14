@@ -1,5 +1,5 @@
 # `atomist/docker-build-skill`
- 
+
 <!---atomist-skill-description:start--->
 
 Build Docker images and push them to a Docker registry
