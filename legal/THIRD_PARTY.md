@@ -186,7 +186,7 @@ ISC License - [https://www.isc.org/downloads/software-support-policy/isc-license
 | `chownr`                    | `2.0.0`   | Isaac Z. Schlueter | [https://github.com/isaacs/chownr](https://github.com/isaacs/chownr)                                         |
 | `cli-width`                 | `3.0.0`   | Ilya Radchenko     | [https://github.com/knownasilya/cli-width](https://github.com/knownasilya/cli-width)                         |
 | `cliui`                     | `6.0.0`   | Ben Coe            | [https://github.com/yargs/cliui](https://github.com/yargs/cliui)                                             |
-| `cliui`                     | `7.0.1`   | Ben Coe            | [https://github.com/yargs/cliui](https://github.com/yargs/cliui)                                             |
+| `cliui`                     | `7.0.3`   | Ben Coe            | [https://github.com/yargs/cliui](https://github.com/yargs/cliui)                                             |
 | `d`                         | `1.0.1`   | Mariusz Nowak      | [https://github.com/medikoo/d](https://github.com/medikoo/d)                                                 |
 | `deprecation`               | `2.3.1`   |                    | [https://github.com/gr2m/deprecation](https://github.com/gr2m/deprecation)                                   |
 | `es5-ext`                   | `0.10.53` | Mariusz Nowak      | [https://github.com/medikoo/es5-ext](https://github.com/medikoo/es5-ext)                                     |
@@ -230,11 +230,11 @@ ISC License - [https://www.isc.org/downloads/software-support-policy/isc-license
 | `wrappy`                    | `1.0.2`   | Isaac Z. Schlueter | [https://github.com/npm/wrappy](https://github.com/npm/wrappy)                                               |
 | `write-file-atomic`         | `3.0.3`   | Rebecca Turner     | [https://github.com/npm/write-file-atomic](https://github.com/npm/write-file-atomic)                         |
 | `y18n`                      | `4.0.0`   | Ben Coe            | [https://github.com/yargs/y18n](https://github.com/yargs/y18n)                                               |
-| `y18n`                      | `5.0.1`   | Ben Coe            | [https://github.com/yargs/y18n](https://github.com/yargs/y18n)                                               |
+| `y18n`                      | `5.0.4`   | Ben Coe            | [https://github.com/yargs/y18n](https://github.com/yargs/y18n)                                               |
 | `yallist`                   | `4.0.0`   | Isaac Z. Schlueter | [https://github.com/isaacs/yallist](https://github.com/isaacs/yallist)                                       |
 | `yaml`                      | `1.10.0`  | Eemeli Aro         | [https://github.com/eemeli/yaml](https://github.com/eemeli/yaml)                                             |
 | `yargs-parser`              | `18.1.3`  | Ben Coe            | [https://github.com/yargs/yargs-parser](https://github.com/yargs/yargs-parser)                               |
-| `yargs-parser`              | `20.2.0`  | Ben Coe            | [https://github.com/yargs/yargs-parser](https://github.com/yargs/yargs-parser)                               |
+| `yargs-parser`              | `20.2.3`  | Ben Coe            | [https://github.com/yargs/yargs-parser](https://github.com/yargs/yargs-parser)                               |
 
 #### MIT
 
@@ -499,7 +499,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `es-abstract`                                        | `1.18.0-next.0`  | Jordan Harband                        | [https://github.com/ljharb/es-abstract](https://github.com/ljharb/es-abstract)                                                                                                                       |
 | `es-to-primitive`                                    | `1.2.1`          | Jordan Harband                        | [https://github.com/ljharb/es-to-primitive](https://github.com/ljharb/es-to-primitive)                                                                                                               |
 | `es6-iterator`                                       | `2.0.3`          | Mariusz Nowak                         | [https://github.com/medikoo/es6-iterator](https://github.com/medikoo/es6-iterator)                                                                                                                   |
-| `escalade`                                           | `3.1.0`          | Luke Edwards                          | [https://github.com/lukeed/escalade](https://github.com/lukeed/escalade)                                                                                                                             |
+| `escalade`                                           | `3.1.1`          | Luke Edwards                          | [https://github.com/lukeed/escalade](https://github.com/lukeed/escalade)                                                                                                                             |
 | `escape-string-regexp`                               | `1.0.5`          | Sindre Sorhus                         | [https://github.com/sindresorhus/escape-string-regexp](https://github.com/sindresorhus/escape-string-regexp)                                                                                         |
 | `event-target-shim`                                  | `5.0.1`          | Toru Nagashima                        | [https://github.com/mysticatea/event-target-shim](https://github.com/mysticatea/event-target-shim)                                                                                                   |
 | `eventemitter3`                                      | `3.1.2`          | Arnout Kazemier                       | [https://github.com/primus/eventemitter3](https://github.com/primus/eventemitter3)                                                                                                                   |
@@ -848,7 +848,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `xdg-basedir`                                        | `4.0.0`          | Sindre Sorhus                         | [https://github.com/sindresorhus/xdg-basedir](https://github.com/sindresorhus/xdg-basedir)                                                                                                           |
 | `yaeti`                                              | `0.0.6`          | Iñaki Baz Castillo                    | [https://github.com/ibc/yaeti](https://github.com/ibc/yaeti)                                                                                                                                         |
 | `yargs`                                              | `15.4.1`         |                                       | [https://github.com/yargs/yargs](https://github.com/yargs/yargs)                                                                                                                                     |
-| `yargs`                                              | `16.0.3`         |                                       | [https://github.com/yargs/yargs](https://github.com/yargs/yargs)                                                                                                                                     |
+| `yargs`                                              | `16.1.0`         |                                       | [https://github.com/yargs/yargs](https://github.com/yargs/yargs)                                                                                                                                     |
 
 #### MIT AND Zlib
 
