@@ -6,10 +6,6 @@
     "email": "oss@atomist.com"
   },
   "license": "Apache-2.0",
-  "keywords": [
-    "DEVOPS",
-    "DEPLOY"
-  ],
   "homepage": "https://github.com/atomist-skills/docker-build-skill",
   "repository": {
     "type": "git",
@@ -18,7 +14,7 @@
   "icon": "file://docs/images/icon.svg",
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
-    "@atomist/skill": "^0.3.0",
+    "@atomist/skill": "^0.3.1",
     "@kubernetes/client-node": "^0.12.2",
     "fs-extra": "^9.0.1",
     "lodash": "^4.17.20",

@@ -15,6 +15,7 @@
  */
 
 import {
+	Category,
 	parameter,
 	ParameterType,
 	ParameterVisibility,
@@ -23,6 +24,8 @@ import {
 } from "@atomist/skill";
 
 export const Skill = skill({
+	categories: [Category.DevOps],
+
 	resourceProviders: {
 		github: resourceProvider.gitHub({ minRequired: 1 }),
 		slack: resourceProvider.chat(),
