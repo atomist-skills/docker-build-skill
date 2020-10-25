@@ -14,7 +14,7 @@
   "icon": "file://docs/images/icon.svg",
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
-    "@atomist/skill": "^0.3.1",
+    "@atomist/skill": "^0.4.0",
     "@kubernetes/client-node": "^0.12.3",
     "fs-extra": "^9.0.1",
     "lodash": "^4.17.20",
