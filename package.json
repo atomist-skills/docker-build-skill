@@ -14,7 +14,7 @@
   "icon": "file://docs/images/icon.svg",
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
-    "@atomist/skill": "^0.4.0",
+    "@atomist/skill": "^0.4.1",
     "@kubernetes/client-node": "^0.12.3",
     "fs-extra": "^9.0.1",
     "lodash": "^4.17.20",
@@ -32,7 +32,7 @@
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
     "eslint": "^7.12.1",
-    "eslint-config-prettier": "^6.14.0",
+    "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
     "espower-typescript": "^9.0.2",
     "graphql": "^15.4.0",
