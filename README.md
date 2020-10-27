@@ -1,128 +1,81 @@
 # `atomist/docker-build-skill`
 
-<!---atomist-skill-description:start--->
+Build Docker images and push them to a Docker registry.
 
-Build Docker images and push them to a Docker registry
+:sparkles: [_**View this skill in the Atomist Skills Catalog**_][atomist-skill]
+to enable this skill on your repositories. :sparkles:
 
-<!---atomist-skill-description:end--->
+See the [Atomist website][atomist] for general information about Atomist Skills
+and the [Atomist documentation site][atomist-doc] for instructions on how to get
+started using Atomist Skills.
 
----
+[atomist-skill]:
+    https://go.atomist.com/catalog/skills/atomist/docker-build-skill
+    "Atomist Skills Catalog - Automate All Your Software Tasks"
+[atomist-doc]: https://docs.atomist.com/ "Atomist Documentation"
 
-<!---atomist-skill-long_description:start--->
+## Contributing
 
-Automatically build and push Docker images on pushes to Git repositories.
+Contributions to this project from community members are encouraged and
+appreciated. Please review the [Contributing Guidelines](CONTRIBUTING.md) for
+more information. Also see the [Development](#development) section in this
+document.
 
-This skill takes the hard and cumbersome task setting up a working
-`docker build` process away. Simply add this skill to your workspace and
-configure a Docker registry to push and you are ready to build your images.
+## Code of conduct
 
-<!---atomist-skill-long_description:end--->
+This project is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). You are
+expected to act in accordance with this code by participating. Please report any
+unacceptable behavior to code-of-conduct@atomist.com.
 
----
+## Connect
 
-<!---atomist-skill-readme:start--->
+Follow [@atomist][atomist-twitter] on Twitter and [The Atomist
+Blog][atomist-blog].
 
-# What it's useful for
+[atomist-twitter]: https://twitter.com/atomist "Atomist on Twitter"
+[atomist-blog]: https://blog.atomist.com/ "The Atomist Blog"
 
-With this skill you can automatically build Docker images and push them to a
-Docker registry. The Docker build is triggered by a push to a Git repository.
+## Support
 
-This skill addresses the cumbersome task of setting up a working `docker build`
-process. Simply add this skill to your workspace and configure a Docker registry
-to push to and you are ready to build your images. Super simple!
+General support questions should be discussed in the `#support` channel in the
+[Atomist community Slack workspace][slack].
 
-# Before you get started
+If you find a problem, please create an [issue](../../issues).
 
-Connect and configure these integrations:
+## Development
 
-1. **GitHub**
-2. **Docker Registry**
-3. **Slack**
+You will need to install [Node.js][node] to build and test this project.
 
-The **GitHub** integration must be configured in order to use this skill. At
-least one repository must be selected. The **Docker Registry** integration must
-also be configured in order to use this skill. At least one registry must be
-configured to push your images to. We recommend connecting the **Slack**
-integration.
+[node]: https://nodejs.org/ "Node.js"
 
-# How to configure
+### Build and test
 
-1. **Select a Docker registry to push to**
+Install dependencies.
 
-    ![Docker Registry](docs/images/docker-push-registry.png)
+```
+$ npm ci
+```
 
-    First connect at least one Docker registry from **Manage -> Integrations**.
-    Once connected you can then select a registry to push to.
+Use the `build` package script to compile, test, lint, and build the
+documentation.
 
-1. **Select Docker registries to pull from**
+```
+$ npm run build
+```
 
-    ![Docker Pull Registry](docs/images/docker-pull-registries.png)
+### Release
 
-    Occasionally you may want to pull private base images from a different
-    registry. Use the **Docker registries to pull from** parameter to configure
-    those additional registries.
+Releases are created by pushing a release [semantic version][semver] tag to the
+repository, Atomist Skills take care of the rest.
 
-1. **Select the trigger for running this skill**
+To make this skill globally available, set its maturity to "stable" via the set
+maturity drop-down in its Atomist Community Slack channel.
 
-    This skill can build Docker images on Git push or tag events. Use this
-    parameter to configure the trigger.
-
-1. **Specify the name of the image**
-
-    ![Docker Image Name](docs/images/docker-image-name.png)
-
-    Provide the name of the Docker image to create. If not provided this
-    defaults to the name of repository.
-
-1. **Specify the tag to create**
-
-    ![Docker Image Tag](docs/images/docker-image-tag.png)
-
-    Specify the Docker image tag to create. If not provided this defaults to Git
-    SHA of the commit that was pushed or the name of the Git tag.
-
-1. **Specify the path to the Dockerfile**
-
-    ![Dockerfile Path](docs/images/dockerfile-path.png)
-
-    Path to the Dockerfile to use for building the image. This defaults to
-    `./Dockerfile`.
-
-    The path is relative to the root of the repository.
-
-1. **Determine repository scope**
-
-    ![Repository filter](docs/images/repo-filter.png)
-
-    By default, this skill will be enabled for all repositories in all
-    organizations you have connected.
-
-    To restrict the organizations or specific repositories on which the skill
-    will run, you can explicitly choose organization(s) and repositories.
-
-# How to use Docker Build
-
-1. **Configure the skill, providing at least a Docker registry to push to**
-
-2. **For every new Git push, a new Docker image will be built**
-
-    When the optional **Slack** integration is configured, you'll see a progress
-    message in the Slack channel that is linked to the repository.
-
-    ![Slack Progress](docs/images/slack-progress.png)
-
-3. **Enjoy not having to manually set up a Docker build and push pipeline!**
-
-To create feature requests or bug reports, create an
-[issue in the repository for this skill](https://github.com/atomist-skills/docker-build-skill/issues).
-See the [code](https://github.com/atomist-skills/docker-build-skill) for the
-skill.
-
-<!---atomist-skill-readme:end--->
+[semver]: https://semver.org/ "Semantic Version"
 
 ---
 
 Created by [Atomist][atomist]. Need Help? [Join our Slack workspace][slack].
 
-[atomist]: https://atomist.com/ "Atomist"
+[atomist]: https://atomist.com/ "Atomist - Automate All the Software Things"
 [slack]: https://join.atomist.com/ "Atomist Community Slack"
