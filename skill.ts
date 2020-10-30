@@ -106,13 +106,21 @@ export const Skill = skill({
 			required: false,
 			defaultValue: true,
 		},
+		docker_args: {
+			type: ParameterType.StringArray,
+			displayName: "Kaniko arguments",
+			description:
+				"Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image",
+			required: false,
+			visibility: ParameterVisibility.Advanced,
+		},
 		version: {
 			type: ParameterType.String,
 			displayName: "Kaniko version",
 			description: "Version of Kaniko to use",
 			placeHolder: "v0.24.0",
 			required: false,
-			visibility: ParameterVisibility.Hidden,
+			visibility: ParameterVisibility.Advanced,
 		},
 		cache: {
 			type: ParameterType.Boolean,
@@ -121,14 +129,7 @@ export const Skill = skill({
 				"Enable Kaniko's support for Docker image layer caching",
 			defaultValue: true,
 			required: false,
-			visibility: ParameterVisibility.Hidden,
-		},
-		docker_args: {
-			type: ParameterType.StringArray,
-			displayName: "Kaniko arguments",
-			description:
-				"Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image",
-			required: false,
+			visibility: ParameterVisibility.Advanced,
 		},
 		repos: parameter.repoFilter({ required: false }),
 	},
