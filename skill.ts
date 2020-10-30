@@ -24,6 +24,8 @@ import {
 } from "@atomist/skill";
 
 export const Skill = skill({
+	displayName: "Docker Build",
+	description: "Build Docker images and push them to a Docker registry",
 	categories: [Category.DevOps],
 
 	resourceProviders: {
@@ -40,11 +42,7 @@ export const Skill = skill({
 			displayName: "Pull registries",
 			minRequired: 0,
 		}),
-		maven: resourceProvider.mavenRepository({
-			description: "Optional Maven repositories needed during build",
-			displayName: "Maven repositories",
-			minRequired: 0,
-		}),
+		secret: resourceProvider.secretProvider({ minRequired: 0 }),
 	},
 
 	parameters: {
@@ -78,6 +76,19 @@ export const Skill = skill({
 			displayName: "Image tag",
 			description:
 				"Tag to use when pushing the Docker image (defaults to Git SHA for pushes and Git tag name for tags)",
+			required: false,
+		},
+		docker_env: {
+			type: ParameterType.StringArray,
+			displayName: "Environment variables",
+			description:
+				"Environment variables to be set on the container (format `KEY=VALUE`)",
+			required: false,
+		},
+		env_map: {
+			type: ParameterType.String,
+			displayName: "",
+			description: "",
 			required: false,
 		},
 		dockerfile: {
