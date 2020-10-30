@@ -46,6 +46,19 @@ export const Skill = skill({
 	},
 
 	parameters: {
+		env_map: {
+			type: ParameterType.String,
+			displayName: "",
+			description: "",
+			required: false,
+		},
+		docker_env: {
+			type: ParameterType.StringArray,
+			displayName: "Environment variables",
+			description:
+				"Environment variables to be set on the container (format `KEY=VALUE`)",
+			required: false,
+		},
 		subscription_filter: {
 			type: ParameterType.SingleChoice,
 			displayName: "Build trigger",
@@ -78,19 +91,6 @@ export const Skill = skill({
 				"Tag to use when pushing the Docker image (defaults to Git SHA for pushes and Git tag name for tags)",
 			required: false,
 		},
-		docker_env: {
-			type: ParameterType.StringArray,
-			displayName: "Environment variables",
-			description:
-				"Environment variables to be set on the container (format `KEY=VALUE`)",
-			required: false,
-		},
-		env_map: {
-			type: ParameterType.String,
-			displayName: "",
-			description: "",
-			required: false,
-		},
 		dockerfile: {
 			type: ParameterType.String,
 			displayName: "Dockerfile path",
@@ -105,6 +105,7 @@ export const Skill = skill({
 				"Automatically create a GitHub check on the commit triggering this Docker build",
 			required: false,
 			defaultValue: true,
+			visibility: ParameterVisibility.Advanced,
 		},
 		docker_args: {
 			type: ParameterType.StringArray,
