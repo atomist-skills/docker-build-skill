@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.3.0...HEAD)
 
+### Added
+
+-   Add environment variables. [#118](https://github.com/atomist-skills/docker-build-skill/issues/118)
+
 ## [1.3.0](https://github.com/atomist-skills/docker-build-skill/compare/1.2.4...1.3.0) - 2020-10-16
 
 ### Changed
