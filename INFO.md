@@ -32,3 +32,7 @@ registry.
 ### GitHub commit check
 
 ![GitHub commit check](docs/images/github-commit-check.png)
+
+### Build status and logs
+
+![Docker build status and logs](docs/images/status-log.png)
