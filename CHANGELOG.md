@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.4.1](https://github.com/atomist-skills/docker-build-skill/compare/1.4.0...1.4.1) - 2020-11-02
 
+### Fixed
+
+-    Set secret resource provider to unbound. [d4d1365](https://github.com/atomist-skills/docker-build-skill/commit/d4d1365f6b5560a3123739ae4c439f454c730ede)
+
 ## [1.4.0](https://github.com/atomist-skills/docker-build-skill/compare/1.3.0...1.4.0) - 2020-11-02
 
 ### Added
