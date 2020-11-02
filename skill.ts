@@ -42,7 +42,10 @@ export const Skill = skill({
 			displayName: "Pull registries",
 			minRequired: 0,
 		}),
-		secret: resourceProvider.secretProvider({ minRequired: 0 }),
+		secret: resourceProvider.secretProvider({
+			minRequired: 0,
+			maxAllowed: undefined,
+		} as any),
 	},
 
 	parameters: {
