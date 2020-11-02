@@ -13,7 +13,7 @@
   },
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
-    "@atomist/skill": "^0.4.2-main.13",
+    "@atomist/skill": "^0.4.2-main.14",
     "@kubernetes/client-node": "^0.12.3",
     "fs-extra": "^9.0.1",
     "lodash": "^4.17.20",
