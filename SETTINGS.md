@@ -39,8 +39,30 @@ Connect and configure these integrations:
     secret to an environment variable here. Select the secret from the drop down
     and then provide a name for the environment variable. The running container
     will then have the value of that secret available to it as the value of the
-    environment variable. You _cannot_ use the same environment variable name as
-    both a secret and regular environment variable.
+    environment variable.
+
+    Note that by default container environment variables are not passed to the
+    Docker build context. To make the environment variable available within the
+    Docker build context you must:
+
+    1.  Declare the environment variable as an
+        [`ARG`](https://docs.docker.com/engine/reference/builder/#arg) in the
+        Dockerfile
+    1.  Provide the environment variable as a build argument to kaniko using its
+        [`--build-arg`](https://github.com/GoogleContainerTools/kaniko#--build-arg)
+        command-line option
+
+    For example, assign the secret to the environment variable `MY_TOKEN`, then
+    your Dockerfile should contain the line `ARG MY_TOKEN` prior to using
+    `$MY_TOKEN` in the Dockerfile and add the kaniko argument
+    `--build-arg=MY_TOKEN` below.
+
+    Be aware that build arguments are visible to any user of a image. Therefore
+    avoid using build arguments with secret values in single-stage Docker builds
+    or the final stage of a multi-stage Docker build.
+
+    You _cannot_ use the same environment variable name as both a secret and
+    regular environment variable.
 
 1.  **Environment variables**
 
@@ -48,7 +70,26 @@ Connect and configure these integrations:
 
     Specify any environment variables needed for your image and commands to run.
     The environment variable format is `KEY=VALUE`. For example:
-    `GIT_URL=https://github.com`
+    `GIT_URL=https://github.com`.
+
+    As with the secret environment variables, container environment variables
+    are not passed to the Docker build context. To make the environment variable
+    available within the Docker build context you must:
+
+    1.  Declare the environment variable as an
+        [`ARG`](https://docs.docker.com/engine/reference/builder/#arg) in the
+        Dockerfile
+    1.  Provide the environment variable as a build argument to kaniko using its
+        [`--build-arg`](https://github.com/GoogleContainerTools/kaniko#--build-arg)
+        command-line option
+
+    For example, assign the secret to the environment variable `MY_TOKEN`, then
+    your Dockerfile should contain the line `ARG MY_TOKEN` prior to using
+    `$MY_TOKEN` in the Dockerfile and add the kaniko argument
+    `--build-arg=MY_TOKEN` below.
+
+    You _cannot_ use the same environment variable name as both a secret and
+    regular environment variable.
 
 1.  **Select the trigger for running this skill**
 
@@ -82,14 +123,7 @@ Connect and configure these integrations:
 
     The path is relative to the root of the repository.
 
-1.  **Create GitHub commit check** _(advanced)_
-
-    ![GitHub commit check](docs/images/github-check.png)
-
-    If selected, a GitHub check will be added to the commit indicating whether
-    the build succeeded for failed.
-
-1.  **Extra kaniko arguments** _(advanced)_
+1.  **Extra kaniko arguments**
 
     ![kaniko arguments](docs/images/kaniko-args.png)
 
@@ -97,9 +131,14 @@ Connect and configure these integrations:
     [kaniko](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags "kaniko command-line arguments"),
     you can provide them here.
 
-    You can also use this argument to create additional image tags. For example,
-    to add the "latest" tag to all images created by builds triggered by a tag,
-    you can add this kaniko argument:
+    You can use this option to pass environment variables through to the Docker
+    build context.
+
+        --build-arg=NODE_ENV
+
+    You can use this option to create additional image tags. For example, to add
+    the "latest" tag to all images created by builds triggered by a tag, you can
+    add this kaniko argument:
 
         --destination=${data.Tag[0].commit.repo.owner}/${data.Tag[0].commit.repo.name}:latest
 
@@ -110,6 +149,13 @@ Connect and configure these integrations:
 
     In both of the above examples, we use data from the event that triggered the
     Docker build to provide the image repository and name.
+
+1.  **Create GitHub commit check** _(advanced)_
+
+    ![GitHub commit check](docs/images/github-check.png)
+
+    If selected, a GitHub check will be added to the commit indicating whether
+    the build succeeded for failed.
 
 1.  **Kaniko version** _(advanced)_
 

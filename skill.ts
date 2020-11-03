@@ -101,6 +101,13 @@ export const Skill = skill({
 				"Path to the Dockerfile within the project (defaults to Dockerfile)",
 			required: false,
 		},
+		docker_args: {
+			type: ParameterType.StringArray,
+			displayName: "Kaniko arguments",
+			description:
+				"Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image",
+			required: false,
+		},
 		githubCheck: {
 			type: ParameterType.Boolean,
 			displayName: "Create GitHub check",
@@ -108,14 +115,6 @@ export const Skill = skill({
 				"Automatically create a GitHub check on the commit triggering this Docker build",
 			required: false,
 			defaultValue: true,
-			visibility: ParameterVisibility.Advanced,
-		},
-		docker_args: {
-			type: ParameterType.StringArray,
-			displayName: "Kaniko arguments",
-			description:
-				"Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image",
-			required: false,
 			visibility: ParameterVisibility.Advanced,
 		},
 		version: {
