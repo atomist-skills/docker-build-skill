@@ -21,7 +21,7 @@ This page details all runtime dependencies of `@atomist/docker-build-skill`.
 | [GPL-3.0](#gpl-30)              | 1     |
 | [ISC](#isc)                     | 54    |
 | [MIT AND Zlib](#mit-and-zlib)   | 1     |
-| [MIT](#mit)                     | 606   |
+| [MIT](#mit)                     | 607   |
 | [Public Domain](#public-domain) | 1     |
 | [Unlicense](#unlicense)         | 2     |
 
@@ -48,10 +48,10 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | Name                                  | Version                       | Publisher             | Repository                                                                                                                       |
 | ------------------------------------- | ----------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `@atomist/skill-logging`              | `0.2.6`                       | Atomist               | [https://github.com/atomist-skills/skill-logging](https://github.com/atomist-skills/skill-logging)                               |
-| `@atomist/skill`                      | `0.4.2-main.14`               | Atomist               | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
+| `@atomist/skill`                      | `0.4.2-main.16`               | Atomist               | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
 | `@atomist/slack-messages`             | `1.2.0-master.20200806132057` | Atomist               | [https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)                                           |
 | `@google-cloud/common`                | `3.4.1`                       | Google Inc.           | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
-| `@google-cloud/logging`               | `8.0.8`                       | Google Inc.           | [https://github.com/googleapis/nodejs-logging](https://github.com/googleapis/nodejs-logging)                                     |
+| `@google-cloud/logging`               | `8.0.9`                       | Google Inc.           | [https://github.com/googleapis/nodejs-logging](https://github.com/googleapis/nodejs-logging)                                     |
 | `@google-cloud/paginator`             | `3.0.5`                       | Google Inc.           | [https://github.com/googleapis/nodejs-paginator](https://github.com/googleapis/nodejs-paginator)                                 |
 | `@google-cloud/precise-date`          | `2.0.3`                       | Google Inc.           | [https://github.com/googleapis/nodejs-precise-date](https://github.com/googleapis/nodejs-precise-date)                           |
 | `@google-cloud/projectify`            | `2.0.1`                       | Google Inc.           | [https://github.com/googleapis/nodejs-projectify](https://github.com/googleapis/nodejs-projectify)                               |
@@ -158,7 +158,7 @@ Creative Commons Zero v1.0 Universal - [https://creativecommons.org/publicdomain
 | Name        | Version  | Publisher     | Repository                                                                             |
 | ----------- | -------- | ------------- | -------------------------------------------------------------------------------------- |
 | `type-fest` | `0.11.0` | Sindre Sorhus | [https://github.com/sindresorhus/type-fest](https://github.com/sindresorhus/type-fest) |
-| `type-fest` | `0.17.0` | Sindre Sorhus | [https://github.com/sindresorhus/type-fest](https://github.com/sindresorhus/type-fest) |
+| `type-fest` | `0.18.0` | Sindre Sorhus | [https://github.com/sindresorhus/type-fest](https://github.com/sindresorhus/type-fest) |
 
 #### GPL-2.0
 
@@ -487,6 +487,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `dir-glob`                                           | `3.0.1`          | Kevin Mårtensson                      | [https://github.com/kevva/dir-glob](https://github.com/kevva/dir-glob)                                                                                                                               |
 | `dot-case`                                           | `3.0.3`          | Blake Embrey                          | [https://github.com/blakeembrey/change-case](https://github.com/blakeembrey/change-case)                                                                                                             |
 | `dot-prop`                                           | `5.3.0`          | Sindre Sorhus                         | [https://github.com/sindresorhus/dot-prop](https://github.com/sindresorhus/dot-prop)                                                                                                                 |
+| `dot-prop`                                           | `6.0.0`          | Sindre Sorhus                         | [https://github.com/sindresorhus/dot-prop](https://github.com/sindresorhus/dot-prop)                                                                                                                 |
 | `duplexify`                                          | `4.1.1`          | Mathias Buus                          | [https://github.com/mafintosh/duplexify](https://github.com/mafintosh/duplexify)                                                                                                                     |
 | `ecc-jsbn`                                           | `0.1.2`          | Jeremie Miller                        | [https://github.com/quartzjer/ecc-jsbn](https://github.com/quartzjer/ecc-jsbn)                                                                                                                       |
 | `ee-first`                                           | `1.1.1`          | Jonathan Ong                          | [https://github.com/jonathanong/ee-first](https://github.com/jonathanong/ee-first)                                                                                                                   |
@@ -821,7 +822,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `tree-kill`                                          | `1.2.2`          | Peteris Krumins                       | [https://github.com/pkrumins/node-tree-kill](https://github.com/pkrumins/node-tree-kill)                                                                                                             |
 | `ts-log`                                             | `2.2.3`          | Stagnation Lab                        | [https://github.com/kallaspriit/ts-log](https://github.com/kallaspriit/ts-log)                                                                                                                       |
 | `type-fest`                                          | `0.11.0`         | Sindre Sorhus                         | [https://github.com/sindresorhus/type-fest](https://github.com/sindresorhus/type-fest)                                                                                                               |
-| `type-fest`                                          | `0.17.0`         | Sindre Sorhus                         | [https://github.com/sindresorhus/type-fest](https://github.com/sindresorhus/type-fest)                                                                                                               |
+| `type-fest`                                          | `0.18.0`         | Sindre Sorhus                         | [https://github.com/sindresorhus/type-fest](https://github.com/sindresorhus/type-fest)                                                                                                               |
 | `typedarray-to-buffer`                               | `3.1.5`          | Feross Aboukhadijeh                   | [https://github.com/feross/typedarray-to-buffer](https://github.com/feross/typedarray-to-buffer)                                                                                                     |
 | `ua-parser-js`                                       | `0.7.22`         | Faisal Salman                         | [https://github.com/faisalman/ua-parser-js](https://github.com/faisalman/ua-parser-js)                                                                                                               |
 | `unc-path-regex`                                     | `0.1.2`          | Jon Schlinkert                        | [https://github.com/regexhq/unc-path-regex](https://github.com/regexhq/unc-path-regex)                                                                                                               |
