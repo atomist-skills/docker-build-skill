@@ -21,10 +21,6 @@ registry.
 -   Easily customize the Docker build to your needs
 -   GitHub commit check indicates success of failure of build
 
-See the
-[Container Skills documentation](https://docs.atomist.com/authoring/container-skills/ "Container Skills - Atomist Documentation")
-for more detailed information.
-
 ### Build Docker images on every push
 
 ![Docker build on push](docs/images/docker-build.png)
