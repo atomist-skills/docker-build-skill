@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.4.1...HEAD)
 
+### Changed
+
+-    Made kaniko args a regular parameter. [4811a0f](https://github.com/atomist-skills/docker-build-skill/commit/4811a0fddba72af161d6a94e26070b930dfd4e17)
+
 ## [1.4.1](https://github.com/atomist-skills/docker-build-skill/compare/1.4.0...1.4.1) - 2020-11-02
 
 ### Fixed
