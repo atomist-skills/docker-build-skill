@@ -43,26 +43,11 @@ Connect and configure these integrations:
 
     Note that by default container environment variables are not passed to the
     Docker build context. To make the environment variable available within the
-    Docker build context you must:
-
-    1.  Declare the environment variable as an
-        [`ARG`](https://docs.docker.com/engine/reference/builder/#arg) in the
-        Dockerfile
-    1.  Provide the environment variable as a build argument to kaniko using its
-        [`--build-arg`](https://github.com/GoogleContainerTools/kaniko#--build-arg)
-        command-line option
-
-    For example, assign the secret to the environment variable `MY_TOKEN`, then
-    your Dockerfile should contain the line `ARG MY_TOKEN` prior to using
-    `$MY_TOKEN` in the Dockerfile and add the kaniko argument
-    `--build-arg=MY_TOKEN` below.
-
-    Be aware that build arguments are visible to any user of a image. Therefore
-    avoid using build arguments with secret values in single-stage Docker builds
-    or the final stage of a multi-stage Docker build.
-
-    You _cannot_ use the same environment variable name as both a secret and
-    regular environment variable.
+    Docker build context you must declare it as an `ARG` in the Dockerfile and
+    provide it as a `--build-arg` to kaniko. For example, assign the secret to
+    the environment variable `MY_TOKEN`, then your Dockerfile should contain the
+    line `ARG MY_TOKEN` prior to using `$MY_TOKEN` in the Dockerfile, and add
+    the kaniko argument `--build-arg=MY_TOKEN` below.
 
 1.  **Environment variables**
 
@@ -74,22 +59,11 @@ Connect and configure these integrations:
 
     As with the secret environment variables, container environment variables
     are not passed to the Docker build context. To make the environment variable
-    available within the Docker build context you must:
-
-    1.  Declare the environment variable as an
-        [`ARG`](https://docs.docker.com/engine/reference/builder/#arg) in the
-        Dockerfile
-    1.  Provide the environment variable as a build argument to kaniko using its
-        [`--build-arg`](https://github.com/GoogleContainerTools/kaniko#--build-arg)
-        command-line option
-
-    For example, assign the secret to the environment variable `MY_TOKEN`, then
-    your Dockerfile should contain the line `ARG MY_TOKEN` prior to using
-    `$MY_TOKEN` in the Dockerfile and add the kaniko argument
-    `--build-arg=MY_TOKEN` below.
-
-    You _cannot_ use the same environment variable name as both a secret and
-    regular environment variable.
+    available within the Docker build context you must declare it as an `ARG` in
+    the Dockerfile and provide it as a `--build-arg` to kaniko. For example, set
+    the environment variable `PROFILE=production` here, then your Dockerfile
+    should contain the line `ARG PROFILE` prior to using `$PROFILE` in the
+    Dockerfile, and add the kaniko argument `--build-arg=PROFILE` below.
 
 1.  **Select the trigger for running this skill**
 
