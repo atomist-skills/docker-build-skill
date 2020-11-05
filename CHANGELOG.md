@@ -7,17 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.4.2...HEAD)
 
+### Changed
+
+-   Update to kaniko 1.3.0. [ce33263](https://github.com/atomist-skills/docker-build-skill/commit/ce33263424351d8ff6ef0bd2824478556ad06871)
+
 ## [1.4.2](https://github.com/atomist-skills/docker-build-skill/compare/1.4.1...1.4.2) - 2020-11-04
 
 ### Changed
 
--    Made kaniko args a regular parameter. [4811a0f](https://github.com/atomist-skills/docker-build-skill/commit/4811a0fddba72af161d6a94e26070b930dfd4e17)
+-   Made kaniko args a regular parameter. [4811a0f](https://github.com/atomist-skills/docker-build-skill/commit/4811a0fddba72af161d6a94e26070b930dfd4e17)
 
 ## [1.4.1](https://github.com/atomist-skills/docker-build-skill/compare/1.4.0...1.4.1) - 2020-11-02
 
 ### Fixed
 
--    Set secret resource provider to unbound. [d4d1365](https://github.com/atomist-skills/docker-build-skill/commit/d4d1365f6b5560a3123739ae4c439f454c730ede)
+-   Set secret resource provider to unbound. [d4d1365](https://github.com/atomist-skills/docker-build-skill/commit/d4d1365f6b5560a3123739ae4c439f454c730ede)
 
 ## [1.4.0](https://github.com/atomist-skills/docker-build-skill/compare/1.3.0...1.4.0) - 2020-11-02
 
