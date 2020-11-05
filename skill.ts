@@ -23,6 +23,8 @@ import {
 	skill,
 } from "@atomist/skill";
 
+const KanikoVersion = "v1.3.0";
+
 export const Skill = skill({
 	displayName: "Docker Build",
 	description: "Build Docker images and push them to a Docker registry",
@@ -126,7 +128,7 @@ export const Skill = skill({
 			type: ParameterType.String,
 			displayName: "Kaniko version",
 			description: "Version of Kaniko to use",
-			placeHolder: "v1.2.0",
+			placeHolder: KanikoVersion,
 			required: false,
 			visibility: ParameterVisibility.Advanced,
 		},
@@ -145,7 +147,9 @@ export const Skill = skill({
 	containers: {
 		"kaniko": {
 			image:
-				"gcr.io/kaniko-project/executor:${configuration.parameters.version:v1.2.0}",
+				"gcr.io/kaniko-project/executor:${configuration.parameters.version:" +
+				KanikoVersion +
+				"}",
 			args: [
 				"--context=dir:///atm/home",
 				"--destination=#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration.parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}",
