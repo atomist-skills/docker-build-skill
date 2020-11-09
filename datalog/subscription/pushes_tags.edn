@@ -1,39 +1,43 @@
 [:find
- (pull ?commit [{:git.commit/repo [:git.repo/source-id
-                                   :git.repo/name
-                                   :git.provider/url
-                                   {:git.repo/org [:github.org/installation-token
-                                                   :git.org/name
-                                                   :git.provider/url]}]}
-                {:git.commit/email [:email.email/address]}
-                {:git.commit/author [:git.user/login
-                                     :git.user/name
-                                     {:git.user/emails [:email.email/address]}]}])
- :in $ $before-db %
- :where
- (get-config-value "branch-filters" ["^.*$"] ?branch-filters)
- (get-config-value "tag-filters" ["^.*$"] ?tag-filters)
- ;; triggers
- (or-join [?commit ?branch-filters ?tag-filters ?ref-name]
-   (tx-push-to-branch ?branch-filters ?commit ?ref-name)
-   (tx-tag ?tag-filters ?commit ?ref-name)
-   (and
-     ;; take a guess at a branch/tag ref for this commit
-     ;; but it must match the filters, if defined
-     (tx-content-index ?commit)
-     [?ref :git.ref/commit ?commit]
-     [?ref :git.ref/name ?ref-name]
-     (get-config-value "file-paths" ["Dockerfile"] ?file-paths)
-     (or-join [?commit ?file-paths]
-       [(empty? ?file-paths)]
-       (content-index-contains? ?commit "path-exists" ?file-paths))
-     (or-join [?ref ?branch-filters ?tag-filters ?ref-name]
-       (and
-         [?ref :git.ref/type :git.ref.type/branch]
-         (array-contains? ?branch-filters ?ref-name))
-       (and
-         [?ref :git.ref/type :git.ref.type/tag]
-         (array-contains? ?tag-filters ?ref-name)))))
-
- [?commit :git.commit/repo ?repo]
- [?repo :git.repo/org ?org]]
+  (pull ?commit [{:git.commit/repo [:git.repo/source-id
+                                    :git.repo/name
+                                    :git.provider/url
+                                    {:git.repo/org [:github.org/installation-token
+                                                    :git.org/name
+                                                    :git.provider/url]}]}
+                 {:git.commit/email [:email.email/address]}
+                 {:git.commit/author [:git.user/login
+                                      :git.user/name
+                                      {:git.user/emails [:email.email/address]}]}])
+  :in $ $before-db %
+  :where
+  (get-config-value "branch-filters" ["^.*$"] ?branch-filters)
+  (get-config-value "tag-filters" ["^.*$"] ?tag-filters)
+  ;; triggers
+  (or-join [?commit ?branch-filters ?tag-filters]
+    (and
+      (tx-push ?commit ?ref)
+      [?ref :git.ref/name ?branch-name]
+      (array-contains? ?branch-filters ?branch-name))
+    (and
+      (tx-tag ?commit ?ref)
+      [?ref :git.ref/name ?tag-name]
+      (array-contains? ?tag-filters ?tag-name))
+    (and
+      ;;take a guess at a branch/tag ref for this commit
+      ;; but it must match the filters, if defined
+      (tx-content-index ?commit _)
+      [?ref :git.ref/commit ?commit]
+      (get-config-value "file-paths" ["Dockerfile"] ?file-paths)
+      (or-join [?commit ?file-paths]
+        [(empty? ?file-paths)]
+        (content-index-contains? ?commit "path-exists" ?file-paths))
+      (or-join [?ref ?branch-filters ?tag-filters]
+        (and
+          [?ref :git.ref/type :git.ref.type/branch]
+          [?ref :git.ref/name ?branch-name]
+          (array-contains? ?branch-filters ?branch-name))
+        (and
+          [?ref :git.ref/type :git.ref.type/tag]
+          [?ref :git.ref/name ?tag-name]
+          (array-contains? ?tag-filters ?tag-name)))))]
