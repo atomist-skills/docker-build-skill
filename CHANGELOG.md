@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 -   Update to kaniko 1.3.0. [ce33263](https://github.com/atomist-skills/docker-build-skill/commit/ce33263424351d8ff6ef0bd2824478556ad06871)
+-   Remove single quotes from label values. [264e1c1](https://github.com/atomist-skills/docker-build-skill/commit/264e1c16e7104935eaea20cad2beca81c2446b2d)
 
 ## [1.4.2](https://github.com/atomist-skills/docker-build-skill/compare/1.4.1...1.4.2) - 2020-11-04
 
