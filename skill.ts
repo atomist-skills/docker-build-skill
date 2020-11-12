@@ -32,7 +32,6 @@ export const Skill = skill({
 
 	resourceProviders: {
 		github: resourceProvider.gitHub({ minRequired: 1 }),
-		slack: resourceProvider.chat(),
 		docker_push_registry: resourceProvider.dockerRegistry({
 			description: "Docker registry to push to",
 			displayName: "Push registry",
