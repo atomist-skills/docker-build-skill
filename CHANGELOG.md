@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.4.3...HEAD)
 
+### Removed
+
+-   Remove optional chat provider. [#138](https://github.com/atomist-skills/docker-build-skill/issues/138)
+
 ## [1.4.3](https://github.com/atomist-skills/docker-build-skill/compare/1.4.2...1.4.3) - 2020-11-10
 
 ### Changed
