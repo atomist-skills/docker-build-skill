@@ -17,7 +17,7 @@
     "@kubernetes/client-node": "^0.12.3",
     "fs-extra": "^9.0.1",
     "source-map-support": "^0.5.19",
-    "yargs": "^16.1.0"
+    "yargs": "^16.1.1"
   },
   "devDependencies": {
     "@google-cloud/functions-framework": "^1.7.1",
