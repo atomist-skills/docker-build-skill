@@ -29,6 +29,8 @@ export const Skill = skill({
 	displayName: "Docker Build",
 	description: "Build Docker images and push them to a Docker registry",
 	categories: [Category.DevOps],
+	iconUrl:
+		"https://raw.githubusercontent.com/atomist-skills/docker-build-skill/main/docs/images/icon.svg",
 
 	resourceProviders: {
 		github: resourceProvider.gitHub({ minRequired: 1 }),
