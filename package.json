@@ -31,7 +31,6 @@
     "compile": "run-s gql:gen compile:ts",
     "compile:ts": "tsc --project .",
     "doc": "typedoc --mode modules --excludeExternals --ignoreCompilerErrors --exclude \"**/*.d.ts\" --out doc index.ts lib",
-    "git:info": "atm-git-info",
     "gql:gen": "atm-skill gql-generate",
     "lint": "run-p lint:eslint lint:prettier",
     "lint:eslint": "eslint --ext .ts .",
@@ -40,11 +39,14 @@
     "lint:prettier": "prettier --list-different \"**/*.{graphql,json,markdown,md,yaml,yml}\"",
     "lint:prettier:fix": "prettier --write \"**/*.{graphql,json,markdown,md,yaml,yml}\"",
     "skill": "run-s compile test skill:generate",
+    "skill:bundle": "atm-skill bundle",
+    "skill:clean": "atm-skill clean",
     "skill:generate": "atm-skill generate",
+    "skill:package": "atm-skill package",
+    "skill:register": "atm-skill register",
     "start": "functions-framework --target=entryPoint --signature-type=event",
-    "test": "echo no tests",
-    "test:one": "mocha --require espower-typescript/guess \"test/**/${TEST:-*.test.ts}\"",
-    "typedoc": "npm run doc"
+    "test": "mocha --require espower-typescript/guess \"test/**/*.test.ts\"",
+    "test:one": "mocha --require espower-typescript/guess \"test/**/${TEST:-*.test.ts}\""
   },
   "dependencies": {
     "@atomist/skill": "^0.5.1",
