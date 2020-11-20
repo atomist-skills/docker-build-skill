@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.6.0...HEAD)
 
+### Changed
+
+-   Add chat message parameter. [e3a2272](https://github.com/atomist-skills/docker-build-skill/commit/e3a2272614be9f2a477992d45eb5553cad777ebc)
+
 ## [1.6.0](https://github.com/atomist-skills/docker-build-skill/compare/1.5.0...1.6.0) - 2020-11-16
 
 ### Changed
