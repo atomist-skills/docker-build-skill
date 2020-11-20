@@ -117,6 +117,14 @@ async function slackMessage(
 	push: { sha: string; branch: string; url: string },
 	ctx: EventContext,
 ): Promise<{ close: (status: number) => Promise<void> }> {
+	if (!ctx.configuration?.parameters?.chat) {
+		return {
+			close: async (): Promise<void> => {
+				// Intentionally left empty
+			},
+		};
+	}
+
 	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
 	const title = "Docker Build";
@@ -210,56 +218,56 @@ async function gitHubCheck(
 	push: { sha: string; branch: string; url: string },
 	ctx: EventContext,
 ): Promise<{ close: (status: number) => Promise<void> }> {
-	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
-
-	if (ctx.configuration?.parameters?.githubCheck) {
-		const credential = await ctx.credential.resolve(
-			secret.gitHubAppToken({
-				owner: repo.owner,
-				repo: repo.name,
-				apiUrl: repo.org.provider.apiUrl,
-			}),
-		);
-		const check = await github.createCheck(
-			ctx,
-			repository.gitHub({
-				owner: repo.owner,
-				repo: repo.name,
-				credential,
-				sha: push.sha,
-				branch: push.branch,
-			}),
-			{
-				name: ctx.skill.name,
-				sha: push.sha,
-				startedAt: new Date().toISOString(),
-				title: "Docker Build",
-				body: `Building image \`${imageName}\``,
-			},
-		);
-
-		return {
-			close: async (status): Promise<void> => {
-				if (status === 0) {
-					await check.update({
-						conclusion: "success",
-						body: `Successfully built and pushed image \`${imageName}\``,
-					});
-				} else {
-					await check.update({
-						conclusion: "failure",
-						body: `Failed to build image \`${imageName}\``,
-					});
-				}
-			},
-		};
-	} else {
+	if (!ctx.configuration?.parameters?.githubCheck) {
 		return {
 			close: async (): Promise<void> => {
 				// Intentionally left empty
 			},
 		};
 	}
+
+	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
+
+	const credential = await ctx.credential.resolve(
+		secret.gitHubAppToken({
+			owner: repo.owner,
+			repo: repo.name,
+			apiUrl: repo.org.provider.apiUrl,
+		}),
+	);
+	const check = await github.createCheck(
+		ctx,
+		repository.gitHub({
+			owner: repo.owner,
+			repo: repo.name,
+			credential,
+			sha: push.sha,
+			branch: push.branch,
+		}),
+		{
+			name: ctx.skill.name,
+			sha: push.sha,
+			startedAt: new Date().toISOString(),
+			title: "Docker Build",
+			body: `Building image \`${imageName}\``,
+		},
+	);
+
+	return {
+		close: async (status): Promise<void> => {
+			if (status === 0) {
+				await check.update({
+					conclusion: "success",
+					body: `Successfully built and pushed image \`${imageName}\``,
+				});
+			} else {
+				await check.update({
+					conclusion: "failure",
+					body: `Failed to build image \`${imageName}\``,
+				});
+			}
+		},
+	};
 }
 
 /**

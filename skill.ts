@@ -118,11 +118,19 @@ export const Skill = skill({
 		},
 		githubCheck: {
 			type: ParameterType.Boolean,
-			displayName: "Create GitHub check",
+			displayName: "GitHub check",
 			description:
 				"Automatically create a GitHub check on the commit triggering this Docker build",
 			required: false,
 			defaultValue: true,
+			visibility: ParameterVisibility.Advanced,
+		},
+		chat: {
+			type: ParameterType.Boolean,
+			displayName: "Chat notification",
+			description: "Send notification to chat channels",
+			required: false,
+			defaultValue: false,
 			visibility: ParameterVisibility.Advanced,
 		},
 		version: {
