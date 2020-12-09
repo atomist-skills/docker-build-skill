@@ -125,14 +125,6 @@ export const Skill = skill({
 			defaultValue: true,
 			visibility: ParameterVisibility.Advanced,
 		},
-		chat: {
-			type: ParameterType.Boolean,
-			displayName: "Chat notification",
-			description: "Send notification to chat channels",
-			required: false,
-			defaultValue: false,
-			visibility: ParameterVisibility.Advanced,
-		},
 		version: {
 			type: ParameterType.String,
 			displayName: "Kaniko version",

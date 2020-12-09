@@ -117,14 +117,6 @@ async function slackMessage(
 	push: { sha: string; branch: string; url: string },
 	ctx: EventContext,
 ): Promise<{ close: (status: number) => Promise<void> }> {
-	if (!ctx.configuration?.parameters?.chat) {
-		return {
-			close: async (): Promise<void> => {
-				// Intentionally left empty
-			},
-		};
-	}
-
 	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
 	const start = Date.now();
@@ -134,10 +126,7 @@ async function slackMessage(
 
 	let slackMsg = await slack.progressMessage(
 		title,
-		`${slack.bold(
-			`${repo.owner}/${repo.name}/${push.branch}`,
-		)} at ${slack.url(push.url, `\`${push.sha.slice(0, 7)}\``)}\n
-${ticks}
+		`${ticks}
 Building image ${imageName}
 ${ticks}`,
 		{
