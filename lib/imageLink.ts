@@ -139,6 +139,7 @@ ${ticks}`,
 			footer: undefined,
 			footer_icon: undefined,
 			ts: undefined,
+			thumb_url: undefined,
 		},
 	);
 
@@ -169,6 +170,7 @@ ${ticks}`,
 						footer: undefined,
 						footer_icon: undefined,
 						ts: undefined,
+						thumb_url: undefined,
 					},
 				);
 
@@ -196,6 +198,7 @@ ${ticks}`,
 						footer: undefined,
 						footer_icon: undefined,
 						ts: undefined,
+						thumb_url: undefined,
 					},
 				);
 
