@@ -121,7 +121,6 @@ async function slackMessage(
 
 	const start = Date.now();
 	const title = "Docker Build";
-	const id = `${ctx.skill.namespace}/${ctx.skill.name}/${imageName}`;
 	const ticks = "```";
 
 	let slackMsg = await slack.progressMessage(
@@ -136,6 +135,11 @@ ${ticks}`,
 			counter: false,
 		},
 		ctx,
+		{
+			footer: undefined,
+			footer_icon: undefined,
+			ts: undefined,
+		},
 	);
 
 	await ctx.message.attach(
@@ -151,13 +155,7 @@ ${ticks}`,
 			if (status === 0) {
 				slackMsg = await slack.progressMessage(
 					title,
-					`${slack.bold(
-						`${repo.owner}/${repo.name}/${push.branch}`,
-					)} at ${slack.url(
-						push.url,
-						`\`${push.sha.slice(0, 7)}\``,
-					)}\n
-${ticks}
+					`${ticks}
 Successfully built and pushed image ${imageName}
 ${ticks}`,
 					{
@@ -167,23 +165,24 @@ ${ticks}`,
 						counter: false,
 					},
 					ctx,
+					{
+						footer: undefined,
+						footer_icon: undefined,
+						ts: undefined,
+					},
 				);
 
-				await ctx.message.send(
-					slackMsg,
-					{ channels: repo.channels.map(c => c.name), users: [] },
-					{ id },
+				await ctx.message.attach(
+					slackMsg.attachments[0],
+					"push",
+					{ sha: push.sha, branch: push.branch },
+					"docker",
+					start,
 				);
 			} else {
 				slackMsg = await slack.progressMessage(
 					title,
-					`${slack.bold(
-						`${repo.owner}/${repo.name}/${push.branch}`,
-					)} at ${slack.url(
-						push.url,
-						`\`${push.sha.slice(0, 7)}\``,
-					)}\n
-${ticks}
+					`${ticks}
 Failed to build image ${imageName}
 ${ticks}`,
 					{
@@ -193,12 +192,19 @@ ${ticks}`,
 						counter: false,
 					},
 					ctx,
+					{
+						footer: undefined,
+						footer_icon: undefined,
+						ts: undefined,
+					},
 				);
 
-				await ctx.message.send(
-					slackMsg,
-					{ channels: repo.channels.map(c => c.name), users: [] },
-					{ id },
+				await ctx.message.attach(
+					slackMsg.attachments[0],
+					"push",
+					{ sha: push.sha, branch: push.branch },
+					"docker",
+					start,
 				);
 			}
 		},
