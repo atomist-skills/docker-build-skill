@@ -127,6 +127,7 @@ async function slackMessage(
 
 	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
 
+	const start = Date.now();
 	const title = "Docker Build";
 	const id = `${ctx.skill.namespace}/${ctx.skill.name}/${imageName}`;
 	const ticks = "```";
@@ -148,10 +149,12 @@ ${ticks}`,
 		ctx,
 	);
 
-	await ctx.message.send(
-		slackMsg,
-		{ channels: repo.channels.map(c => c.name), users: [] },
-		{ id },
+	await ctx.message.attach(
+		slackMsg.attachments[0],
+		"push",
+		{ sha: push.sha, branch: push.branch },
+		"docker",
+		start,
 	);
 
 	return {
