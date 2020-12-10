@@ -147,8 +147,7 @@ ${ticks}`,
 
 	await ctx.message.attach(
 		slackMsg.attachments[0],
-		"push",
-		{ sha: push.sha, branch: push.branch },
+		`${push.sha}#${push.branch}`,
 		"docker",
 		start,
 	);
@@ -180,8 +179,7 @@ ${ticks}`,
 
 				await ctx.message.attach(
 					slackMsg.attachments[0],
-					"push",
-					{ sha: push.sha, branch: push.branch },
+					`${push.sha}#${push.branch}`,
 					"docker",
 					start,
 				);
@@ -210,8 +208,7 @@ ${ticks}`,
 
 				await ctx.message.attach(
 					slackMsg.attachments[0],
-					"push",
-					{ sha: push.sha, branch: push.branch },
+					`${push.sha}#${push.branch}`,
 					"docker",
 					start,
 				);
