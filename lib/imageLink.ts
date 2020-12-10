@@ -14,7 +14,14 @@
  * limitations under the License.
  */
 
-import { github, log, repository, secret, slack } from "@atomist/skill";
+import {
+	github,
+	log,
+	repository,
+	secret,
+	slack,
+	AttachmentTarget,
+} from "@atomist/skill";
 import { createContext } from "@atomist/skill/lib/context";
 import { EventContext } from "@atomist/skill/lib/handler";
 import { EventIncoming } from "@atomist/skill/lib/payload";
@@ -147,6 +154,7 @@ ${ticks}`,
 
 	await ctx.message.attach(
 		slackMsg.attachments[0],
+		AttachmentTarget.Push,
 		`${push.sha}#${push.branch}`,
 		"docker",
 		start,
@@ -179,6 +187,7 @@ ${ticks}`,
 
 				await ctx.message.attach(
 					slackMsg.attachments[0],
+					AttachmentTarget.Push,
 					`${push.sha}#${push.branch}`,
 					"docker",
 					start,
@@ -208,6 +217,7 @@ ${ticks}`,
 
 				await ctx.message.attach(
 					slackMsg.attachments[0],
+					AttachmentTarget.Push,
 					`${push.sha}#${push.branch}`,
 					"docker",
 					start,
