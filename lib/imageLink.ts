@@ -15,12 +15,12 @@
  */
 
 import {
+	AttachmentTarget,
 	github,
 	log,
 	repository,
 	secret,
 	slack,
-	AttachmentTarget,
 } from "@atomist/skill";
 import { createContext } from "@atomist/skill/lib/context";
 import { EventContext } from "@atomist/skill/lib/handler";
@@ -29,6 +29,7 @@ import * as k8s from "@kubernetes/client-node";
 import * as fs from "fs-extra";
 import * as os from "os";
 import * as path from "path";
+
 import {
 	BuildOnPushSubscription,
 	BuildOnTagSubscription,
