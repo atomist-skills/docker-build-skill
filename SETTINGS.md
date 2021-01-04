@@ -120,6 +120,13 @@ Connect and configure these integrations:
     In both of the above examples, we use data from the event that triggered the
     Docker build to provide the image repository and name.
 
+    Note that each argument provided is passed as a _single_ argument to kaniko,
+    no command-line parsing is done. This means that command-line options that
+    take a value should either be provided as a single argument with the option
+    and value joined by an equal sign (`=`), e.g., `--context-sub-path=docker`,
+    or as two separate arguments, the first being the option and the second
+    being the value, e.g., `--context-sub-path` and `docker`.
+
 1.  **Create GitHub commit check** _(advanced)_
 
     ![GitHub commit check](docs/images/github-check.png)

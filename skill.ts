@@ -113,7 +113,7 @@ export const Skill = skill({
 			type: ParameterType.StringArray,
 			displayName: "Kaniko arguments",
 			description:
-				"Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image",
+				"Additional [arguments](https://github.com/GoogleContainerTools/kaniko/blob/master/README.md#additional-flags) to be passed to Kaniko when building the image. Kaniko command-line options that take argument values should be provided as a single argument with the option and its value connected by an equal sign (`=`), e.g., `--context-sub-path=docker`.",
 			required: false,
 		},
 		githubCheck: {
