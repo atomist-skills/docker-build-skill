@@ -129,13 +129,10 @@ async function slackMessage(
 
 	const start = Date.now();
 	const title = "Docker Build";
-	const ticks = "```";
 
 	let slackMsg = await slack.progressMessage(
 		title,
-		`${ticks}
-Building image ${imageName}
-${ticks}`,
+		`Building image \`${imageName}\``,
 		{
 			state: "in_process",
 			total: 1,
@@ -166,9 +163,7 @@ ${ticks}`,
 			if (status === 0) {
 				slackMsg = await slack.progressMessage(
 					title,
-					`${ticks}
-Successfully built and pushed image ${imageName}
-${ticks}`,
+					`Successfully built and pushed image \`${imageName}\``,
 					{
 						state: "success",
 						total: 1,
@@ -196,9 +191,7 @@ ${ticks}`,
 			} else {
 				slackMsg = await slack.progressMessage(
 					title,
-					`${ticks}
-Failed to build image ${imageName}
-${ticks}`,
+					`Failed to build image \`${imageName}\``,
 					{
 						state: "failure",
 						total: 1,
