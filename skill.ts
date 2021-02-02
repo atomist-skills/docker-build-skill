@@ -161,7 +161,7 @@ export const Skill = skill({
 				"--label=org.label-schema.name=#{data | get('Push[0].repo.name') | orValue(data | get('Tag[0].commit.repo.name'))}",
 				"--label=org.label-schema.vendor=#{data | get('Push[0].repo.owner') | orValue(data | get('Tag[0].commit.repo.owner'))}",
 				"--label=org.label-schema.vcs-url=#{data | get('Push[0].repo.org.provider.gitUrl') | orValue(data | get('Tag[0].commit.repo.org.provider.gitUrl'))}:#{data | get('Push[0].repo.owner') | orValue(data | get('Tag[0].commit.repo.owner'))}/#{data | get('Push[0].repo.name') | orValue(data | get('Tag[0].commit.repo.name'))}.git",
-				"--label=org.label-schema.vcs-ref=#{data | get('Push[0].after.sha') | orValue(data | get('Tag[0].name'))}",
+				"--label=org.label-schema.vcs-ref=#{data | get('Push[0].after.sha') | orValue(data | get('Tag[0].commit.sha'))}",
 				"--label=org.label-schema.build-date=#{data | get('Push[0].after.timestamp') | orValue(data | get('Tag[0].commit.timestamp'))}",
 				"--force",
 			],
