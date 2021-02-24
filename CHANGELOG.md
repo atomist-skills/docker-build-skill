@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 -   Improve kaniko arguments docs. [#191](https://github.com/atomist-skills/docker-build-skill/issues/191)
+-   Update kaniko to 1.5.1. [f2a68b3](https://github.com/atomist-skills/docker-build-skill/commit/f2a68b38481873db1f739ade163f2fe105b90e6d)
 
 ## [1.6.1](https://github.com/atomist-skills/docker-build-skill/compare/1.6.0...1.6.1) - 2020-11-20
 
