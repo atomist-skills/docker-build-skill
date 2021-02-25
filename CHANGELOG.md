@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.6.1...HEAD)
 
+### Added
+
+-   Support for using git branch name as tag suffix. [#220](https://github.com/atomist-skills/docker-build-skill/issues/220)
+
 ### Changed
 
 -   Improve kaniko arguments docs. [#191](https://github.com/atomist-skills/docker-build-skill/issues/191)
