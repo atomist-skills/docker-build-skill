@@ -56,7 +56,7 @@ export const Skill = skill({
 			type: ParameterType.String,
 			displayName: "",
 			description:
-				"Map selected secrets to environment variables that will be available in the running container." +
+				"Map selected secrets to environment variables that will be available in the running container. " +
 				"You must also declare the environment variable as an `ARG` in your " +
 				"Dockerfile and provide it as a `--build-arg` to kaniko.",
 			required: false,
