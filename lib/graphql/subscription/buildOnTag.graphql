@@ -6,6 +6,7 @@ subscription buildOnTag {
       sha
       url
       repo {
+        defaultBranch
         url
         owner
         name

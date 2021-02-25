@@ -102,6 +102,14 @@ export const Skill = skill({
 				"Tag to use when pushing the Docker image (defaults to Git SHA for pushes and Git tag name for tags)",
 			required: false,
 		},
+		branchSuffix: {
+			type: ParameterType.Boolean,
+			displayName: "Image tag branch suffix",
+			description:
+				"Add branch name suffix to the configured image tag for non-default branch builds",
+			defaultValue: false,
+			required: false,
+		},
 		dockerfile: {
 			type: ParameterType.String,
 			displayName: "Dockerfile path",
@@ -153,14 +161,14 @@ export const Skill = skill({
 				"}",
 			args: [
 				"--context=dir:///atm/home",
-				"--destination=#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration.parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}",
+				"--destination=#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration.parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}#{configuration.parameters.branchSuffix ? (data | get('Push[0].repo.defaultBranch') | branchSuffix(data | get('Push[0].branch'))) : ''}",
 				"--dockerfile=${configuration.parameters.dockerfile:Dockerfile}",
 				"--cache=${configuration.parameters.cache:false}",
 				"--cache-repo=#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}-cache",
 				"--label=org.label-schema.schema-version=1.0",
 				"--label=org.label-schema.name=#{data | get('Push[0].repo.name') | orValue(data | get('Tag[0].commit.repo.name'))}",
 				"--label=org.label-schema.vendor=#{data | get('Push[0].repo.owner') | orValue(data | get('Tag[0].commit.repo.owner'))}",
-				"--label=org.label-schema.vcs-url=#{data | get('Push[0].repo.org.provider.gitUrl') | orValue(data | get('Tag[0].commit.repo.org.provider.gitUrl'))}:#{data | get('Push[0].repo.owner') | orValue(data | get('Tag[0].commit.repo.owner'))}/#{data | get('Push[0].repo.name') | orValue(data | get('Tag[0].commit.repo.name'))}.git",
+				"--label=org.label-schema.vcs-url=#{data | get('Push[0].repo.org.provider.gitUrl') | orValue(data | get('Tag[0].commit.repo.org.provider.gitUrl'))}#{data | get('Push[0].repo.owner') | orValue(data | get('Tag[0].commit.repo.owner'))}/#{data | get('Push[0].repo.name') | orValue(data | get('Tag[0].commit.repo.name'))}.git",
 				"--label=org.label-schema.vcs-ref=#{data | get('Push[0].after.sha') | orValue(data | get('Tag[0].commit.sha'))}",
 				"--label=org.label-schema.build-date=#{data | get('Push[0].after.timestamp') | orValue(data | get('Tag[0].commit.timestamp'))}",
 				"--force",
@@ -189,7 +197,7 @@ export const Skill = skill({
 				{
 					name: "DOCKER_BUILD_IMAGE_NAME",
 					value:
-						"#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration.parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}",
+						"#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration.parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}#{configuration.parameters.branchSuffix ? (data | get('Push[0].repo.defaultBranch') | branchSuffix(data | get('Push[0].branch'))) : ''}",
 				},
 				{
 					name: "DOCKER_PROVIDER_ID",
