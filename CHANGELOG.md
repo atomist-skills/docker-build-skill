@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 -   Support for using git branch name as tag suffix. [#220](https://github.com/atomist-skills/docker-build-skill/issues/220)
 -   Add path to Dockerfile to vcs-url. [94c6949](https://github.com/atomist-skills/docker-build-skill/commit/94c694919afde939a9405011c9bf030b3aeba9d1)
+-   Add org.opencontainers.image image labels. [899721f](https://github.com/atomist-skills/docker-build-skill/commit/899721f3a5ba24c9ee8b554b9b0be5f9c01a4350)
 
 ### Changed
 
