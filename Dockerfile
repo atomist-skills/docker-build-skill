@@ -21,3 +21,5 @@ COPY --from=build /usr/src/ .
 
 ENTRYPOINT ["dumb-init", "node", "--no-deprecation", "--trace-warnings", "--expose_gc", "--optimize_for_size", "--always_compact", "--max_old_space_size=512"]
 CMD ["/sdm/bin/start.js", "run"]
+
+RUN mkdir -p /atm/home/output
