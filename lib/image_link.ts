@@ -27,6 +27,7 @@ import { EventContext } from "@atomist/skill/lib/handler";
 import { EventIncoming } from "@atomist/skill/lib/payload";
 import * as k8s from "@kubernetes/client-node";
 import * as fs from "fs-extra";
+import * as _ from "lodash";
 import * as os from "os";
 import * as path from "path";
 
@@ -114,17 +115,27 @@ export async function imageLink(): Promise<number> {
 	}
 
 	// Check if digest file exists
+	const digests: Array<{ digest: string; tag: string }> = [];
 	if (await fs.pathExists(path.join(home, "digest"))) {
-		const digest = (
-			await fs.readFile(path.join(home, "digest"))
-		).toString();
-		await ctx.audit.log(`-----------------------
-${digest}
------------------------`);
+		digests.push(
+			...(await fs.readFile(path.join(home, "digest")))
+				.toString()
+				.trim()
+				.split("\n")
+				.map(d => {
+					const parts = d.split("@");
+					const digest = parts[1];
+					const tag = parts[0].split(":")[1];
+					return {
+						digest,
+						tag,
+					};
+				}),
+		);
 	}
 
-	await slackMessageCb.close(status);
-	await checkCb.close(status);
+	await slackMessageCb.close(status, digests);
+	await checkCb.close(status, digests);
 
 	log.info("Completed processing. Exiting...");
 	return 0;
@@ -134,8 +145,13 @@ async function slackMessage(
 	repo: BuildOnPushSubscription["Push"][0]["repo"],
 	push: { sha: string; branch: string; url: string },
 	ctx: EventContext,
-): Promise<{ close: (status: number) => Promise<void> }> {
-	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
+): Promise<{
+	close: (
+		status: number,
+		digests: Array<{ digest: string; tag: string }>,
+	) => Promise<void>;
+}> {
+	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0];
 
 	const start = Date.now();
 	const title = "Docker Build";
@@ -169,11 +185,15 @@ async function slackMessage(
 	);
 
 	return {
-		close: async (status): Promise<void> => {
+		close: async (status, digests): Promise<void> => {
+			const tags = _.uniqBy(digests, "tag").map(d => d.tag);
+			const digest = _.uniqBy(digests, "digest")[0].digest;
 			if (status === 0) {
 				slackMsg = await slack.progressMessage(
 					title,
-					`Successfully built and pushed image \`${imageName}\``,
+					`Successfully built and pushed image \`${imageName}\`
+${tags.length === 1 ? "Tag" : "Tags"} ${tags.map(t => `_${t}_`).join(", ")}
+Digest \`${digest}\``,
 					{
 						state: "success",
 						total: 1,
@@ -235,7 +255,12 @@ async function gitHubCheck(
 	repo: BuildOnPushSubscription["Push"][0]["repo"],
 	push: { sha: string; branch: string; url: string },
 	ctx: EventContext,
-): Promise<{ close: (status: number) => Promise<void> }> {
+): Promise<{
+	close: (
+		status: number,
+		digests: Array<{ digest: string; tag: string }>,
+	) => Promise<void>;
+}> {
 	if (!ctx.configuration?.parameters?.githubCheck) {
 		return {
 			close: async (): Promise<void> => {
@@ -244,7 +269,7 @@ async function gitHubCheck(
 		};
 	}
 
-	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
+	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0];
 
 	const credential = await ctx.credential.resolve(
 		secret.gitHubAppToken({
@@ -272,11 +297,15 @@ async function gitHubCheck(
 	);
 
 	return {
-		close: async (status): Promise<void> => {
+		close: async (status, digests): Promise<void> => {
+			const tags = _.uniqBy(digests, "tag").map(d => d.tag);
+			const digest = _.uniqBy(digests, "digest")[0].digest;
 			if (status === 0) {
 				await check.update({
 					conclusion: "success",
-					body: `Successfully built and pushed image \`${imageName}\``,
+					body: `Successfully built and pushed image \`${imageName}\`
+${tags.length === 1 ? "Tag" : "Tags"} ${tags.map(t => `_${t}_`).join(", ")}
+Digest \`${digest}\``,
 				});
 			} else {
 				await check.update({
