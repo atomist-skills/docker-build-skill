@@ -32,7 +32,7 @@ yargs
 		async () => {
 			try {
 				const exitCode = await (
-					await import("../lib/imageLink")
+					await import("../lib/image_link")
 				).imageLink();
 				process.exit(exitCode);
 			} catch (e) {
