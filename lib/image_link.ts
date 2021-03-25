@@ -167,7 +167,7 @@ async function slackMessage(
 	const dockerfile = `[\`${process.env.DOCKER_FILE}\`](https://github.com/${push.owner}/${push.repo}/blob/${push.sha}/${process.env.DOCKER_FILE})`;
 
 	const start = Date.now();
-	const title = "Docker build";
+	const title = "Docker Build";
 
 	let slackMsg = await slack.progressMessage(
 		title,
@@ -312,7 +312,7 @@ async function gitHubCheck(
 			name: ctx.skill.name,
 			sha: push.sha,
 			startedAt: new Date().toISOString(),
-			title: "Docker Build",
+			title: "Docker build",
 			body: `Building image \`${imageName}\` from ${dockerfile}`,
 		},
 	);
