@@ -154,7 +154,7 @@ export const Skill = skill({
 			type: ParameterType.String,
 			displayName: "Kaniko cache ttl",
 			description: "Specify ttl for Kaniko's image layer cache",
-			defaultValue: "48",
+			defaultValue: "48h0m0s",
 			required: false,
 			visibility: ParameterVisibility.Advanced,
 		},
