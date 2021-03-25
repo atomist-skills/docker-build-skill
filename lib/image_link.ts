@@ -152,13 +152,14 @@ async function slackMessage(
 	) => Promise<void>;
 }> {
 	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0];
+	const dockerfile = process.env.DOCKER_FILE;
 
 	const start = Date.now();
 	const title = "Docker Build";
 
 	let slackMsg = await slack.progressMessage(
 		title,
-		`Building image \`${imageName}\``,
+		`Building image \`${imageName}\` from \`${dockerfile}\``,
 		{
 			state: "in_process",
 			total: 1,
@@ -191,8 +192,9 @@ async function slackMessage(
 			if (status === 0) {
 				slackMsg = await slack.progressMessage(
 					title,
-					`Successfully built and pushed image \`${imageName}\`
-${tags.length === 1 ? "Tag" : "Tags"} ${tags.map(t => `_${t}_`).join(", ")}
+					`Built and pushed image \`${imageName}\` from \`${dockerfile}\`
+
+${tags.length === 1 ? "Tag" : "Tags"} ${tags.map(t => `\`${t}\``).join(", ")}
 Digest \`${digest}\``,
 					{
 						state: "success",
@@ -221,7 +223,7 @@ Digest \`${digest}\``,
 			} else {
 				slackMsg = await slack.progressMessage(
 					title,
-					`Failed to build image \`${imageName}\``,
+					`Failed to build image \`${imageName}\` from \`${dockerfile}\``,
 					{
 						state: "failure",
 						total: 1,
@@ -270,6 +272,7 @@ async function gitHubCheck(
 	}
 
 	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0];
+	const dockerfile = process.env.DOCKER_FILE;
 
 	const credential = await ctx.credential.resolve(
 		secret.gitHubAppToken({
@@ -292,7 +295,7 @@ async function gitHubCheck(
 			sha: push.sha,
 			startedAt: new Date().toISOString(),
 			title: "Docker Build",
-			body: `Building image \`${imageName}\``,
+			body: `Building image \`${imageName}\` from \`${dockerfile}\``,
 		},
 	);
 
@@ -303,14 +306,15 @@ async function gitHubCheck(
 			if (status === 0) {
 				await check.update({
 					conclusion: "success",
-					body: `Successfully built and pushed image \`${imageName}\`
+					body: `Built and pushed image \`${imageName}\` from \`${dockerfile}\`
+
 ${tags.length === 1 ? "Tag" : "Tags"} ${tags.map(t => `\`${t}\``).join(", ")}
 Digest \`${digest}\``,
 				});
 			} else {
 				await check.update({
 					conclusion: "failure",
-					body: `Failed to build image \`${imageName}\``,
+					body: `Failed to build image \`${imageName}\` from \`${dockerfile}\``,
 				});
 			}
 		},
