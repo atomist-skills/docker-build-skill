@@ -304,7 +304,7 @@ async function gitHubCheck(
 				await check.update({
 					conclusion: "success",
 					body: `Successfully built and pushed image \`${imageName}\`
-${tags.length === 1 ? "Tag" : "Tags"} ${tags.map(t => `_${t}_`).join(", ")}
+${tags.length === 1 ? "Tag" : "Tags"} ${tags.map(t => `\`${t}\``).join(", ")}
 Digest \`${digest}\``,
 				});
 			} else {
