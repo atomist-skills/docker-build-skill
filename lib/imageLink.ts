@@ -113,6 +113,16 @@ export async function imageLink(): Promise<number> {
 		);
 	}
 
+	// Check if digest file exists
+	if (await fs.pathExists(path.join(home, "output", "digest"))) {
+		const digest = (
+			await fs.readFile(path.join(home, "output", "digest"))
+		).toString();
+		await ctx.audit.log(`-----------------------
+${digest}
+-----------------------`);
+	}
+
 	await slackMessageCb.close(status);
 	await checkCb.close(status);
 
