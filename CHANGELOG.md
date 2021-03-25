@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.6.2...HEAD)
 
+### Added
+
+-   Add cacheTtl parameter. [86364ac](https://github.com/atomist-skills/docker-build-skill/commit/86364ace7d1757f1c337ca0c8ab1497bfa2c9885)
+
 ## [1.6.2](https://github.com/atomist-skills/docker-build-skill/compare/1.6.1...1.6.2) - 2021-03-10
 
 ### Added
