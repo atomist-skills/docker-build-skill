@@ -187,7 +187,7 @@ export const Skill = skill({
 				"--label=org.opencontainers.image.source=#{data | get('Push[0].repo.org.provider.gitUrl') | orValue(data | get('Tag[0].commit.repo.org.provider.gitUrl'))}#{data | get('Push[0].repo.owner') | orValue(data | get('Tag[0].commit.repo.owner'))}/#{data | get('Push[0].repo.name') | orValue(data | get('Tag[0].commit.repo.name'))}.git!${configuration.parameters.dockerfile:Dockerfile}",
 				"--label=org.opencontainers.image.revision=#{data | get('Push[0].after.sha') | orValue(data | get('Tag[0].commit.sha'))}",
 				"--label=org.opencontainers.image.created=#{data | get('Push[0].after.timestamp') | orValue(data | get('Tag[0].commit.timestamp'))}",
-				"--image-name-tag-with-digest-file=/atm/home/output/digest",
+				"--image-name-tag-with-digest-file=/atm/home/digest",
 				"--force",
 			],
 			env: [

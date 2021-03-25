@@ -114,9 +114,9 @@ export async function imageLink(): Promise<number> {
 	}
 
 	// Check if digest file exists
-	if (await fs.pathExists(path.join(home, "output", "digest"))) {
+	if (await fs.pathExists(path.join(home, "digest"))) {
 		const digest = (
-			await fs.readFile(path.join(home, "output", "digest"))
+			await fs.readFile(path.join(home, "digest"))
 		).toString();
 		await ctx.audit.log(`-----------------------
 ${digest}
