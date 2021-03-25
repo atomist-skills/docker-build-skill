@@ -165,7 +165,7 @@ async function slackMessage(
 }> {
 	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0];
 	const dockerfile = `\`${slack.url(
-		`https://github.com/${push.owner}/${push.repo}/blob/${push.sha}/${process.env.DOCKER_FILE})`,
+		`https://github.com/${push.owner}/${push.repo}/blob/${push.sha}/${process.env.DOCKER_FILE}`,
 		process.env.DOCKER_FILE,
 	)}\``;
 
