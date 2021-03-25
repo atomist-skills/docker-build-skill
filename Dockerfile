@@ -1,6 +1,8 @@
 # Set up build
 FROM node:lts@sha256:fe842f5b828c121514d62cbe0ace0927aec4f3130297180c3343e54e7ae97362 AS build
 
+RUN mkdir -p /atm/home/output
+
 WORKDIR /usr/src
 
 COPY . ./ 
@@ -21,5 +23,3 @@ COPY --from=build /usr/src/ .
 
 ENTRYPOINT ["dumb-init", "node", "--no-deprecation", "--trace-warnings", "--expose_gc", "--optimize_for_size", "--always_compact", "--max_old_space_size=512"]
 CMD ["/sdm/bin/start.js", "run"]
-
-RUN mkdir -p /atm/home/output
