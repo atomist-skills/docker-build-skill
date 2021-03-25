@@ -173,7 +173,7 @@ export const Skill = skill({
 				"--dockerfile=${configuration.parameters.dockerfile:Dockerfile}",
 				"--cache=${configuration.parameters.cache:false}",
 				"--cache-repo=#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}-cache",
-				"--cache-ttl=${configuration.parameters.cacheTtl:48}",
+				"--cache-ttl=${configuration.parameters.cacheTtl:48h0m0s}",
 				"--label=org.label-schema.schema-version=1.0",
 				"--label=org.label-schema.name=#{data | get('Push[0].repo.name') | orValue(data | get('Tag[0].commit.repo.name'))}",
 				"--label=org.label-schema.vendor=#{data | get('Push[0].repo.owner') | orValue(data | get('Tag[0].commit.repo.owner'))}",
