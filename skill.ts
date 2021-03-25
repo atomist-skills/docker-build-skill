@@ -209,7 +209,7 @@ export const Skill = skill({
 		},
 		"image-link": {
 			image: "gcr.io/atomist-container-skills/docker-build-skill",
-			args: ["/sdm/bin/start.js", "image-link"],
+			args: ["image-link"],
 			env: [
 				{
 					name: "DOCKER_BUILD_IMAGE_NAME",
