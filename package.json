@@ -52,6 +52,7 @@
     "@atomist/skill": "^0.9.1-main.139",
     "@kubernetes/client-node": "^0.12.3",
     "fs-extra": "^9.1.0",
+    "lodash": "^4.17.21",
     "source-map-support": "^0.5.19",
     "yargs": "^16.2.0"
   },
