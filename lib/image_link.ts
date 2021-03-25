@@ -87,6 +87,12 @@ export async function imageLink(): Promise<number> {
 		branch:
 			(ctx.data as BuildOnPushSubscription)?.Push?.[0]?.branch ||
 			(ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.name,
+		owner:
+			(ctx.data as BuildOnPushSubscription)?.Push?.[0]?.repo?.owner ||
+			(ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit.repo?.owner,
+		repo:
+			(ctx.data as BuildOnPushSubscription)?.Push?.[0]?.repo?.name ||
+			(ctx.data as BuildOnTagSubscription)?.Tag?.[0]?.commit.repo?.name,
 	};
 
 	const slackMessageCb = await slackMessage(repo, push, ctx);
@@ -143,7 +149,13 @@ export async function imageLink(): Promise<number> {
 
 async function slackMessage(
 	repo: BuildOnPushSubscription["Push"][0]["repo"],
-	push: { sha: string; branch: string; url: string },
+	push: {
+		owner: string;
+		repo: string;
+		sha: string;
+		branch: string;
+		url: string;
+	},
 	ctx: EventContext,
 ): Promise<{
 	close: (
@@ -152,14 +164,14 @@ async function slackMessage(
 	) => Promise<void>;
 }> {
 	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0];
-	const dockerfile = process.env.DOCKER_FILE;
+	const dockerfile = `[\`${process.env.DOCKER_FILE}\`](https://github.com/${push.owner}/${push.repo}/blob/${push.sha}/${process.env.DOCKER_FILE})`;
 
 	const start = Date.now();
-	const title = "Docker Build";
+	const title = "Docker build";
 
 	let slackMsg = await slack.progressMessage(
 		title,
-		`Building image \`${imageName}\` from \`${dockerfile}\``,
+		`Building image \`${imageName}\` from ${dockerfile}`,
 		{
 			state: "in_process",
 			total: 1,
@@ -192,7 +204,7 @@ async function slackMessage(
 			if (status === 0) {
 				slackMsg = await slack.progressMessage(
 					title,
-					`Built and pushed image \`${imageName}\` from \`${dockerfile}\`
+					`Built and pushed image \`${imageName}\` from ${dockerfile}
 
 ${tags.length === 1 ? "Tag" : "Tags"} ${tags.map(t => `\`${t}\``).join(", ")}
 Digest \`${digest}\``,
@@ -223,7 +235,7 @@ Digest \`${digest}\``,
 			} else {
 				slackMsg = await slack.progressMessage(
 					title,
-					`Failed to build image \`${imageName}\` from \`${dockerfile}\``,
+					`Failed to build image \`${imageName}\` from ${dockerfile}`,
 					{
 						state: "failure",
 						total: 1,
@@ -255,7 +267,13 @@ Digest \`${digest}\``,
 
 async function gitHubCheck(
 	repo: BuildOnPushSubscription["Push"][0]["repo"],
-	push: { sha: string; branch: string; url: string },
+	push: {
+		sha: string;
+		branch: string;
+		url: string;
+		owner: string;
+		repo: string;
+	},
 	ctx: EventContext,
 ): Promise<{
 	close: (
@@ -272,7 +290,7 @@ async function gitHubCheck(
 	}
 
 	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0];
-	const dockerfile = process.env.DOCKER_FILE;
+	const dockerfile = `[\`${process.env.DOCKER_FILE}\`](https://github.com/${push.owner}/${push.repo}/blob/${push.sha}/${process.env.DOCKER_FILE})`;
 
 	const credential = await ctx.credential.resolve(
 		secret.gitHubAppToken({
@@ -295,7 +313,7 @@ async function gitHubCheck(
 			sha: push.sha,
 			startedAt: new Date().toISOString(),
 			title: "Docker Build",
-			body: `Building image \`${imageName}\` from \`${dockerfile}\``,
+			body: `Building image \`${imageName}\` from ${dockerfile}`,
 		},
 	);
 
@@ -306,7 +324,7 @@ async function gitHubCheck(
 			if (status === 0) {
 				await check.update({
 					conclusion: "success",
-					body: `Built and pushed image \`${imageName}\` from \`${dockerfile}\`
+					body: `Built and pushed image \`${imageName}\` from ${dockerfile}
 
 ${tags.length === 1 ? "Tag" : "Tags"} ${tags.map(t => `\`${t}\``).join(", ")}
 Digest \`${digest}\``,
@@ -314,7 +332,7 @@ Digest \`${digest}\``,
 			} else {
 				await check.update({
 					conclusion: "failure",
-					body: `Failed to build image \`${imageName}\` from \`${dockerfile}\``,
+					body: `Failed to build image \`${imageName}\` from ${dockerfile}`,
 				});
 			}
 		},
