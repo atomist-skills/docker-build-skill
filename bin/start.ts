@@ -18,7 +18,7 @@
 // tslint:disable-next-line:no-import-side-effect
 import "source-map-support/register";
 
-import { error } from "@atomist/skill/lib/log";
+import { log } from "@atomist/skill";
 import * as yargs from "yargs";
 
 // tslint:disable-next-line:no-unused-expression
@@ -36,7 +36,7 @@ yargs
 				).imageLink();
 				process.exit(exitCode);
 			} catch (e) {
-				error(e);
+				log.error(e);
 				process.exit(1);
 			}
 		},
