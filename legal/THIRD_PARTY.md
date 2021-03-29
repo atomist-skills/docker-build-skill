@@ -13,7 +13,7 @@ This page details all runtime dependencies of `@atomist/docker-build-skill`.
 | [0BSD](#0bsd)                   | 3     |
 | [AFLv2.1](#aflv21)              | 1     |
 | [Apache-2.0](#apache-20)        | 47    |
-| [BSD-2-Clause](#bsd-2-clause)   | 10    |
+| [BSD-2-Clause](#bsd-2-clause)   | 11    |
 | [BSD-3-Clause](#bsd-3-clause)   | 27    |
 | [BSD](#bsd)                     | 1     |
 | [CC-BY-4.0](#cc-by-40)          | 1     |
@@ -22,7 +22,7 @@ This page details all runtime dependencies of `@atomist/docker-build-skill`.
 | [GPL-3.0](#gpl-30)              | 1     |
 | [ISC](#isc)                     | 52    |
 | [MIT AND Zlib](#mit-and-zlib)   | 1     |
-| [MIT](#mit)                     | 662   |
+| [MIT](#mit)                     | 665   |
 | [Public Domain](#public-domain) | 1     |
 | [Python-2.0](#python-20)        | 1     |
 | [Unlicense](#unlicense)         | 2     |
@@ -50,7 +50,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | Name                                  | Version          | Publisher             | Repository                                                                                                                       |
 | ------------------------------------- | ---------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `@atomist/skill-logging`              | `0.2.6`          | Atomist               | [https://github.com/atomist-skills/skill-logging](https://github.com/atomist-skills/skill-logging)                               |
-| `@atomist/skill`                      | `0.9.1-main.151` | Atomist, Inc.         | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
+| `@atomist/skill`                      | `0.9.1-main.162` | Atomist, Inc.         | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
 | `@atomist/slack-messages`             | `1.2.2`          | Atomist               | [https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)                                           |
 | `@google-cloud/common`                | `3.6.0`          | Google Inc.           | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
 | `@google-cloud/logging`               | `8.2.0`          | Google Inc.           | [https://github.com/googleapis/nodejs-logging](https://github.com/googleapis/nodejs-logging)                                     |
@@ -118,6 +118,7 @@ BSD 2-Clause "Simplified" License - [https://opensource.org/licenses/BSD-2-Claus
 | `http-cache-semantics`       | `4.1.0`  | Kornel Lesiński   | [https://github.com/kornelski/http-cache-semantics](https://github.com/kornelski/http-cache-semantics)                     |
 | `rc`                         | `1.2.8`  | Dominic Tarr      | [https://github.com/dominictarr/rc](https://github.com/dominictarr/rc)                                                     |
 | `shimmer`                    | `1.2.1`  | Forrest L Norvell | [https://github.com/othiym23/shimmer](https://github.com/othiym23/shimmer)                                                 |
+| `uglify-js`                  | `3.13.2` | Mihai Bazon       | [https://github.com/mishoo/UglifyJS](https://github.com/mishoo/UglifyJS)                                                   |
 | `uri-js`                     | `4.4.1`  | Gary Court        | [https://github.com/garycourt/uri-js](https://github.com/garycourt/uri-js)                                                 |
 
 #### BSD-3-Clause
@@ -576,6 +577,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `graphql-ws`                                         | `4.2.2`        |                                       | [https://github.com/enisdenjo/graphql-ws](https://github.com/enisdenjo/graphql-ws)                                                                                                                   |
 | `graphql`                                            | `15.5.0`       |                                       | [https://github.com/graphql/graphql-js](https://github.com/graphql/graphql-js)                                                                                                                       |
 | `gtoken`                                             | `5.2.1`        | Google, LLC                           | [https://github.com/google/node-gtoken](https://github.com/google/node-gtoken)                                                                                                                       |
+| `handlebars`                                         | `4.7.7`        | Yehuda Katz                           | [https://github.com/wycats/handlebars.js](https://github.com/wycats/handlebars.js)                                                                                                                   |
 | `har-validator`                                      | `5.1.5`        | Ahmad Nassri                          | [https://github.com/ahmadnassri/node-har-validator](https://github.com/ahmadnassri/node-har-validator)                                                                                               |
 | `has-ansi`                                           | `2.0.0`        | Sindre Sorhus                         | [https://github.com/sindresorhus/has-ansi](https://github.com/sindresorhus/has-ansi)                                                                                                                 |
 | `has-bigints`                                        | `1.0.1`        | Jordan Harband                        | [https://github.com/ljharb/has-bigints](https://github.com/ljharb/has-bigints)                                                                                                                       |
@@ -721,6 +723,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `minizlib`                                           | `2.1.2`        | Isaac Z. Schlueter                    | [https://github.com/isaacs/minizlib](https://github.com/isaacs/minizlib)                                                                                                                             |
 | `mkdirp`                                             | `1.0.4`        |                                       | [https://github.com/isaacs/node-mkdirp](https://github.com/isaacs/node-mkdirp)                                                                                                                       |
 | `ms`                                                 | `2.1.2`        |                                       | [https://github.com/zeit/ms](https://github.com/zeit/ms)                                                                                                                                             |
+| `neo-async`                                          | `2.6.2`        |                                       | [https://github.com/suguru03/neo-async](https://github.com/suguru03/neo-async)                                                                                                                       |
 | `nice-try`                                           | `1.0.5`        |                                       | [https://github.com/electerious/nice-try](https://github.com/electerious/nice-try)                                                                                                                   |
 | `no-case`                                            | `3.0.4`        | Blake Embrey                          | [https://github.com/blakeembrey/change-case](https://github.com/blakeembrey/change-case)                                                                                                             |
 | `node-fetch`                                         | `2.6.1`        | David Frank                           | [https://github.com/bitinn/node-fetch](https://github.com/bitinn/node-fetch)                                                                                                                         |
@@ -755,7 +758,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `p-locate`                                           | `4.1.0`        | Sindre Sorhus                         | [https://github.com/sindresorhus/p-locate](https://github.com/sindresorhus/p-locate)                                                                                                                 |
 | `p-locate`                                           | `5.0.0`        | Sindre Sorhus                         | [https://github.com/sindresorhus/p-locate](https://github.com/sindresorhus/p-locate)                                                                                                                 |
 | `p-map`                                              | `2.1.0`        | Sindre Sorhus                         | [https://github.com/sindresorhus/p-map](https://github.com/sindresorhus/p-map)                                                                                                                       |
-| `p-retry`                                            | `4.4.0`        | Sindre Sorhus                         | [https://github.com/sindresorhus/p-retry](https://github.com/sindresorhus/p-retry)                                                                                                                   |
+| `p-retry`                                            | `4.5.0`        | Sindre Sorhus                         | [https://github.com/sindresorhus/p-retry](https://github.com/sindresorhus/p-retry)                                                                                                                   |
 | `p-try`                                              | `2.2.0`        | Sindre Sorhus                         | [https://github.com/sindresorhus/p-try](https://github.com/sindresorhus/p-try)                                                                                                                       |
 | `package-json`                                       | `6.5.0`        | Sindre Sorhus                         | [https://github.com/sindresorhus/package-json](https://github.com/sindresorhus/package-json)                                                                                                         |
 | `param-case`                                         | `3.0.4`        | Blake Embrey                          | [https://github.com/blakeembrey/change-case](https://github.com/blakeembrey/change-case)                                                                                                             |
@@ -904,6 +907,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `verror`                                             | `1.10.0`       |                                       | [https://github.com/davepacheco/node-verror](https://github.com/davepacheco/node-verror)                                                                                                             |
 | `whatwg-fetch`                                       | `3.6.2`        |                                       | [https://github.com/github/fetch](https://github.com/github/fetch)                                                                                                                                   |
 | `which-boxed-primitive`                              | `1.0.2`        | Jordan Harband                        | [https://github.com/inspect-js/which-boxed-primitive](https://github.com/inspect-js/which-boxed-primitive)                                                                                           |
+| `wordwrap`                                           | `1.0.0`        | James Halliday                        | [https://github.com/substack/node-wordwrap](https://github.com/substack/node-wordwrap)                                                                                                               |
 | `wrap-ansi`                                          | `3.0.1`        | Sindre Sorhus                         | [https://github.com/chalk/wrap-ansi](https://github.com/chalk/wrap-ansi)                                                                                                                             |
 | `wrap-ansi`                                          | `6.2.0`        | Sindre Sorhus                         | [https://github.com/chalk/wrap-ansi](https://github.com/chalk/wrap-ansi)                                                                                                                             |
 | `wrap-ansi`                                          | `7.0.0`        | Sindre Sorhus                         | [https://github.com/chalk/wrap-ansi](https://github.com/chalk/wrap-ansi)                                                                                                                             |
