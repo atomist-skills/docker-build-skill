@@ -202,9 +202,9 @@ async function slackMessage(
 
 	return {
 		close: async (status, digests): Promise<void> => {
-			const tags = _.uniqBy(digests, "tag").map(d => d.tag);
-			const digest = _.uniqBy(digests, "digest")[0].digest;
 			if (status === 0) {
+				const tags = _.uniqBy(digests, "tag").map(d => d.tag);
+				const digest = _.uniqBy(digests, "digest")[0].digest;
 				slackMsg = await slack.progressMessage(
 					title,
 					`Built and pushed image \`${imageName}\` from ${dockerfile}
@@ -322,9 +322,9 @@ async function gitHubCheck(
 
 	return {
 		close: async (status, digests): Promise<void> => {
-			const tags = _.uniqBy(digests, "tag").map(d => d.tag);
-			const digest = _.uniqBy(digests, "digest")[0].digest;
 			if (status === 0) {
+				const tags = _.uniqBy(digests, "tag").map(d => d.tag);
+				const digest = _.uniqBy(digests, "digest")[0].digest;
 				await check.update({
 					conclusion: "success",
 					body: `Built and pushed image \`${imageName}\` from ${dockerfile}
