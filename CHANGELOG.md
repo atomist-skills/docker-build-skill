@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/1.6.3...HEAD)
 
+### Fixed
+
+-   Fix failing check and slack update when build fails. [f525dd1](https://github.com/atomist-skills/docker-build-skill/commit/f525dd13b6259784edc46c86006c8a70b7cfccbb)
+
 ## [1.6.3](https://github.com/atomist-skills/docker-build-skill/compare/1.6.2...1.6.3) - 2021-03-25
 
 ### Added
