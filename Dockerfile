@@ -1,5 +1,5 @@
 # Set up build
-FROM node:lts@sha256:fe842f5b828c121514d62cbe0ace0927aec4f3130297180c3343e54e7ae97362 AS build
+FROM node:lts@sha256:359104ed81c918c2ca3bfb01faa069e33949013fde25c6a471b0fa27d19d78ca AS build
 
 RUN mkdir -p /atm/home/output
 
@@ -12,7 +12,7 @@ RUN npm ci --no-optional && \
     rm -rf node_modules .git
  
 # Set up running image     
-FROM atomist/skill:node14
+FROM atomist/skill:node14@sha256:cce007fa715f32ac17a4b6afebaf21e37a10b8f04309a3ad984edabc2ac60963
 
 WORKDIR "/skill"
 
