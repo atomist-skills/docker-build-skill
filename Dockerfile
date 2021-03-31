@@ -12,7 +12,7 @@ RUN npm ci --no-optional && \
     rm -rf node_modules .git
  
 # Set up running image     
-FROM atomist/skill:node14@sha256:cce007fa715f32ac17a4b6afebaf21e37a10b8f04309a3ad984edabc2ac60963
+FROM atomist/skill:node14@sha256:989a55d6c49d60d6a889157af3c00b8c93f185f1469c14e6bb1bcdc7e0578005
 
 WORKDIR "/skill"
 
