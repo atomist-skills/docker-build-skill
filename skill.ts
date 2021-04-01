@@ -28,7 +28,7 @@ const KanikoVersion = "v1.5.1";
 export const Skill = skill({
 	displayName: "Docker Build",
 	description: "Build Docker images and push them to a Docker registry",
-	categories: [Category.DevOps],
+	categories: [Category.DevSecOps],
 	iconUrl:
 		"https://raw.githubusercontent.com/atomist-skills/docker-build-skill/main/docs/images/icon.svg",
 
