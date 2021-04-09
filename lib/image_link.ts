@@ -173,7 +173,7 @@ export async function imageLink(): Promise<number> {
 		);
 		publicKey = (await fs.readFile("cosign.pub")).toString().trim();
 		verifyCommand = `$ cosign verify \\
-      -key public.key \\
+      -key signing.pub \\
       -a GIT_SLUG=${push.owner}/${push.repo} \\
       -a GIT_SHA=${push.sha} \\
       ${imageNameWithDigest}`;
@@ -397,10 +397,10 @@ Digest \`${digest}\`${
 
 ---
 
-Pushed image is signed. Signature can be verified using the following \`public.key\` and command:
+Pushed image is signed. Signature can be verified using the following \`signing.pub\` and command:
 
 \`\`\`
-${publicKey}
+$ echo "${publicKey}" > signing.pub
 \`\`\`
 
 \`\`\`
