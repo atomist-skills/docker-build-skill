@@ -172,11 +172,11 @@ export async function imageLink(): Promise<number> {
 			},
 		);
 		publicKey = (await fs.readFile("cosign.pub")).toString().trim();
-		verifyCommand = `$ cosign verify \
-		-key public.key \
-		-a GIT_SLUG=${push.owner}/${push.repo} \
-		-a GIT_SHA=${push.sha} \
-		${imageNameWithDigest}`;
+		verifyCommand = `$ cosign verify \\
+      -key public.key \\
+      -a GIT_SLUG=${push.owner}/${push.repo} \\
+      -a GIT_SHA=${push.sha} \\
+      ${imageNameWithDigest}`;
 		// Sign
 		await childProcess.execPromise(
 			"cosign",
