@@ -16,7 +16,9 @@
 
 import {
 	AttachmentTarget,
+	childProcess,
 	github,
+	guid,
 	log,
 	repository,
 	secret,
@@ -140,8 +142,64 @@ export async function imageLink(): Promise<number> {
 		);
 	}
 
+	// Sign image and upload signature
+	let publicKey;
+	let verifyCommand;
+	if (
+		digests.length > 0 &&
+		ctx.configuration.parameters.sign &&
+		ctx.configuration.parameters.privateKeyPassword &&
+		ctx.configuration.parameters.privateKey
+	) {
+		const privateKey = path.join(os.tmpdir(), guid());
+		const imageNameWithDigest = `${
+			process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0]
+		}@${digests[0].digest}`;
+		// Store key in file
+		await fs.writeFile(privateKey, ctx.configuration.parameters.privateKey);
+		// Public key
+		await childProcess.execPromise(
+			"cosign",
+			["public-key", "-key", privateKey],
+			{
+				env: {
+					...process.env,
+					COSIGN_PASSWORD:
+						ctx.configuration.parameters.privateKeyPassword,
+				},
+			},
+		);
+		publicKey = (await fs.readFile("cosign.pub")).toString().trim();
+		verifyCommand = `$ cosign verify \
+		-key public.key \
+		-a GIT_SLUG=${push.owner}/${push.repo} \
+		-a GIT_SHA=${push.sha} \
+		${imageNameWithDigest}`;
+		// Sign
+		await childProcess.execPromise(
+			"cosign",
+			[
+				"sign",
+				"-key",
+				privateKey,
+				"-a",
+				`GIT_SLUG=${push.owner}/${push.repo}`,
+				"-a",
+				`GIT_SHA=${push.sha}`,
+				imageNameWithDigest,
+			],
+			{
+				env: {
+					...process.env,
+					COSIGN_PASSWORD:
+						ctx.configuration.parameters.privateKeyPassword,
+				},
+			},
+		);
+	}
+
 	await slackMessageCb.close(status, digests);
-	await checkCb.close(status, digests);
+	await checkCb.close(status, digests, verifyCommand, publicKey);
 
 	log.info("Completed processing. Exiting...");
 	return 0;
@@ -282,6 +340,8 @@ async function gitHubCheck(
 	close: (
 		status: number,
 		digests: Array<{ digest: string; tag: string }>,
+		command: string,
+		publicKey: string,
 	) => Promise<void>;
 }> {
 	if (!ctx.configuration?.parameters?.githubCheck) {
@@ -321,7 +381,7 @@ async function gitHubCheck(
 	);
 
 	return {
-		close: async (status, digests): Promise<void> => {
+		close: async (status, digests, command, publicKey): Promise<void> => {
 			if (status === 0) {
 				const tags = _.uniqBy(digests, "tag").map(d => d.tag);
 				const digest = _.uniqBy(digests, "digest")[0].digest;
@@ -330,7 +390,23 @@ async function gitHubCheck(
 					body: `Built and pushed image \`${imageName}\` from ${dockerfile}
 
 ${tags.length === 1 ? "Tag" : "Tags"} ${tags.map(t => `\`${t}\``).join(", ")}
-Digest \`${digest}\``,
+Digest \`${digest}\`${
+						publicKey
+							? `
+
+---
+
+Pushed image is signed. Signature can be verified using the following \`public.key\` and command:
+
+\`\`\`
+${publicKey}
+\`\`\`
+
+\`\`\`
+${command}
+\`\`\``
+							: ""
+					}`,
 				});
 			} else {
 				await check.update({

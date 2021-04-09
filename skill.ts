@@ -23,7 +23,7 @@ import {
 	skill,
 } from "@atomist/skill";
 
-const KanikoVersion = "v1.5.1";
+const KanikoVersion = "v1.5.2";
 
 export const Skill = skill({
 	displayName: "Docker Build",
@@ -158,6 +158,25 @@ export const Skill = skill({
 			required: false,
 			visibility: ParameterVisibility.Advanced,
 		},
+		sign: {
+			type: ParameterType.Boolean,
+			displayName: "Sign Docker image",
+			description:
+				"Sign the created Docker image with [cosign](https://github.com/sigstore/cosign)",
+			required: false,
+		},
+		privateKeyPassword: {
+			type: ParameterType.Secret,
+			displayName: "Private key password",
+			description: "Password for private signing key",
+			required: false,
+		},
+		privateKey: {
+			type: ParameterType.Secret,
+			displayName: "Private key",
+			description: "Private signing key",
+			required: false,
+		},
 		repos: parameter.repoFilter({ required: false }),
 	},
 
@@ -211,6 +230,10 @@ export const Skill = skill({
 			image: "gcr.io/atomist-container-skills/docker-build-skill",
 			args: ["image-link"],
 			env: [
+				{
+					name: "DOCKER_CONFIG",
+					value: "/atm/input/.docker/",
+				},
 				{
 					name: "DOCKER_BUILD_IMAGE_NAME",
 					value:

@@ -14,6 +14,10 @@ RUN npm ci --no-optional && \
 # Set up running image     
 FROM atomist/skill:node14@sha256:751092f7b3455923ef4dca1b91721968cdd3bd1b52b09b4d492c6731c1f158d9
 
+RUN curl -LO https://github.com/sigstore/cosign/releases/download/v0.2.0/cosign-linux-amd64 && \
+    chmod +x cosign-linux-amd64 && \
+    mv cosign-linux-amd64 /usr/local/bin/cosign
+
 WORKDIR "/skill"
 
 COPY package.json package-lock.json ./
