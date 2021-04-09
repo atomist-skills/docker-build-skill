@@ -148,15 +148,18 @@ export async function imageLink(): Promise<number> {
 	if (
 		digests.length > 0 &&
 		ctx.configuration.parameters.sign &&
-		ctx.configuration.parameters.privateKeyPassword &&
-		ctx.configuration.parameters.privateKey
+		ctx.configuration.parameters.password &&
+		ctx.configuration.parameters.key
 	) {
 		const privateKey = path.join(os.tmpdir(), guid());
 		const imageNameWithDigest = `${
 			process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0]
 		}@${digests[0].digest}`;
 		// Store key in file
-		await fs.writeFile(privateKey, ctx.configuration.parameters.privateKey);
+		await fs.writeFile(
+			privateKey,
+			new Buffer(ctx.configuration.parameters.key, "base64"),
+		);
 		// Public key
 		await childProcess.execPromise(
 			"cosign",
@@ -164,8 +167,7 @@ export async function imageLink(): Promise<number> {
 			{
 				env: {
 					...process.env,
-					COSIGN_PASSWORD:
-						ctx.configuration.parameters.privateKeyPassword,
+					COSIGN_PASSWORD: ctx.configuration.parameters.password,
 				},
 			},
 		);
@@ -191,8 +193,7 @@ export async function imageLink(): Promise<number> {
 			{
 				env: {
 					...process.env,
-					COSIGN_PASSWORD:
-						ctx.configuration.parameters.privateKeyPassword,
+					COSIGN_PASSWORD: ctx.configuration.parameters.password,
 				},
 			},
 		);

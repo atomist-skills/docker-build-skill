@@ -165,16 +165,16 @@ export const Skill = skill({
 				"Sign the created Docker image with [cosign](https://github.com/sigstore/cosign)",
 			required: false,
 		},
-		privateKeyPassword: {
+		password: {
 			type: ParameterType.Secret,
 			displayName: "Private key password",
 			description: "Password for private signing key",
 			required: false,
 		},
-		privateKey: {
+		key: {
 			type: ParameterType.Secret,
 			displayName: "Private key",
-			description: "Private signing key",
+			description: "Private signing key encoded as base64 text",
 			required: false,
 		},
 		repos: parameter.repoFilter({ required: false }),
