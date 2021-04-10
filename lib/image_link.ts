@@ -146,6 +146,7 @@ export async function imageLink(): Promise<number> {
 	let publicKey;
 	let verifyCommand;
 	if (
+		status === 0 &&
 		digests.length > 0 &&
 		ctx.configuration.parameters.sign &&
 		ctx.configuration.parameters.password &&
@@ -173,10 +174,10 @@ export async function imageLink(): Promise<number> {
 		);
 		publicKey = (await fs.readFile("cosign.pub")).toString().trim();
 		verifyCommand = `$ cosign verify \\
-      -key signing.pub \\
-      -a GIT_SLUG=${push.owner}/${push.repo} \\
-      -a GIT_SHA=${push.sha} \\
-      ${imageNameWithDigest}`;
+    -key signing.pub \\
+    -a com.atomist.git_slug=${push.owner}/${push.repo} \\
+    -a com.atomist.git_sha=${push.sha} \\
+    ${imageNameWithDigest}`;
 		// Sign
 		await childProcess.execPromise(
 			"cosign",
@@ -185,9 +186,9 @@ export async function imageLink(): Promise<number> {
 				"-key",
 				privateKey,
 				"-a",
-				`GIT_SLUG=${push.owner}/${push.repo}`,
+				`com.atomist.git_slug=${push.owner}/${push.repo}`,
 				"-a",
-				`GIT_SHA=${push.sha}`,
+				`com.atomist.git_sha=${push.sha}`,
 				imageNameWithDigest,
 			],
 			{
