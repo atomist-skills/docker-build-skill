@@ -175,8 +175,9 @@ export async function imageLink(): Promise<number> {
 		publicKey = (await fs.readFile("cosign.pub")).toString().trim();
 		verifyCommand = `$ cosign verify \\
     -key signing.pub \\
-    -a com.atomist.git_slug=${push.owner}/${push.repo} \\
-    -a com.atomist.git_sha=${push.sha} \\
+    -a com.atomist.git.slug=${push.owner}/${push.repo} \\
+    -a com.atomist.git.sha=${push.sha} \\
+    -a com.atomist.docker.tag=${digests.map(d => d.tag).join(",")} \\
     ${imageNameWithDigest}`;
 		// Sign
 		await childProcess.execPromise(
@@ -186,9 +187,11 @@ export async function imageLink(): Promise<number> {
 				"-key",
 				privateKey,
 				"-a",
-				`com.atomist.git_slug=${push.owner}/${push.repo}`,
+				`com.atomist.git.slug=${push.owner}/${push.repo}`,
 				"-a",
-				`com.atomist.git_sha=${push.sha}`,
+				`com.atomist.git.sha=${push.sha}`,
+				"-a",
+				`com.atomist.docker.tag=${digests.map(d => d.tag).join(",")}`,
 				imageNameWithDigest,
 			],
 			{
