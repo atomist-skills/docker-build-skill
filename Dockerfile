@@ -12,7 +12,7 @@ RUN npm ci --no-optional && \
     rm -rf node_modules .git
  
 # Set up running image     
-FROM atomist/skill:node14@sha256:bf3135547ed70a413d521a4cc574c5688d827fdd5350a9be61512e576a784864
+FROM atomist/skill:node14@sha256:4d16839ef11bcecc6dff2156dd06324ca2f9e768b6736795feeeebc3d55e3cd8
 
 RUN curl -LO https://github.com/sigstore/cosign/releases/download/v0.2.0/cosign-linux-amd64 && \
     chmod +x cosign-linux-amd64 && \
