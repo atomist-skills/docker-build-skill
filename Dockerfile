@@ -12,7 +12,7 @@ RUN npm ci --no-optional && \
     rm -rf node_modules .git
  
 # Set up running image     
-FROM atomist/skill:node14@sha256:a2d9b138b2f5ac6ab86a0b9c352fec888f1bf0f542d2f483770d3997b53d59ea
+FROM atomist/skill:node14@sha256:3599e7152377d14de4685c8ce19c468f7f9227ae3200fd8e1409fbea9e1adf5a
 
 RUN apt-get update && \
     apt-get install -y curl=7.68.0-1ubuntu4.3 && \
