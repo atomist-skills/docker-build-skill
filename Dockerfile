@@ -12,11 +12,17 @@ RUN npm ci --no-optional && \
     rm -rf node_modules .git
  
 # Set up running image     
-FROM atomist/skill:node14@sha256:bf3135547ed70a413d521a4cc574c5688d827fdd5350a9be61512e576a784864
+FROM atomist/skill:node14@sha256:4d16839ef11bcecc6dff2156dd06324ca2f9e768b6736795feeeebc3d55e3cd8
 
-RUN curl -LO https://github.com/sigstore/cosign/releases/download/v0.2.0/cosign-linux-amd64 && \
+RUN apt-get update && \
+    apt-get install -y curl=7.68.0-1ubuntu4.3 && \
+    curl -LO https://github.com/sigstore/cosign/releases/download/v0.2.0/cosign-linux-amd64 && \
     chmod +x cosign-linux-amd64 && \
-    mv cosign-linux-amd64 /usr/local/bin/cosign
+    mv cosign-linux-amd64 /usr/local/bin/cosign && \
+    apt-get remove -y curl && \
+    apt-get autoremove -y && \
+    apt-get clean -y && \
+    rm -rf /var/cache/apt /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR "/skill"
 
