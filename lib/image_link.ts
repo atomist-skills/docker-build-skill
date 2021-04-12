@@ -175,9 +175,9 @@ export async function imageLink(): Promise<number> {
 		publicKey = (await fs.readFile("cosign.pub")).toString().trim();
 		verifyCommand = `$ cosign verify \\
     -key cosign.pub \\
-    -a com.atomist.git.slug=${push.owner}/${push.repo} \\
-    -a com.atomist.git.sha=${push.sha} \\
-    -a com.atomist.docker.tag=${digests.map(d => d.tag).join(",")} \\
+    -a 'com.atomist.git.slug=${push.owner}/${push.repo}' \\
+    -a 'com.atomist.git.sha=${push.sha}' \\
+    -a 'com.atomist.docker.tag=${digests.map(d => d.tag).join(",")}' \\
     ${imageNameWithDigest}`;
 		// Sign
 		await childProcess.execPromise(
@@ -403,13 +403,13 @@ Digest \`${digest}\`${
 
 Pushed image is signed. Signature can be verified using the following command:
 
-\`\`\`
+\`\`\`shell
 $ echo \\
 "${publicKey}" \\
 > cosign.pub
 \`\`\`
 
-\`\`\`
+\`\`\`shell
 ${command}
 \`\`\``
 							: ""
