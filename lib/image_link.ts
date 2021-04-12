@@ -404,7 +404,9 @@ Digest \`${digest}\`${
 Pushed image is signed. Signature can be verified using the following command:
 
 \`\`\`
-$ echo "${publicKey}" > cosign.pub
+$ echo \\
+"${publicKey}" \\
+> cosign.pub
 \`\`\`
 
 \`\`\`
