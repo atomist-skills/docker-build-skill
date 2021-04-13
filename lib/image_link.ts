@@ -405,7 +405,7 @@ Pushed image is signed. Signature can be verified using the following command:
 
 \`\`\`shell
 $ echo \\
-"${publicKey}" \\
+'${publicKey}' \\
 > cosign.pub
 \`\`\`
 
