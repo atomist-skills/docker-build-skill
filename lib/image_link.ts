@@ -401,7 +401,9 @@ Digest \`${digest}\`${
 
 ---
 
-Pushed image is signed. Signature can be verified using the following command:
+### Image Signature 
+
+The Docker image has been signed. Verified the signature with the following commands:
 
 \`\`\`shell
 $ echo \\
