@@ -163,7 +163,7 @@ export async function imageLink(): Promise<number> {
 		// Store key in file
 		await fs.writeFile(
 			privateKey,
-			new Buffer(ctx.configuration.parameters.key, "base64"),
+			Buffer.from(ctx.configuration.parameters.key, "base64"),
 		);
 		// Public key
 		await childProcess.execPromise(
