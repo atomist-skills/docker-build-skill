@@ -51,12 +51,6 @@ export async function imageLink(): Promise<number> {
 	const payload = (await fs.readJson(
 		process.env.ATOMIST_PAYLOAD || "/atm/payload.json",
 	)) as EventIncoming;
-	log.info(
-		"Starting %s/%s:%s image-link",
-		payload.skill.namespace,
-		payload.skill.name,
-		payload.skill.version,
-	);
 
 	const home = process.env.ATOMIST_HOME || "/atm/home";
 	const imageName = process.env.DOCKER_BUILD_IMAGE_NAME;
@@ -72,6 +66,14 @@ export async function imageLink(): Promise<number> {
 	const ctx: EventContext<
 		BuildOnPushSubscription | BuildOnTagSubscription
 	> = createContext(payload, {} as any) as any;
+
+	log.debug(
+		"Starting %s/%s:%s image-link",
+		payload.skill.namespace,
+		payload.skill.name,
+		payload.skill.version,
+	);
+
 	const container = payload.skill.artifacts[0].name;
 	const namespace = await readNamespace();
 	const name = os.hostname();
@@ -206,7 +208,7 @@ export async function imageLink(): Promise<number> {
 	await slackMessageCb.close(status, digests);
 	await checkCb.close(status, digests, verifyCommand, publicKey);
 
-	log.info("Completed processing. Exiting...");
+	log.debug("Completed processing. Exiting...");
 	return 0;
 }
 
