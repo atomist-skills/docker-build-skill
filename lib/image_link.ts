@@ -65,7 +65,9 @@ export async function imageLink(): Promise<number> {
 
 	const ctx: EventContext<
 		BuildOnPushSubscription | BuildOnTagSubscription
-	> = createContext(payload, {} as any) as any;
+	> = createContext(payload, {
+		eventId: process.env.ATOMIST_EVENT_ID,
+	}) as any;
 
 	log.debug(
 		"Starting %s/%s:%s image-link",
