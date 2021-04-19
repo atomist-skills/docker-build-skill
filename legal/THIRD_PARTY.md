@@ -51,7 +51,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | Name                                  | Version         | Publisher             | Repository                                                                                                                       |
 | ------------------------------------- | --------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `@atomist/skill-logging`              | `0.2.6`         | Atomist               | [https://github.com/atomist-skills/skill-logging](https://github.com/atomist-skills/skill-logging)                               |
-| `@atomist/skill`                      | `0.9.2-main.39` | Atomist, Inc.         | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
+| `@atomist/skill`                      | `0.9.2-main.40` | Atomist, Inc.         | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
 | `@atomist/slack-messages`             | `1.2.2`         | Atomist               | [https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)                                           |
 | `@google-cloud/common`                | `3.6.0`         | Google Inc.           | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
 | `@google-cloud/logging`               | `8.2.0`         | Google Inc.           | [https://github.com/googleapis/nodejs-logging](https://github.com/googleapis/nodejs-logging)                                     |
@@ -158,7 +158,7 @@ Creative Commons Attribution 4.0 International - [https://creativecommons.org/li
 
 | Name           | Version        | Publisher  | Repository                                                                       |
 | -------------- | -------------- | ---------- | -------------------------------------------------------------------------------- |
-| `caniuse-lite` | `1.0.30001209` | Ben Briggs | [https://github.com/ben-eb/caniuse-lite](https://github.com/ben-eb/caniuse-lite) |
+| `caniuse-lite` | `1.0.30001211` | Ben Briggs | [https://github.com/ben-eb/caniuse-lite](https://github.com/ben-eb/caniuse-lite) |
 
 #### CC0-1.0
 
@@ -324,7 +324,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `@graphql-tools/import`                              | `6.3.0`        | Dotan Simha                           | [https://github.com/ardatan/graphql-tools](https://github.com/ardatan/graphql-tools)                                                                                                                 |
 | `@graphql-tools/json-file-loader`                    | `6.2.6`        | Dotan Simha                           | [https://github.com/ardatan/graphql-tools](https://github.com/ardatan/graphql-tools)                                                                                                                 |
 | `@graphql-tools/load`                                | `6.2.8`        | Dotan Simha                           | [https://github.com/ardatan/graphql-tools](https://github.com/ardatan/graphql-tools)                                                                                                                 |
-| `@graphql-tools/merge`                               | `6.2.12`       | Dotan Simha                           | [https://github.com/ardatan/graphql-tools](https://github.com/ardatan/graphql-tools)                                                                                                                 |
+| `@graphql-tools/merge`                               | `6.2.13`       | Dotan Simha                           | [https://github.com/ardatan/graphql-tools](https://github.com/ardatan/graphql-tools)                                                                                                                 |
 | `@graphql-tools/optimize`                            | `1.0.1`        |                                       | [https://github.com/ardatan/graphql-tools](https://github.com/ardatan/graphql-tools)                                                                                                                 |
 | `@graphql-tools/prisma-loader`                       | `6.3.0`        | Dotan Simha                           | [https://github.com/ardatan/graphql-tools](https://github.com/ardatan/graphql-tools)                                                                                                                 |
 | `@graphql-tools/relay-operation-optimizer`           | `6.3.0`        | Laurin Quast                          | [https://github.com/ardatan/graphql-tools](https://github.com/ardatan/graphql-tools)                                                                                                                 |
