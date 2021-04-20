@@ -15,7 +15,7 @@ RUN npm ci --no-optional && \
 FROM atomist/skill:node14@sha256:efbc687b70b53334069498c7f4fbca278537a3d3927d8748ba0f359156543678
 
 RUN apt-get update && \
-    apt-get install -y curl=7.68.0-1ubuntu4.3 && \
+    apt-get install -y curl=7.68.0-1ubuntu4.3 libpcsclite-dev=1.9.0-1 && \
     curl -LO https://github.com/sigstore/cosign/releases/download/v0.3.0/cosign-linux-amd64 && \
     chmod +x cosign-linux-amd64 && \
     mv cosign-linux-amd64 /usr/local/bin/cosign && \

@@ -174,7 +174,7 @@ export async function imageLink(): Promise<number> {
 					"public-key",
 					"-key",
 					privateKeyFile,
-					"--outfile",
+					"-outfile",
 					publicKeyFile,
 				],
 				{
