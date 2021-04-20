@@ -149,62 +149,70 @@ export async function imageLink(): Promise<number> {
 	// Sign image and upload signature
 	let publicKey;
 	let verifyCommand;
-	if (
-		status === 0 &&
-		digests.length > 0 &&
-		ctx.configuration.parameters.sign &&
-		ctx.configuration.parameters.password &&
-		ctx.configuration.parameters.key
-	) {
-		const privateKey = path.join(os.tmpdir(), guid());
-		const imageNameWithDigest = `${
-			process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0]
-		}@${digests[0].digest}`;
-		// Store key in file
-		await fs.writeFile(
-			privateKey,
-			Buffer.from(ctx.configuration.parameters.key, "base64"),
-		);
-		// Public key
-		await childProcess.execPromise(
-			"cosign",
-			["public-key", "-key", privateKey, "--outfile", "cosign.pub"],
-			{
-				env: {
-					...process.env,
-					COSIGN_PASSWORD: ctx.configuration.parameters.password,
+	try {
+		if (
+			status === 0 &&
+			digests.length > 0 &&
+			ctx.configuration.parameters.sign &&
+			ctx.configuration.parameters.password &&
+			ctx.configuration.parameters.key
+		) {
+			const privateKey = path.join(os.tmpdir(), guid());
+			const imageNameWithDigest = `${
+				process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0]
+			}@${digests[0].digest}`;
+			// Store key in file
+			await fs.writeFile(
+				privateKey,
+				Buffer.from(ctx.configuration.parameters.key, "base64"),
+			);
+			// Public key
+			await childProcess.spawnPromise(
+				"cosign",
+				["public-key", "-key", privateKey, "--outfile", "cosign.pub"],
+				{
+					env: {
+						...process.env,
+						COSIGN_PASSWORD: ctx.configuration.parameters.password,
+					},
+					log: childProcess.captureLog(log.debug),
 				},
-			},
-		);
-		publicKey = (await fs.readFile("cosign.pub")).toString().trim();
-		verifyCommand = `$ cosign verify \\
+			);
+			publicKey = (await fs.readFile("cosign.pub")).toString().trim();
+			verifyCommand = `$ cosign verify \\
     -key cosign.pub \\
     -a 'com.atomist.git.slug=${push.owner}/${push.repo}' \\
     -a 'com.atomist.git.sha=${push.sha}' \\
     -a 'com.atomist.docker.tag=${digests.map(d => d.tag).join(",")}' \\
     ${imageNameWithDigest}`;
-		// Sign
-		await childProcess.execPromise(
-			"cosign",
-			[
-				"sign",
-				"-key",
-				privateKey,
-				"-a",
-				`com.atomist.git.slug=${push.owner}/${push.repo}`,
-				"-a",
-				`com.atomist.git.sha=${push.sha}`,
-				"-a",
-				`com.atomist.docker.tag=${digests.map(d => d.tag).join(",")}`,
-				imageNameWithDigest,
-			],
-			{
-				env: {
-					...process.env,
-					COSIGN_PASSWORD: ctx.configuration.parameters.password,
+			// Sign
+			await childProcess.spawnPromise(
+				"cosign",
+				[
+					"sign",
+					"-key",
+					privateKey,
+					"-a",
+					`com.atomist.git.slug=${push.owner}/${push.repo}`,
+					"-a",
+					`com.atomist.git.sha=${push.sha}`,
+					"-a",
+					`com.atomist.docker.tag=${digests
+						.map(d => d.tag)
+						.join(",")}`,
+					imageNameWithDigest,
+				],
+				{
+					env: {
+						...process.env,
+						COSIGN_PASSWORD: ctx.configuration.parameters.password,
+					},
+					log: childProcess.captureLog(log.debug),
 				},
-			},
-		);
+			);
+		}
+	} catch (e) {
+		log.warn(e.stack);
 	}
 
 	await slackMessageCb.close(status, digests);
