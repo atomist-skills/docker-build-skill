@@ -25,7 +25,7 @@ import {
 	slack,
 } from "@atomist/skill";
 import { createContext } from "@atomist/skill/lib/context";
-import { EventContext } from "@atomist/skill/lib/handler";
+import { ContextualLifecycle, EventContext } from "@atomist/skill/lib/handler";
 import { EventIncoming } from "@atomist/skill/lib/payload";
 import * as k8s from "@kubernetes/client-node";
 import * as fs from "fs-extra";
@@ -57,17 +57,17 @@ export async function imageLink(): Promise<number> {
 	const providerId = process.env.DOCKER_PROVIDER_ID;
 	const dockerfile = process.env.DOCKER_FILE;
 
-	// Check if Dockerfile exists
-	if (!(await fs.pathExists(path.join(home, dockerfile)))) {
-		log.info(`Dockerfile '${dockerfile}' not found. Exiting...`);
-		return 0;
-	}
-
 	const ctx: EventContext<
 		BuildOnPushSubscription | BuildOnTagSubscription
 	> = createContext(payload, {
 		eventId: process.env.ATOMIST_EVENT_ID,
 	}) as any;
+
+	// Check if Dockerfile exists
+	if (!(await fs.pathExists(path.join(home, dockerfile)))) {
+		log.info(`Dockerfile '${dockerfile}' not found. Exiting...`);
+		return 0;
+	}
 
 	log.debug(
 		"Starting %s/%s:%s image-link",
@@ -211,6 +211,7 @@ export async function imageLink(): Promise<number> {
 	await checkCb.close(status, digests, verifyCommand, publicKey);
 
 	log.debug("Completed processing. Exiting...");
+	await ((ctx as any) as ContextualLifecycle).close();
 	return 0;
 }
 
@@ -252,7 +253,7 @@ async function slackMessage(
 		{
 			title: undefined,
 			title_link: undefined,
-			footer: slack.url(ctx.audit.url, "Docker Build"),
+			footer: slack.url(log.url(ctx), "Docker Build"),
 			footer_icon: undefined,
 			ts: undefined,
 			thumb_url: undefined,
@@ -288,7 +289,7 @@ Digest \`${digest}\``,
 					{
 						title: undefined,
 						title_link: undefined,
-						footer: slack.url(ctx.audit.url, "Docker Build"),
+						footer: slack.url(log.url(ctx), "Docker Build"),
 						footer_icon: undefined,
 						ts: undefined,
 						thumb_url: undefined,
@@ -316,7 +317,7 @@ Digest \`${digest}\``,
 					{
 						title: undefined,
 						title_link: undefined,
-						footer: slack.url(ctx.audit.url, "Docker Build"),
+						footer: slack.url(log.url(ctx), "Docker Build"),
 						footer_icon: undefined,
 						ts: undefined,
 						thumb_url: undefined,
