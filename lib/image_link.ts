@@ -406,9 +406,9 @@ Digest \`${digest}\`${
 
 ---
 
-### Image Signature 
+### Docker image signature 
 
-The Docker image has been signed. Verified the signature with the following commands:
+Docker image \`${imageName}\` has been signed. Verify the signature with the following commands:
 
 \`\`\`shell
 $ echo \\
