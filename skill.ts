@@ -18,7 +18,6 @@ import {
 	Category,
 	parameter,
 	ParameterType,
-	ParameterVisibility,
 	resourceProvider,
 	skill,
 } from "@atomist/skill";
@@ -131,7 +130,6 @@ export const Skill = skill({
 				"Automatically create a GitHub check on the commit triggering this Docker build",
 			required: false,
 			defaultValue: true,
-			visibility: ParameterVisibility.Advanced,
 		},
 		version: {
 			type: ParameterType.String,
@@ -139,7 +137,6 @@ export const Skill = skill({
 			description: "Version of Kaniko to use",
 			placeHolder: KanikoVersion,
 			required: false,
-			visibility: ParameterVisibility.Advanced,
 		},
 		cache: {
 			type: ParameterType.Boolean,
@@ -148,7 +145,6 @@ export const Skill = skill({
 				"Enable Kaniko's support for Docker image layer caching",
 			defaultValue: true,
 			required: false,
-			visibility: ParameterVisibility.Advanced,
 		},
 		cacheTtl: {
 			type: ParameterType.String,
@@ -156,7 +152,6 @@ export const Skill = skill({
 			description: "Specify ttl for Kaniko's image layer cache",
 			defaultValue: "48h0m0s",
 			required: false,
-			visibility: ParameterVisibility.Advanced,
 		},
 		sign: {
 			type: ParameterType.Boolean,
