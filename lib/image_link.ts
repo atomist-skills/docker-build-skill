@@ -157,19 +157,26 @@ export async function imageLink(): Promise<number> {
 			ctx.configuration.parameters.password &&
 			ctx.configuration.parameters.key
 		) {
-			const privateKey = path.join(os.tmpdir(), guid());
+			const privateKeyFile = path.join(os.tmpdir(), guid());
+			const publicKeyFile = path.join(os.tmpdir(), guid());
 			const imageNameWithDigest = `${
 				process.env.DOCKER_BUILD_IMAGE_NAME.split(":")[0]
 			}@${digests[0].digest}`;
 			// Store key in file
 			await fs.writeFile(
-				privateKey,
+				privateKeyFile,
 				Buffer.from(ctx.configuration.parameters.key, "base64"),
 			);
 			// Public key
 			await childProcess.spawnPromise(
 				"cosign",
-				["public-key", "-key", privateKey, "--outfile", "cosign.pub"],
+				[
+					"public-key",
+					"-key",
+					privateKeyFile,
+					"--outfile",
+					publicKeyFile,
+				],
 				{
 					env: {
 						...process.env,
@@ -178,7 +185,7 @@ export async function imageLink(): Promise<number> {
 					log: childProcess.captureLog(log.debug),
 				},
 			);
-			publicKey = (await fs.readFile("cosign.pub")).toString().trim();
+			publicKey = (await fs.readFile(publicKeyFile)).toString().trim();
 			verifyCommand = `$ cosign verify \\
     -key cosign.pub \\
     -a 'com.atomist.git.slug=${push.owner}/${push.repo}' \\
@@ -191,7 +198,7 @@ export async function imageLink(): Promise<number> {
 				[
 					"sign",
 					"-key",
-					privateKey,
+					privateKeyFile,
 					"-a",
 					`com.atomist.git.slug=${push.owner}/${push.repo}`,
 					"-a",
