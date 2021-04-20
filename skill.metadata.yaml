@@ -27,14 +27,14 @@ parameter_groups:
 parameters:
   - name: env_map
     group: env
-  - name: docker_env
-    group: env
   - name: name
     group: name
   - name: tag
     group: name
   - name: branchSuffix
     group: name
+  - name: docker_env
+    group: env
   - name: dockerfile
     group: what
   - name: subscription_filter
