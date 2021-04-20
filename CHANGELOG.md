@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 -   Add parameter metadata. [fb0861f](https://github.com/atomist-skills/docker-build-skill/commit/fb0861fefd9e1ca905fa3b63fcbfde4c98efbf26)
+-   Add image signing. [#278](https://github.com/atomist-skills/docker-build-skill/issues/278)
 
 ## [1.6.5](https://github.com/atomist-skills/docker-build-skill/compare/1.6.4...1.6.5) - 2021-04-01
 
