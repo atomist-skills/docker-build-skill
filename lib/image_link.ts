@@ -168,7 +168,7 @@ export async function imageLink(): Promise<number> {
 		// Public key
 		await childProcess.execPromise(
 			"cosign",
-			["public-key", "-key", privateKey],
+			["public-key", "-key", privateKey, "--outfile", "cosign.pub"],
 			{
 				env: {
 					...process.env,
