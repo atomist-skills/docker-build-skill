@@ -20,6 +20,7 @@ registry.
 -   Automatic image naming and tag creation
 -   Easily customize the Docker build to your needs
 -   GitHub commit check indicates success of failure of build
+-   Sign built Docker images with [cosign](https://github.com/sigstore/cosign)
 
 ### Build Docker images on every push
 

@@ -16,7 +16,7 @@ FROM atomist/skill:node14@sha256:3599e7152377d14de4685c8ce19c468f7f9227ae3200fd8
 
 RUN apt-get update && \
     apt-get install -y curl=7.68.0-1ubuntu4.3 && \
-    curl -LO https://github.com/sigstore/cosign/releases/download/v0.2.0/cosign-linux-amd64 && \
+    curl -LO https://github.com/sigstore/cosign/releases/download/v0.3.0/cosign-linux-amd64 && \
     chmod +x cosign-linux-amd64 && \
     mv cosign-linux-amd64 /usr/local/bin/cosign && \
     apt-get remove -y curl && \
