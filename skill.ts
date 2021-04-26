@@ -22,7 +22,7 @@ import {
 	skill,
 } from "@atomist/skill";
 
-const KanikoVersion = "v1.5.2";
+const KanikoVersion = "v1.6.0";
 
 export const Skill = skill({
 	displayName: "Docker Build",
