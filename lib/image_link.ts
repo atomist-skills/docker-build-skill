@@ -57,11 +57,10 @@ export async function imageLink(): Promise<number> {
 	const providerId = process.env.DOCKER_PROVIDER_ID;
 	const dockerfile = process.env.DOCKER_FILE;
 
-	const ctx: EventContext<
-		BuildOnPushSubscription | BuildOnTagSubscription
-	> = createContext(payload, {
-		eventId: process.env.ATOMIST_EVENT_ID,
-	}) as any;
+	const ctx: EventContext<BuildOnPushSubscription | BuildOnTagSubscription> =
+		createContext(payload, {
+			eventId: process.env.ATOMIST_EVENT_ID,
+		}) as any;
 
 	// Check if Dockerfile exists
 	if (!(await fs.pathExists(path.join(home, dockerfile)))) {
@@ -226,7 +225,7 @@ export async function imageLink(): Promise<number> {
 	await checkCb.close(status, digests, verifyCommand, publicKey);
 
 	log.debug("Completed processing. Exiting...");
-	await ((ctx as any) as ContextualLifecycle).close();
+	await (ctx as any as ContextualLifecycle).close();
 	return 0;
 }
 

@@ -231,13 +231,11 @@ export const Skill = skill({
 				},
 				{
 					name: "DOCKER_BUILD_IMAGE_NAME",
-					value:
-						"#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration.parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}#{configuration.parameters.branchSuffix ? (data | get('Push[0].repo.defaultBranch') | branchSuffix(data | get('Push[0].branch'))) : ''}",
+					value: "#{configuration.resourceProviders.docker_push_registry | provider('registryName') | replace('https://','')}/#{configuration.parameters.name | orValue(data | get('Push[0].repo.name'), data | get('Tag[0].commit.repo.name'))}:#{configuration.parameters.tag | orValue(data | get('Push[0].after.sha'), data | get('Tag[0].name'))}#{configuration.parameters.branchSuffix ? (data | get('Push[0].repo.defaultBranch') | branchSuffix(data | get('Push[0].branch'))) : ''}",
 				},
 				{
 					name: "DOCKER_PROVIDER_ID",
-					value:
-						"${configuration.resourceProviders.docker_push_registry.selectedResourceProviders[0].id}",
+					value: "${configuration.resourceProviders.docker_push_registry.selectedResourceProviders[0].id}",
 				},
 				{
 					name: "DOCKER_FILE",
