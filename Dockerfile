@@ -1,5 +1,5 @@
 # Set up build
-FROM node:lts@sha256:9025a77b2f37fcda3bbd367587367a9f2251d16a756ed544550b8a571e16a653 AS build
+FROM node:lts@sha256:af9879e7473d347048c5d5919aa9775f27c33d92e4d58058ffdc08247f4bd902 AS build
 
 RUN mkdir -p /atm/home/output
 
@@ -12,7 +12,7 @@ RUN npm ci --no-optional && \
     rm -rf node_modules .git
  
 # Set up running image     
-FROM atomist/skill:node14@sha256:1248c259f5b77ac47aed85143ae01daf618cf2dbcabd59244f64cdb5fc8234e1
+FROM atomist/skill:node14@sha256:134c68d53be1551ede987b80a92e75b1acff8e638d620f3d74fa2251635ed472
 
 RUN apt-get update && \
     apt-get install -y curl=7.74.0-1ubuntu2 libpcsclite-dev=1.9.1-1 && \
