@@ -229,7 +229,7 @@ ISC License - [https://www.isc.org/downloads/software-support-policy/isc-license
 | `semver`                    | `7.3.5`   |                    | [https://github.com/npm/node-semver](https://github.com/npm/node-semver)                                     |
 | `set-blocking`              | `2.0.0`   | Ben Coe            | [https://github.com/yargs/set-blocking](https://github.com/yargs/set-blocking)                               |
 | `signal-exit`               | `3.0.3`   | Ben Coe            | [https://github.com/tapjs/signal-exit](https://github.com/tapjs/signal-exit)                                 |
-| `tar`                       | `6.1.0`   | Isaac Z. Schlueter | [https://github.com/npm/node-tar](https://github.com/npm/node-tar)                                           |
+| `tar`                       | `6.1.6`   | Isaac Z. Schlueter | [https://github.com/npm/node-tar](https://github.com/npm/node-tar)                                           |
 | `universal-user-agent`      | `6.0.0`   |                    | [https://github.com/gr2m/universal-user-agent](https://github.com/gr2m/universal-user-agent)                 |
 | `which-module`              | `2.0.0`   | nexdrew            | [https://github.com/nexdrew/which-module](https://github.com/nexdrew/which-module)                           |
 | `which`                     | `1.3.1`   | Isaac Z. Schlueter | [https://github.com/isaacs/node-which](https://github.com/isaacs/node-which)                                 |
