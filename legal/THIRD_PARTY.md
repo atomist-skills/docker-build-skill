@@ -12,7 +12,7 @@ This page details all runtime dependencies of `@atomist/docker-build-skill`.
 | ------------------------------------ | ----- |
 | [0BSD](#0bsd)                        | 5     |
 | [AFLv2.1](#aflv21)                   | 1     |
-| [Apache-2.0](#apache-20)             | 43    |
+| [Apache-2.0](#apache-20)             | 44    |
 | [BSD-2-Clause](#bsd-2-clause)        | 11    |
 | [BSD-3-Clause](#bsd-3-clause)        | 27    |
 | [BSD](#bsd)                          | 1     |
@@ -93,6 +93,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | `rxjs`                                | `6.6.7`  | Ben Lesh              | [https://github.com/reactivex/rxjs](https://github.com/reactivex/rxjs)                                                           |
 | `teeny-request`                       | `7.0.1`  | fhinkel               | [https://github.com/googleapis/teeny-request](https://github.com/googleapis/teeny-request)                                       |
 | `tunnel-agent`                        | `0.6.0`  | Mikeal Rogers         | [https://github.com/mikeal/tunnel-agent](https://github.com/mikeal/tunnel-agent)                                                 |
+| `typescript`                          | `4.4.3`  | Microsoft Corp.       | [https://github.com/Microsoft/TypeScript](https://github.com/Microsoft/TypeScript)                                               |
 | `yaml-ast-parser`                     | `0.0.43` |                       | [https://github.com/mulesoft-labs/yaml-ast-parser](https://github.com/mulesoft-labs/yaml-ast-parser)                             |
 
 #### BSD
