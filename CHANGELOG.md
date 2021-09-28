@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/docker-build-skill/compare/2.0.3...HEAD)
 
+### Removed
+
+*   Remove Dockerfile path from source label. [c719dc2](https://github.com/atomist-skills/docker-build-skill/commit/c719dc21c706485654a0d0a5f72490722dc7bc49)
+
 ## [2.0.3](https://github.com/atomist-skills/docker-build-skill/compare/2.0.2...2.0.3) - 2021-09-24
 
 ### Added
