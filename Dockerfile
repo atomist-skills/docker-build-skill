@@ -12,7 +12,7 @@ RUN npm ci --no-optional && \
     rm -rf node_modules .git
  
 # Set up running image     
-FROM atomist/skill:node14@sha256:2c98a06ec9cc2504c1d93ea519cbe01f2aae30771c37e7fe8fa92e450b03db98
+FROM atomist/skill:node14@sha256:ece1ae57959d60970e895928b04d0bbc84a3c448b1f99c7e1add23e525a1d013
 
 RUN apt-get update && \
     apt-get install -y curl=7.74.0-1ubuntu2.3 libpcsclite-dev=1.9.1-1 && \
