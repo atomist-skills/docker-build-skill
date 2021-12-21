@@ -1,5 +1,5 @@
 # Set up build
-FROM node:lts@sha256:89b59ce49929d8a8e230946bdb1b58c14cdbbb86c9a7397610afcecfce1be035 AS build
+FROM node:lts@sha256:79d350bf454e08b5e5c3a3f081191b1ea17dbb880fd9bf364d2e6a9626ffa472 AS build
 
 RUN mkdir -p /atm/home/output
 
